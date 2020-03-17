@@ -6,14 +6,14 @@ public class Test {
 
 
         //Tavalise teksti päeviku näide.
-        /*
+
         final DefaultTable<String> tDefaultTable = new DefaultTable<>();
         tDefaultTable.addData("Tere päevik!");
         tDefaultTable.addData("Täna on ilus päev!");
         Map tabel = tDefaultTable.getTabel();
         for (Object o : tabel.keySet()) {
             System.out.println(o.toString() + ":\t" + tabel.get(o));
-        }*/
+        }
 
         //Rahapäeviku näide.
         /*
