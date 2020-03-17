@@ -1,4 +1,4 @@
-﻿MyDiaries (TBA)
+MyDiaries (TBA)
 
 
 GRUPI LIIKMED:
@@ -21,12 +21,12 @@ IDEE FUNKTSIONAALSUSED:
 4. Treeningud
 5. Toidunimekiri
 
-
 1. Faili salvestamine (.csv)
 Plaanid tulevikuks:
 * Kasutajad/paroolid süsteem (krüpteeritult)
 * Andmebaasi salvestamine
 * Kohandatavad päeviku liigid (custom diary)
+
 ARENDUSPLAAN:
 1. Põhiline liides või alamklass, millest sõltuvad teised päeviku liigid (klassid)
 2. Esmases etapis salvestatakse päevikud seadmesse .cvs formaadis. Hiljem plaan siduda rakendus andmebaasiga (ühendada projekt aine Andmebaasid rühmatööga)
