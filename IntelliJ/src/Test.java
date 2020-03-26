@@ -6,13 +6,33 @@ public class Test {
 
 
         //Tavalise teksti päeviku näide.
+        /*
+        final DefaultTable<String> defaultTable = new DefaultTable<>();
+        defaultTable.addData("Vahva maailm!");
+        defaultTable.addData("Täna on ilus päev!");
 
-        final DefaultTable<String> tDefaultTable = new DefaultTable<>();
-        tDefaultTable.addData("Tere päevik!");
-        tDefaultTable.addData("Täna on ilus päev!");
-        Map tabel = tDefaultTable.getTabel();
+        defaultTable.setName("test.json");
+        defaultTable.saveTable();
+
+        final DefaultTable<String> newDefaultTable = new DefaultTable<>();
+        newDefaultTable.setName("test.json");
+        newDefaultTable.loadTable();
+
+        Map tabel = newDefaultTable.getTabel();
         for (Object o : tabel.keySet()) {
             System.out.println(o.toString() + ":\t" + tabel.get(o));
+        }*/
+
+        final FoodListTable foodListTable = new FoodListTable();
+        foodListTable.addData(LocalDateTime.now().plusDays(10),"Eggs",10);
+
+        Map<LocalDateTime,Entries.FoodTableEntry> foodTableEntryMap = foodListTable.getTabel();
+        for (LocalDateTime o : foodTableEntryMap.keySet()) {
+            //System.out.println(o.toString());
+            Entries.FoodTableEntry foodTableEntry = foodTableEntryMap.get(o);
+            System.out.println("ExpDate: " + foodTableEntry.getExpDate());
+            System.out.println(foodTableEntry.getType());
+            System.out.println(foodTableEntry.getAmount());
         }
 
         //Rahapäeviku näide.
