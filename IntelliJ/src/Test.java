@@ -1,25 +1,46 @@
 import java.time.LocalDateTime;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 
 public class Test {
+    private static final Set<String> tS = Set.of("toit", "treening", "todo", "raha");
+
     public static void main(String[] args) throws InterruptedException {
+        List<String> tableNames = new ArrayList<>();
+        tableNames.add("raha");
+        tableNames.add("toit");
+        tableNames.add("treening");
+        tableNames.add("todo");
+        int selected = -1;
 
+        while (true) {
+            Scanner tableSelection = new Scanner(System.in);
+            System.out.println("Sisestage, millist tabelit tahate avada: (raha, treening, ToDo, toit");
+            System.out.println("Väljumiseks, sisestage 'quit'");
+            String tS = tableSelection.nextLine().toLowerCase();
 
-        final FoodTable foodListTable = new FoodTable();
-        foodListTable.setName("foodlist.json");
-        foodListTable.loadTable();
-        while(true){
-            final Scanner scanner = new Scanner(System.in);
-            System.out.println("Sisesta exp date:");
-            final LocalDateTime date = LocalDateTime.parse(scanner.next());
-            System.out.println("Sisesta toode:");
-            final String type = scanner.next();
-            System.out.println("Sisesta kogus");
-            final int amout = scanner.nextInt();
-            foodListTable.addData(date,type,amout);
+            if (tableNames.contains(tS)) {
+                selected = tableNames.indexOf(tS);
+                break;
+            } else if (tS.equals("quit")) return;
         }
-        foodListTable.saveTable();
+
+        if (selected == 1) {
+            final FoodTable FoodTable = new FoodTable();
+            FoodTable.setName("foodlist.json");
+            FoodTable.loadTable();
+            while(true){
+                final Scanner scanner = new Scanner(System.in);
+                if (scanner.nextLine().equals("valmis")) break;
+                System.out.println("Sisesta exp date:");
+                final LocalDateTime date = LocalDateTime.parse(scanner.next());
+                System.out.println("Sisesta toode:");
+                final String type = scanner.next();
+                System.out.println("Sisesta kogus");
+                final int amount = scanner.nextInt();
+                FoodTable.addData(date,type,amount);
+            }
+            FoodTable.saveTable();
+        }
 
 
         //Tavalise teksti päeviku näide.
@@ -42,6 +63,7 @@ public class Test {
 
         /*
         final FoodTable foodListTable = new FoodTable();
+
         foodListTable.addData(LocalDateTime.now().plusDays(10),"Eggs",10);
 
         Map<LocalDateTime,Entries.FoodTableEntry> foodTableEntryMap = foodListTable.getTabel();
@@ -53,7 +75,7 @@ public class Test {
             System.out.println(foodTableEntry.getAmount());
         }
         */
-         */
+
 
         //Rahapäeviku näide.
         /*

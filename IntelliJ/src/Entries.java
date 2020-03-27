@@ -2,10 +2,10 @@ import java.time.LocalDateTime;
 
 public class Entries {
 
-    static class StringEntry{
+    static class TextEntry{
         private String string;
 
-        public StringEntry(String string) {
+        public TextEntry(String string) {
             this.string = string;
         }
     }
