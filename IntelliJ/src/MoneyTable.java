@@ -1,11 +1,10 @@
 import java.time.LocalDateTime;
 
-public class MoneyTable extends DefaultTable<Object[]> {
-
+public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
 
     public void addData(LocalDateTime useDate, double amount, String type, String description) {
-        Object[] data = new Object[]{useDate, amount, type, description};
-        super.addData(data);
+        Entries.MoneyTableEntry entries = new Entries.MoneyTableEntry(useDate, amount, type, description);
+        super.addData(entries);
     }
 
 }

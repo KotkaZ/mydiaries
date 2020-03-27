@@ -1,6 +1,6 @@
 import java.time.LocalDateTime;
 
-public class FoodListTable extends DefaultTable<Entries.FoodTableEntry> {
+public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
 
 
     public void addData(LocalDateTime expDate, String type, int amount) {
