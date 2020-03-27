@@ -1,8 +1,25 @@
 import java.time.LocalDateTime;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Test {
     public static void main(String[] args) throws InterruptedException {
+
+
+        final FoodTable foodListTable = new FoodTable();
+        foodListTable.setName("foodlist.json");
+        foodListTable.loadTable();
+        while(true){
+            final Scanner scanner = new Scanner(System.in);
+            System.out.println("Sisesta exp date:");
+            final LocalDateTime date = LocalDateTime.parse(scanner.next());
+            System.out.println("Sisesta toode:");
+            final String type = scanner.next();
+            System.out.println("Sisesta kogus");
+            final int amout = scanner.nextInt();
+            foodListTable.addData(date,type,amout);
+        }
+        foodListTable.saveTable();
 
 
         //Tavalise teksti päeviku näide.
@@ -23,6 +40,7 @@ public class Test {
             System.out.println(o.toString() + ":\t" + tabel.get(o));
         }*/
 
+        /*
         final FoodTable foodListTable = new FoodTable();
         foodListTable.addData(LocalDateTime.now().plusDays(10),"Eggs",10);
 
@@ -34,6 +52,8 @@ public class Test {
             System.out.println(foodTableEntry.getType());
             System.out.println(foodTableEntry.getAmount());
         }
+        */
+         */
 
         //Rahapäeviku näide.
         /*
