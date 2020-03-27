@@ -7,5 +7,4 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
         Entries.FoodTableEntry entries = new Entries.FoodTableEntry(expDate,type,amount);
         super.addData(entries);
     }
-
 }
