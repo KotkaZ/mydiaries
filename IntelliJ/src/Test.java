@@ -23,7 +23,7 @@ public class Test {
             System.out.println(o.toString() + ":\t" + tabel.get(o));
         }*/
 
-        final FoodListTable foodListTable = new FoodListTable();
+        final FoodTable foodListTable = new FoodTable();
         foodListTable.addData(LocalDateTime.now().plusDays(10),"Eggs",10);
 
         Map<LocalDateTime,Entries.FoodTableEntry> foodTableEntryMap = foodListTable.getTabel();

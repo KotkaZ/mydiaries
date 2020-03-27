@@ -34,13 +34,13 @@ public class Entries {
         }
     }
 
-    static class MoneyEntry{
+    static class MoneyTableEntry{
         private LocalDateTime useDate;
         private double amount;
         private String type;
         private String description;
 
-        public MoneyEntry(LocalDateTime useDate, double amount, String type, String description) {
+        public MoneyTableEntry(LocalDateTime useDate, double amount, String type, String description) {
             this.useDate = useDate;
             this.amount = amount;
             this.type = type;
@@ -64,7 +64,35 @@ public class Entries {
         }
     }
 
+    static class ToDoTableEntry {
+        private LocalDateTime deadline;
+        private String description;
+        private int priority;
+        private String type;
 
+        public ToDoTableEntry(LocalDateTime deadline, String description, int priority, String type) {
+            this.deadline = deadline;
+            this.description = description;
+            this.priority = priority;
+            this.type = type;
+        }
+
+        public LocalDateTime getDeadline() {
+            return deadline;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public int getPriority() {
+            return priority;
+        }
+
+        public String getType() {
+            return type;
+        }
+    }
 }
 
 
