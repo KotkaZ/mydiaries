@@ -1,8 +1,11 @@
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Test {
     private static final Set<String> tS = Set.of("toit", "treening", "todo", "raha");
+
 
     public static void main(String[] args) throws InterruptedException {
         List<String> tableNames = new ArrayList<>();
@@ -28,16 +31,16 @@ public class Test {
             final FoodTable FoodTable = new FoodTable();
             FoodTable.setName("foodlist.json");
             FoodTable.loadTable();
-            while(true){
+            while (true) {
                 final Scanner scanner = new Scanner(System.in);
                 if (scanner.nextLine().equals("valmis")) break;
                 System.out.println("Sisesta exp date:");
-                final LocalDateTime date = LocalDateTime.parse(scanner.next());
+                final LocalDateTime date = dateTimeControl(scanner);
                 System.out.println("Sisesta toode:");
                 final String type = scanner.next();
                 System.out.println("Sisesta kogus");
                 final int amount = scanner.nextInt();
-                FoodTable.addData(date,type,amount);
+                FoodTable.addData(date, type, amount);
             }
             FoodTable.saveTable();
         }
@@ -98,4 +101,38 @@ public class Test {
             System.out.println("\tKirjeldus: " +objects[3].toString());
         }*/
     }
+
+    /**
+     * Kontrollib, kas kuupäev on õigesti sisestatud ja kas on mõistlik sisestus.
+     * @param scanner
+     * @return Scannerist saadud kuupäev ajaga.
+     */
+    private static LocalDateTime dateTimeControl(Scanner scanner) {
+        LocalDateTime date;
+        while (true) {
+            String sDate = scanner.next();
+
+            //Kui teikib viga scanneriga, läheb catch plokki.
+            try {
+                date = LocalDateTime.parse(sDate);
+
+                //Kontrollib, kas kuupäev on minevikust või rohkem kui
+                // 10 aastat praegusest ja annab võimaluse parandada.
+                if (0 < date.compareTo(LocalDateTime.now()) || 0 < date.compareTo(LocalDateTime.now().plusYears(10)))
+                    break;
+                else {
+                    System.out.println("Oled kindel, et see kuupäev " + date + "on õige? (y/n)");
+                    String vastus = scanner.next().toLowerCase();
+                    if (vastus.equals("y"))
+                        break;
+                }
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Kuupäeav peab olema kujul AAAA-KK-PP");
+                continue;
+            }
+        }
+        return date;
+    }
+
 }
