@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Entries {
 
@@ -10,7 +11,7 @@ public class Entries {
         }
     }
 
-    static class FoodTableEntry{
+    static class FoodTableEntry  implements Comparable<FoodTableEntry> {
         private LocalDateTime expDate;
         private String type;
         private int amount;
@@ -31,6 +32,12 @@ public class Entries {
 
         public int getAmount() {
             return amount;
+        }
+
+        //minevikule lähemad tooted eespool
+        @Override
+        public int compareTo(FoodTableEntry o) {
+            return this.expDate.compareTo(o.expDate);
         }
     }
 
@@ -64,7 +71,7 @@ public class Entries {
         }
     }
 
-    static class ToDoTableEntry {
+    static class ToDoTableEntry implements Comparable<ToDoTableEntry> {
         private LocalDateTime deadline;
         private String description;
         private int priority;
@@ -91,6 +98,15 @@ public class Entries {
 
         public String getType() {
             return type;
+        }
+
+        //Kõrgem prioriteet eespool ja siis minevikule lähemad ülesanded eespool
+        @Override
+        public int compareTo(ToDoTableEntry o) {
+            int dif = this.priority-o.priority;
+            if (dif == 0)
+                dif = this.deadline.compareTo(o.deadline);
+            return dif;
         }
     }
 

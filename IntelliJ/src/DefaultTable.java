@@ -73,7 +73,7 @@ public class DefaultTable<T> {
         String jsonFile = gson.toJson(this);
 
         try(final FileWriter fileWriter = new FileWriter( fileName)) {
-            System.out.println(path + "/" + fileName);
+            System.out.println(path + "/" + fileName);//pathseparator?
             fileWriter.write(jsonFile);
         }
         catch (IOException ioException){

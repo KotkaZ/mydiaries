@@ -14,7 +14,7 @@ public class Test {
 
         while (true) {
             Scanner tableSelection = new Scanner(System.in);
-            System.out.println("Sisestage, millist tabelit tahate avada: (raha, treening, ToDo, toit");
+            System.out.println("Sisestage, millist tabelit tahate avada: (raha, treening, ToDo, toit)");
             System.out.println("Väljumiseks, sisestage 'quit'");
             String tS = tableSelection.nextLine().toLowerCase();
 
@@ -97,6 +97,5 @@ public class Test {
             System.out.print("\tTüüp: " +objects[2].toString());
             System.out.println("\tKirjeldus: " +objects[3].toString());
         }*/
-
     }
 }
