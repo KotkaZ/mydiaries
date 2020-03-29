@@ -26,13 +26,13 @@ public class Test {
             final Scanner scanner = new Scanner(System.in);
             System.out.println("Enter action: " + Arrays.toString(actionNames.toArray()));
 
-            String action = scanner.next().toLowerCase();
+            String action = scanner.nextLine().toLowerCase().trim();
             int selection = actionNames.indexOf(action);
             if (selection == 0) break;
 
             else if (selection == 1) {
                 System.out.println("Enter table name: " + Arrays.toString(tableNames.toArray()));
-                String table = scanner.next().toLowerCase();
+                String table = scanner.nextLine().toLowerCase().trim();
                 int tableSelection = tableNames.indexOf(table);
                 if (tableSelection == 0)
                     addMoney(scanner);
@@ -45,7 +45,7 @@ public class Test {
 
             } else if (selection == 2) {
                 System.out.println("Enter table name: " + Arrays.toString(tableNames.toArray()));
-                String table = scanner.next().toLowerCase();
+                String table = scanner.nextLine().toLowerCase().trim();
                 int tableSelection = tableNames.indexOf(table);
                 if (tableSelection == 0)
                     showMoney();
@@ -85,9 +85,9 @@ public class Test {
         System.out.println("Enter amount:");
         final double amount = scanner.nextDouble();
         System.out.println("Enter type:");
-        final String type = scanner.next();
+        final String type = scanner.nextLine();
         System.out.println("Enter desc.:");
-        final String desc = scanner.next();
+        final String desc = scanner.nextLine();
 
         moneyTable.addData(date, amount, type, desc);
 
@@ -111,11 +111,11 @@ public class Test {
             ioException.printStackTrace();
         } //Only for Testing. TODO.
 
-        System.out.println("Enter exp. date:");
+        System.out.print("Enter exp. date:");
         final LocalDateTime expDate = dateTimeControl(scanner);
-        System.out.println("Enter amount:");
+        System.out.print("Enter amount:");
         final int amount = scanner.nextInt();
-        System.out.println("Enter type:");
+        System.out.print("Enter type:");
         final String type = scanner.next();
 
         foodTable.addData(expDate, type, amount);
@@ -145,11 +145,11 @@ public class Test {
         System.out.println("Enter length:");
         final double amount = scanner.nextDouble();
         System.out.println("Enter type:");
-        final String type = scanner.next();
+        final String type = scanner.nextLine();
         System.out.println("Enter desc.:");
-        final String desc = scanner.next();
+        final String desc = scanner.nextLine();
         System.out.println("Enter location:");
-        final String location = scanner.next();
+        final String location = scanner.nextLine();
 
 
         exerciseTable.addData(date, type, amount, desc, location);
@@ -178,11 +178,11 @@ public class Test {
         final LocalDateTime date = dateTimeControl(scanner);
 
         System.out.println("Enter type:");
-        final String type = scanner.next();
+        final String type = scanner.nextLine();
         System.out.println("Enter priority:");
         final int amount = scanner.nextInt();
         System.out.println("Enter desc.:");
-        final String desc = scanner.next();
+        final String desc = scanner.nextLine();
 
         toDoTable.addData(date, desc, amount, type);
 
@@ -207,7 +207,7 @@ public class Test {
 
         final Map<LocalDateTime, Entries.MoneyTableEntry> tabel = moneyTable.getTabel();
         for (Map.Entry<LocalDateTime, Entries.MoneyTableEntry> entry : tabel.entrySet()) {
-            System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s",
+            System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getAmount(), entry.getValue().getType(),
                     entry.getValue().getUseDate(), entry.getValue().getDescription());
         }
@@ -226,7 +226,7 @@ public class Test {
         } //Only for Testing. TODO.
 
         System.out.println("Do you want sorted data? (y/n)");
-        String answer = scanner.next();
+        String answer = scanner.nextLine().trim().toLowerCase();
 
         Map<LocalDateTime, Entries.FoodTableEntry> tabel = foodTable.getTabel();
         if (answer.equalsIgnoreCase("y"))
@@ -234,7 +234,7 @@ public class Test {
 
 
         for (Map.Entry<LocalDateTime, Entries.FoodTableEntry> entry : tabel.entrySet()) {
-            System.out.printf("%-10s; %-10s; %-10s; %-10s",
+            System.out.printf("%-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getExpDate(), entry.getValue().getAmount(),
                     entry.getValue().getType());
         }
@@ -254,7 +254,7 @@ public class Test {
 
         final Map<LocalDateTime, Entries.ExerciseTableEntry> tabel = exerciseTable.getTabel();
         for (Map.Entry<LocalDateTime, Entries.ExerciseTableEntry> entry : tabel.entrySet()) {
-            System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s; %-10s",
+            System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getExerciseDate(), entry.getValue().getLength(),
                     entry.getValue().getType(), entry.getValue().getDescription(), entry.getValue().getLocation());
         }
@@ -279,7 +279,7 @@ public class Test {
             tabel = toDoTable.getOrderedByExpDate();
 
         for (Map.Entry<LocalDateTime, Entries.ToDoTableEntry> entry : tabel.entrySet()) {
-            System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s",
+            System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getDeadline(), entry.getValue().getPriority(),
                     entry.getValue().getType(), entry.getValue().getDescription());
         }
@@ -296,7 +296,7 @@ public class Test {
         LocalDateTime date;
         String sDate;
         while (true) {
-            sDate = scanner.nextLine();
+            sDate = scanner.nextLine().trim();
             //Kui teikib viga scanneriga, läheb catch plokki.
             try {
                 //Paneb pange
@@ -310,7 +310,7 @@ public class Test {
                     break;
                 else {
                     System.out.println("Are you sure that this date " + date + "is right? (y/n)");
-                    String vastus = scanner.next().toLowerCase();
+                    String vastus = scanner.nextLine().toLowerCase().trim();
                     if (vastus.equals("y"))
                         break;
                 }
