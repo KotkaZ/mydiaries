@@ -296,13 +296,14 @@ public class Test {
         LocalDateTime date;
         String sDate;
         while (true) {
-            sDate = scanner.next();
+            sDate = scanner.nextLine();
             //Kui teikib viga scanneriga, läheb catch plokki.
             try {
                 //Paneb pange
-                //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                //date = LocalDateTime.parse(sDate, formatter);
-                date = LocalDateTime.parse(sDate);
+                System.out.println(sDate);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                date = LocalDateTime.parse(sDate, formatter);
+                //date = LocalDateTime.parse(sDate);
                 //Kontrollib, kas kuupäev on minevikust või rohkem kui
                 // 10 aastat praegusest ja annab võimaluse parandada.
                 if (0 < date.compareTo(LocalDateTime.now()) || 0 < date.compareTo(LocalDateTime.now().plusYears(10)))
@@ -312,8 +313,6 @@ public class Test {
                     String vastus = scanner.next().toLowerCase();
                     if (vastus.equals("y"))
                         break;
-                    else
-                        continue;
                 }
 
             } catch (DateTimeParseException e) {
