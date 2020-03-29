@@ -1,5 +1,7 @@
 import java.time.LocalDateTime;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
@@ -13,24 +15,18 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
     /**
      * Sorteerib kuupäeva alusel, vanemad ees, ja väljastab tabeli kujul.
      */
-    public void showOrderedByExpDate() {
-        Map<LocalDateTime, Entries.FoodTableEntry> mapThis = this.getTabel();
-        Object[] expiringArray = mapThis.values().toArray();
-        Arrays.sort(expiringArray);
-        System.out.printf("%-30s%-10s%-20s%n", "Expire date", "Amount", "Type");
-        for (Entries.FoodTableEntry entry :
-                (Entries.FoodTableEntry[]) expiringArray) {
-            System.out.printf("%-30s%-10s%-20s%n", entry.getExpDate(), entry.getAmount(), entry.getType());
-        }
-    }
-}
-/*
+    public Map<LocalDateTime, Entries.FoodTableEntry> getOrderedByPriority() {
+        Map<LocalDateTime, Entries.FoodTableEntry> toDoTableEntryMap = this.getTabel();
 
-class TestFoodTabel {
-    public static void main(String[] args) {
-        System.out.printf("%-30s%-10s%-20s%n", "Expire date", "Amount", "Type");
-        System.out.printf("%-30s%-10s%-20s%n", LocalDateTime.now(), 999, "Sitaks piima");
+        List<Map.Entry<LocalDateTime, Entries.FoodTableEntry>> entries =
+                new ArrayList<>(toDoTableEntryMap.entrySet());
+        entries.sort(Map.Entry.comparingByValue());
+        Map<LocalDateTime, Entries.FoodTableEntry> orderedByPriority = new LinkedHashMap<>();
+        for (Map.Entry<LocalDateTime, Entries.FoodTableEntry> entry : entries) {
+            orderedByPriority.put(entry.getKey(), entry.getValue());
+        }
+
+        return orderedByPriority;
     }
 }
-/*
- */
+

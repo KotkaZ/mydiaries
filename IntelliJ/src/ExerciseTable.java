@@ -8,4 +8,5 @@ public class ExerciseTable extends DefaultTable<Entries.ExerciseTableEntry> {
         super.addData(entries);
     }
 
+
 }

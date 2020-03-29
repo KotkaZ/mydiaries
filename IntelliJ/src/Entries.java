@@ -1,13 +1,12 @@
 import java.time.LocalDateTime;
-import java.util.List;
 
 public class Entries {
 
     static class TextEntry{
-        private String string;
+        private String text;
 
-        public TextEntry(String string) {
-            this.string = string;
+        public TextEntry(String text) {
+            this.text = text;
         }
     }
 
