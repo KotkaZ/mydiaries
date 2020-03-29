@@ -61,13 +61,16 @@ public class DefaultTable<T> {
      */
     public void loadTable(String fileName) throws IOException {
 
-        final Type REVIEW_TYPE = new TypeToken<DefaultTable<T>>() {}.getType();
+        //final Type REVIEW_TYPE = new TypeToken<DefaultTable<T>>() {}.getType();
         final Gson gson = new Gson();
 
         try (final JsonReader jsonReader = new JsonReader(new FileReader(fileName))) {
-            DefaultTable<T> defaultTable = gson.fromJson(jsonReader, REVIEW_TYPE);
+            DefaultTable<T> defaultTable = gson.fromJson(jsonReader, this.getClass());
             this.inputDate = defaultTable.inputDate;
             this.tabelData = defaultTable.tabelData;
+        }
+        catch (NullPointerException nullPointerException){
+            //Do nothing
         }
 
     }
@@ -81,7 +84,8 @@ public class DefaultTable<T> {
     public void saveTabel(String fileName) throws IOException {
         final Gson gson = new Gson();
 
-        String jsonFile = gson.toJson(this);
+        final Type REVIEW_TYPE = new TypeToken<DefaultTable<T>>() {}.getType();
+        String jsonFile = gson.toJson(this,REVIEW_TYPE);
 
         try (final FileWriter fileWriter = new FileWriter(fileName)) {
             fileWriter.write(jsonFile);
