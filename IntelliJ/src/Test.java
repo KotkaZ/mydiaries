@@ -1,10 +1,12 @@
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Test {
 
     public static void main(String[] args) {
+
         List<String> tableNames = new ArrayList<>();
         tableNames.add("money");
         tableNames.add("food");
@@ -41,7 +43,7 @@ public class Test {
                     } //Only for Testing. TODO.
 
                     System.out.println("Enter use/get date:");
-                    final LocalDateTime date = LocalDateTime.parse(scanner.next());
+                    final LocalDateTime date = dateTimeControl(scanner);
                     System.out.println("Enter amount:");
                     final double amount = scanner.nextDouble();
                     System.out.println("Enter type:");
@@ -66,7 +68,7 @@ public class Test {
                     } //Only for Testing. TODO.
 
                     System.out.println("Enter exp. date:");
-                    final LocalDateTime expDate = LocalDateTime.parse(scanner.next());
+                    final LocalDateTime expDate = dateTimeControl(scanner);
                     System.out.println("Enter amount:");
                     final int amount = scanner.nextInt();
                     System.out.println("Enter type:");
@@ -89,7 +91,7 @@ public class Test {
                     } //Only for Testing. TODO.
 
                     System.out.println("Enter date:");
-                    final LocalDateTime date = LocalDateTime.parse(scanner.next());
+                    final LocalDateTime date = dateTimeControl(scanner);
                     System.out.println("Enter length:");
                     final double amount = scanner.nextDouble();
                     System.out.println("Enter type:");
@@ -98,6 +100,7 @@ public class Test {
                     final String desc = scanner.next();
                     System.out.println("Enter location:");
                     final String location = scanner.next();
+
 
                     exerciseTable.addData(date, type, amount, desc, location);
 
@@ -116,7 +119,7 @@ public class Test {
                     } //Only for Testing. TODO.
 
                     System.out.println("Enter deadline:");
-                    final LocalDateTime date = LocalDateTime.parse(scanner.next());
+                    final LocalDateTime date = dateTimeControl(scanner);
 
                     System.out.println("Enter type:");
                     final String type = scanner.next();
@@ -212,4 +215,37 @@ public class Test {
 
 
     }
+
+    /**
+     * Kontrollib, kas kuupäev on õigesti sisestatud ja kas on mõistlik sisestus.
+     * @param scanner
+     * @return Scannerist saadud kuupäev ajaga.
+     */
+    private static LocalDateTime dateTimeControl(Scanner scanner) {
+        LocalDateTime date;
+        while (true) {
+            String sDate = scanner.next();
+
+            //Kui teikib viga scanneriga, läheb catch plokki.
+            try {
+                date = LocalDateTime.parse(sDate);
+
+                //Kontrollib, kas kuupäev on minevikust või rohkem kui
+                // 10 aastat praegusest ja annab võimaluse parandada.
+                if (0 < date.compareTo(LocalDateTime.now()) || 0 < date.compareTo(LocalDateTime.now().plusYears(10)))
+                    break;
+                else {
+                    System.out.println("Oled kindel, et see kuupäev " + date + "on õige? (y/n)");
+                    String vastus = scanner.next().toLowerCase();
+                    if (vastus.equals("y"))
+                        break;
+                }
+
+            } catch (DateTimeParseException e) {
+                System.out.println("Kuupäeav peab olema kujul AAAA-KK-PP");
+            }
+        }
+        return date;
+    }
+
 }
