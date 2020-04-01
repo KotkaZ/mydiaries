@@ -16,7 +16,7 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
      * Sorteerib kuupäeva alusel, vanemad ees, ja väljastab tabeli kujul.
      */
     public Map<LocalDateTime, Entries.FoodTableEntry> getOrderedByPriority() {
-        Map<LocalDateTime, Entries.FoodTableEntry> toDoTableEntryMap = this.getTabel();
+        Map<LocalDateTime, Entries.FoodTableEntry> toDoTableEntryMap = getTabel();
 
         List<Map.Entry<LocalDateTime, Entries.FoodTableEntry>> entries =
                 new ArrayList<>(toDoTableEntryMap.entrySet());

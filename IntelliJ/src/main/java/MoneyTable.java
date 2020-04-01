@@ -9,7 +9,7 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
     }
 
     public double getTotalSum(){
-        Map<LocalDateTime,Entries.MoneyTableEntry> moneyTable = super.getTabel();
+        Map<LocalDateTime,Entries.MoneyTableEntry> moneyTable = getTabel();
         double sum = 0;
         for (Entries.MoneyTableEntry moneyTableEntry: moneyTable.values())
             sum += moneyTableEntry.getAmount();

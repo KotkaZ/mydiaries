@@ -10,7 +10,7 @@ public class Entries {
         }
     }
 
-    static class FoodTableEntry  implements Comparable<FoodTableEntry> {
+    static class FoodTableEntry extends DefaultEntry implements Comparable<FoodTableEntry> {
         private LocalDateTime expDate;
         private String type;
         private int amount;
@@ -40,7 +40,7 @@ public class Entries {
         }
     }
 
-    static class MoneyTableEntry{
+    static class MoneyTableEntry extends DefaultEntry{
         private LocalDateTime useDate;
         private double amount;
         private String type;
@@ -70,7 +70,7 @@ public class Entries {
         }
     }
 
-    static class ToDoTableEntry implements Comparable<ToDoTableEntry> {
+    static class ToDoTableEntry extends DefaultEntry implements Comparable<ToDoTableEntry> {
         private LocalDateTime deadline;
         private String description;
         private int priority;
@@ -109,7 +109,7 @@ public class Entries {
         }
     }
 
-    static class ExerciseTableEntry {
+    static class ExerciseTableEntry extends DefaultEntry{
         private LocalDateTime exerciseDate;
         private String type;
         private double length;

@@ -66,11 +66,9 @@ public class DefaultTable<T> {
 
         try (final JsonReader jsonReader = new JsonReader(new FileReader(fileName))) {
             DefaultTable<T> defaultTable = gson.fromJson(jsonReader, this.getClass());
+            if(defaultTable == null) return;
             this.inputDate = defaultTable.inputDate;
             this.tabelData = defaultTable.tabelData;
-        }
-        catch (NullPointerException nullPointerException){
-            //Do nothing
         }
 
     }

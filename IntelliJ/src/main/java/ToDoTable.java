@@ -14,7 +14,7 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
 
 
     public Map<LocalDateTime, Entries.ToDoTableEntry> getOrderedByExpDate() {
-        Map<LocalDateTime, Entries.ToDoTableEntry> toDoTableEntryMap = this.getTabel();
+        Map<LocalDateTime, Entries.ToDoTableEntry> toDoTableEntryMap = getTabel();
 
         List<Map.Entry<LocalDateTime, Entries.ToDoTableEntry>> entries =
                 new ArrayList<>(toDoTableEntryMap.entrySet());
