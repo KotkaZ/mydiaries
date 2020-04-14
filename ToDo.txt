@@ -1,0 +1,33 @@
+Karl:
+* Androidi visuaalne disain (peamenüü, tabelite vaated, tabelite lisamine)
+* Hetkel töötavate classide toomine üle Andriod Studio projekti.
+
+
+
+
+.
+.
+.
+
+
+
+
+
+
+* table tüübis võiks luua oma klassi tabeli elementide jaoks, milles oleks date+T, siis pole vaja kahte eraldi listi luua ja eraldi "samade" indeksite pealt lugeda infot jne.
+pealegi te kasutate entry tüübi, miks mitte lisada see kuupäev sinna? võiks olla ka abstraktne juur klass vms.
+
+* miks FoodTableEntry, MoneyTableEntry jne ei laienda baasklassi Entry? Siis poleks vaja dubleerida välju nendes klassides...
+
+*TodoTable ja FoodTable sisaldab duplikaatkoodi getOrderedByPriority ja getOrderedByExpDate. Miks mitte seda meetodit realiseerida baasklassis ja anda sellele Comparatorit kaasa?
+Või koguni teha et Entry implementeeriks Comparable-i?
+
+*Salvestamine SQLLite baasi?
+
+*Meetodid erinevate tabelite funktsionaalsuste jaoks (nädalas kokku treenitud, see kuu kokku raha kulutatud (sh kulutused kokku, miinused kokku)
+list tänaste tähtajaliste asjadega jms)
+
+*Entride eemaldamine
+
+*Kokapäevik? Reisipäevik? Tsitaatide päevik? Ideede päevik? Auto päevik/hooldusraamat? 
+Või siis arendada custom päeviku classi loomist, mis oleks dünaamiline ja uuesti laetav tänu gsoni omanudstele.
