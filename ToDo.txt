@@ -31,3 +31,5 @@ list tänaste tähtajaliste asjadega jms)
 
 *Kokapäevik? Reisipäevik? Tsitaatide päevik? Ideede päevik? Auto päevik/hooldusraamat? 
 Või siis arendada custom päeviku classi loomist, mis oleks dünaamiline ja uuesti laetav tänu gsoni omanudstele.
+
+*LocalDateTime.now() ei ole vanemates androidides kaustusel. Liiga uus funktsioon. Leida mingi asendus?
