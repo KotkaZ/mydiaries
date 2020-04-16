@@ -2,10 +2,13 @@
     <string name="app_name">myDiaries</string>
 
     //Button texts
-    <string name="btn_foodlist">Toidunimekiri</string>
-    <string name="btn_moneylist">Rahapäevik</string>
-    <string name="btn_todolist">ToDo nimekiri</string>
-    <string name="btn_exercise">Treeningpäevik</string>
+    <string name="btnFoodList">Toidunimekiri</string>
+    <string name="btnMoneyList">Rahapäevik</string>
+    <string name="btnToDoList">ToDo nimekiri</string>
+    <string name="btnExercise">Treeningpäevik</string>
 
-    <string name="btn_exit">Välju</string>
+    <string name="btnExit">Välju</string>
+
+    //TextView texts
+    <string name="txtTitle">Pealkiri</string>
 </resources>
