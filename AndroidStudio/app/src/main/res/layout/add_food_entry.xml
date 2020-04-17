@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/colorDarkMenuTrans"
+    android:padding="15dp">
+
+    <EditText
+        android:id="@+id/boxFoodType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/boxFoodTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/boxFoodAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="@string/boxFoodAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boxFoodType" />
+
+    <EditText
+        android:id="@+id/boxFoodExpDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:text="@string/boxFoodExpDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boxFoodAmount" />
+
+    <Button
+        android:id="@+id/btnConfirmEntry"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/btnConfirmEntry"
+        app:layout_constraintEnd_toEndOf="@+id/boxFoodExpDate"
+        app:layout_constraintStart_toStartOf="@+id/boxFoodExpDate"
+        app:layout_constraintTop_toBottomOf="@+id/boxFoodExpDate" />
+</androidx.constraintlayout.widget.ConstraintLayout>

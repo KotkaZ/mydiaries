@@ -3,22 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorDarkMenuTrans">
 
 
     <TextView
-        android:id="@+id/txtDate"
+        android:id="@+id/txtExerciseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="24dp"
         android:text="TextView"
         android:textAppearance="@style/ListItemText"
-        app:layout_constraintBottom_toBottomOf="@+id/txtFoodTitle"
-        app:layout_constraintStart_toEndOf="@+id/txtFoodTitle"
-        app:layout_constraintTop_toTopOf="@+id/txtFoodTitle" />
+        app:layout_constraintStart_toEndOf="@+id/txtExerciseTitle"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtToDoTitle"
+        android:id="@+id/txtExerciseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -31,13 +31,34 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtPriority"
+        android:id="@+id/txtExerciseLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="8dp"
         android:text="TextView"
         android:textAppearance="@style/ListItemText"
-        app:layout_constraintBottom_toBottomOf="@+id/txtExpDate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtExpDate" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textExerciseDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="TextView"
+        android:textAppearance="@style/ListItemText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtExerciseTitle" />
+
+    <TextView
+        android:id="@+id/txtExerciseLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="2dp"
+        android:text="TextView"
+        android:textAppearance="@style/ListItemText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

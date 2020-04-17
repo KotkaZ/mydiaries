@@ -1,14 +1,47 @@
 <resources>
     <string name="app_name">myDiaries</string>
 
-    //Button texts
-    <string name="btnFoodList">Toidunimekiri</string>
-    <string name="btnMoneyList">Rahapäevik</string>
-    <string name="btnToDoList">ToDo nimekiri</string>
-    <string name="btnExercise">Treeningpäevik</string>
+    //Diary Titles
+    <string name="FoodList">Toidunimekiri</string>
+    <string name="MoneyList">Rahapäevik</string>
+    <string name="ToDoList">ToDo nimekiri</string>
+    <string name="Exercise">Treeningpäevik</string>
 
+
+    //Button texts
     <string name="btnExit">Välju</string>
+    <string name="btnConfirmEntry">Kinnita</string>
+
 
     //TextView texts
     <string name="txtTitle">Pealkiri</string>
+
+
+    //Entries
+    //FoodEntry
+    <string name="boxFoodTitle">Toit</string>
+    <string name="boxFoodAmount">Kogus</string>
+    <string name="boxFoodExpDate">Aegub</string>
+
+
+    //MoneyEntry
+    <string name="boxMoenyTitle">Valdkond</string>
+    <string name="boxMoneyDesc">Kirjeldus</string>
+    <string name="boxMoneyAmount">Kogus</string>
+    <string name="boxMoneyUseDate">Kuupäev</string>
+
+
+    //Entry
+    <string name="boxToDoTitle">Ülesanne</string>
+    <string name="boxToDoPriority">Tähtsus</string>
+    <string name="boxToDoDate">Kuupäev</string>
+    <string name="boxToDoDesc">Kirjeldus</string>
+
+
+    //FoodEntry
+    <string name="boxExerciseTitle">Harjutus</string>
+    <string name="boxExerciseDesc">Kirjeldus</string>
+    <string name="boxExerciseLocation">Asukoht</string>
+    <string name="boxExerciseLength">Kestvus</string>
+    <string name="boxExerciseDate">Kuupäev</string>
 </resources>

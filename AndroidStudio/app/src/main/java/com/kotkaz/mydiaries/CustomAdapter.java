@@ -14,10 +14,13 @@ import org.joda.time.LocalDate;
 
 import java.util.Map;
 
+/**
+ * CustomAdapter class for listView.
+ */
 public class CustomAdapter extends BaseAdapter {
 
-    LocalDate[] entries;
-    Map<LocalDate, Entries.FoodTableEntry> foodTableEntryMap;
+    private LocalDate[] entries;
+    private Map<LocalDate, Entries.FoodTableEntry> foodTableEntryMap; //Has to be changed.
     private LayoutInflater layoutInflater;
 
     public CustomAdapter(FoodTable foodTableDefaultTable, LayoutInflater layoutInflater) {
@@ -47,8 +50,8 @@ public class CustomAdapter extends BaseAdapter {
         convertView = layoutInflater.inflate(R.layout.food_table_item, null);
 
         TextView foodTitle = convertView.findViewById(R.id.txtFoodTitle);
-        TextView foodDate = convertView.findViewById(R.id.txtExpDate);
-        TextView foodAmount = convertView.findViewById(R.id.txtAmount);
+        TextView foodDate = convertView.findViewById(R.id.txtFoodExpDate);
+        TextView foodAmount = convertView.findViewById(R.id.txtFoodAmount);
 
         foodTitle.setText(foodTableEntryMap.get(entries[position]).getType());
         foodDate.setText(foodTableEntryMap.get(entries[position]).getExpDate().toString());
