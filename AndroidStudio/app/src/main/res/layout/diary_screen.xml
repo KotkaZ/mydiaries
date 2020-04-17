@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@drawable/app_background"
+    tools:context=".Runner">
 
 
     <androidx.constraintlayout.widget.Guideline
@@ -43,9 +44,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/txtTitle"
+        android:textAppearance="@style/TableTitle"
         app:layout_constraintBottom_toTopOf="@+id/guideline_up"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ListView
+        android:id="@+id/listEntries"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btn_exit"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_up" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

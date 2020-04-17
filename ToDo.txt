@@ -5,29 +5,37 @@ Karl:
 
 
 
-.
-.
-.
+Ma arvan
+Tiit/Robert?
 
+* Elementide klass
+	Juhendajate selgitus:	table tüübis võiks luua oma klassi tabeli elementide jaoks, milles oleks date+T, siis pole vaja kahte eraldi listi luua ja eraldi "samade" indeksite pealt lugeda infot jne.
+				pealegi te kasutate entry tüübi, miks mitte lisada see kuupäev sinna? võiks olla ka abstraktne juur klass vms.
+	Karli selgitus: 	Hetkel Map<date,T> väga ei toida, kuna teen taast kuvades massivi. Võiks olla masiiv või arraylist elementide klassist, kust saaks indeksi alusel kätte.
+				Samuti ei sa programmiliset hetkel uusi väärtusi lisada, sest võttmeid võivad kattuda.
 
+* Luua baasklass DefaultEntry 
+	Juhendajate selgitus: 	Miks FoodTableEntry, MoneyTableEntry jne ei laienda baasklassi Entry? Siis poleks vaja dubleerida välju nendes klassides...
 
+* DefaultTable meetod, mis tagastab tabeli vastavalt etteantud Comparatorile.
+	Juhendajate selgitus:	TodoTable ja FoodTable sisaldab duplikaatkoodi getOrderedByPriority ja getOrderedByExpDate. Miks mitte seda meetodit realiseerida baasklassis ja anda sellele Comparatorit kaasa?
+				Või koguni teha et Entry implementeeriks Comparable-i?
 
-
-
-* table tüübis võiks luua oma klassi tabeli elementide jaoks, milles oleks date+T, siis pole vaja kahte eraldi listi luua ja eraldi "samade" indeksite pealt lugeda infot jne.
-pealegi te kasutate entry tüübi, miks mitte lisada see kuupäev sinna? võiks olla ka abstraktne juur klass vms.
-
-* miks FoodTableEntry, MoneyTableEntry jne ei laienda baasklassi Entry? Siis poleks vaja dubleerida välju nendes klassides...
-
-*TodoTable ja FoodTable sisaldab duplikaatkoodi getOrderedByPriority ja getOrderedByExpDate. Miks mitte seda meetodit realiseerida baasklassis ja anda sellele Comparatorit kaasa?
-Või koguni teha et Entry implementeeriks Comparable-i?
-
-*Salvestamine SQLLite baasi?
+*Salvestamine SQLLite
 
 *Meetodid erinevate tabelite funktsionaalsuste jaoks (nädalas kokku treenitud, see kuu kokku raha kulutatud (sh kulutused kokku, miinused kokku)
-list tänaste tähtajaliste asjadega jms)
+	list tänaste tähtajaliste asjadega jms).
+	Karli selgitus:		Võiksid olla staatilised meetodid, mist võtavad argumendina selle samma klassi tabeli.
 
 *Entride eemaldamine
 
-*Kokapäevik? Reisipäevik? Tsitaatide päevik? Ideede päevik? Auto päevik/hooldusraamat? 
-Või siis arendada custom päeviku classi loomist, mis oleks dünaamiline ja uuesti laetav tänu gsoni omanudstele.
+*Kokapäevik? Reisipäevik? Tsitaatide päevik? Ideede päevik? Auto päevik/hooldusraamat? Või siis arendada custom päeviku classi loomist, mis oleks dünaamiline ja uuesti laetav tänu jsoni omanudstele.
+
+*LocalDateTime.now() ei ole vanemates androidides kaustusel. Liiga uus funktsioon. Leida mingi asendus?
+	Karli Selgitus:		Pole väga kriitiline, saan workaroundi teha. 
+
+*Hetkel puudub toidu kogusel ühiku võimalus. Sama probleem on ka teiste tabelite korral. Hetkel ei oska täpselt 
+
+*Sisse võiks tuua Visitori Patterni https://github.com/sim642/oop-visitor-template. Kohati tundub mul mõttetu vajadus iga tabeli jaosk eraldi ListView CustomAdapter klass luua. 
+
+* https://github.com/Zukkari/testing-template näitel luua testid? AStudio loob projekti, kus on need testid vaikimisi sees.
