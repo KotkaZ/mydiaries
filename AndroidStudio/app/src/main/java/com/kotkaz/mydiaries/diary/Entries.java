@@ -1,14 +1,10 @@
 package com.kotkaz.mydiaries.diary;
 
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
-import java.time.LocalDateTime;
+import org.joda.time.LocalDate;
 
 public class Entries {
 
-    public static class TextEntry{
+    static class TextEntry{
         private String text;
 
         public TextEntry(String text) {
@@ -17,17 +13,17 @@ public class Entries {
     }
 
     public static class FoodTableEntry extends DefaultEntry implements Comparable<FoodTableEntry> {
-        private LocalDateTime expDate;
+        private LocalDate expDate;
         private String type;
         private int amount;
 
-        public FoodTableEntry(LocalDateTime expDate, String type, int amount) {
+        public FoodTableEntry(LocalDate expDate, String type, int amount) {
             this.expDate = expDate;
             this.type = type;
             this.amount = amount;
         }
 
-        public LocalDateTime getExpDate() {
+        public LocalDate getExpDate() {
             return expDate;
         }
 
@@ -40,7 +36,6 @@ public class Entries {
         }
 
         //minevikule lähemad tooted eespool
-        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public int compareTo(FoodTableEntry o) {
             return this.expDate.compareTo(o.expDate);
@@ -48,19 +43,19 @@ public class Entries {
     }
 
     static class MoneyTableEntry extends DefaultEntry{
-        private LocalDateTime useDate;
+        private LocalDate useDate;
         private double amount;
         private String type;
         private String description;
 
-        public MoneyTableEntry(LocalDateTime useDate, double amount, String type, String description) {
+        public MoneyTableEntry(LocalDate useDate, double amount, String type, String description) {
             this.useDate = useDate;
             this.amount = amount;
             this.type = type;
             this.description = description;
         }
 
-        public LocalDateTime getUseDate() {
+        public LocalDate getUseDate() {
             return useDate;
         }
 
@@ -78,19 +73,19 @@ public class Entries {
     }
 
     static class ToDoTableEntry extends DefaultEntry implements Comparable<ToDoTableEntry> {
-        private LocalDateTime deadline;
+        private LocalDate deadline;
         private String description;
         private int priority;
         private String type;
 
-        public ToDoTableEntry(LocalDateTime deadline, String description, int priority, String type) {
+        public ToDoTableEntry(LocalDate deadline, String description, int priority, String type) {
             this.deadline = deadline;
             this.description = description;
             this.priority = priority;
             this.type = type;
         }
 
-        public LocalDateTime getDeadline() {
+        public LocalDate getDeadline() {
             return deadline;
         }
 
@@ -107,7 +102,6 @@ public class Entries {
         }
 
         //Kõrgem prioriteet eespool ja siis minevikule lähemad ülesanded eespool
-        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public int compareTo(ToDoTableEntry o) {
             int dif = this.priority-o.priority;
@@ -117,14 +111,14 @@ public class Entries {
         }
     }
 
-    static class ExerciseTableEntry extends DefaultEntry{
-        private LocalDateTime exerciseDate;
+    static class ExerciseTableEntry extends DefaultEntry {
+        private LocalDate exerciseDate;
         private String type;
         private double length;
         private String description;
         private String location;
 
-        public ExerciseTableEntry(LocalDateTime exerciseDate, String type, double length, String description, String location) {
+        public ExerciseTableEntry(LocalDate exerciseDate, String type, double length, String description, String location) {
             this.exerciseDate = exerciseDate;
             this.type = type;
             this.length = length;
@@ -132,7 +126,7 @@ public class Entries {
             this.location = location;
         }
 
-        public LocalDateTime getExerciseDate() {
+        public LocalDate getExerciseDate() {
             return exerciseDate;
         }
 

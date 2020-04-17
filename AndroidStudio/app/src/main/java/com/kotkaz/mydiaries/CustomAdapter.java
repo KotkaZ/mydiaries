@@ -9,18 +9,20 @@ import android.widget.TextView;
 import com.kotkaz.mydiaries.diary.Entries;
 import com.kotkaz.mydiaries.diary.FoodTable;
 
-import java.time.LocalDateTime;
+
+import org.joda.time.LocalDate;
+
 import java.util.Map;
 
 public class CustomAdapter extends BaseAdapter {
 
-    LocalDateTime[] entries;
-    Map<LocalDateTime, Entries.FoodTableEntry> foodTableEntryMap;
+    LocalDate[] entries;
+    Map<LocalDate, Entries.FoodTableEntry> foodTableEntryMap;
     private LayoutInflater layoutInflater;
 
     public CustomAdapter(FoodTable foodTableDefaultTable, LayoutInflater layoutInflater) {
         this.foodTableEntryMap = foodTableDefaultTable.getTabel();
-        this.entries = foodTableEntryMap.keySet().toArray(new LocalDateTime[0]);
+        this.entries = foodTableEntryMap.keySet().toArray(new LocalDate[0]);
         this.layoutInflater = layoutInflater;
     }
 

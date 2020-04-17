@@ -1,6 +1,5 @@
 package com.kotkaz.mydiaries;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Build;
@@ -12,12 +11,12 @@ import android.widget.ScrollView;
 
 import com.kotkaz.mydiaries.diary.FoodTable;
 
-import java.time.LocalDateTime;
+import org.joda.time.LocalDate;
+
 
 public class Runner extends AppCompatActivity {
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,15 +27,15 @@ public class Runner extends AppCompatActivity {
 
         FoodTable foodTable = new FoodTable();
         try {
-            foodTable.addData(LocalDateTime.of(1999, 11, 23, 10, 20), "Eggs", 10);
+            foodTable.addData(LocalDate.parse("1999-10-10"), "Eggs", 10);
             Thread.sleep(100);
-            foodTable.addData(LocalDateTime.of(2000, 11, 23, 10, 20), "Milk", 5);
+            foodTable.addData(LocalDate.parse("1998-10-10"), "Milk", 5);
             Thread.sleep(100);
-            foodTable.addData(LocalDateTime.of(2001, 11, 23, 10, 20), "Flour", 500);
+            foodTable.addData(LocalDate.parse("1999-11-10"), "Flour", 500);
             Thread.sleep(100);
-            foodTable.addData(LocalDateTime.of(2012, 11, 23, 10, 20), "Bread", 2);
+            foodTable.addData(LocalDate.parse("1999-10-12"), "Bread", 2);
             Thread.sleep(100);
-            foodTable.addData(LocalDateTime.of(1999, 11, 23, 10, 20), "Steak", 2);
+            foodTable.addData(LocalDate.parse("2012-11-11"), "Steak", 2);
         }
         catch (Exception e){
             e.printStackTrace();

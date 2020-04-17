@@ -1,4 +1,6 @@
 Karl:
+* [DONE] Leida asendus LocalDateTime. Võtsin kasutusele org.joda.time.LocalDate
+
 * Androidi visuaalne disain (peamenüü, tabelite vaated, tabelite lisamine)
 * Hetkel töötavate classide toomine üle Andriod Studio projekti.
 
@@ -30,9 +32,6 @@ Tiit/Robert?
 *Entride eemaldamine
 
 *Kokapäevik? Reisipäevik? Tsitaatide päevik? Ideede päevik? Auto päevik/hooldusraamat? Või siis arendada custom päeviku classi loomist, mis oleks dünaamiline ja uuesti laetav tänu jsoni omanudstele.
-
-*LocalDateTime.now() ei ole vanemates androidides kaustusel. Liiga uus funktsioon. Leida mingi asendus?
-	Karli Selgitus:		Pole väga kriitiline, saan workaroundi teha. 
 
 *Hetkel puudub toidu kogusel ühiku võimalus. Sama probleem on ka teiste tabelite korral. Hetkel ei oska täpselt 
 
