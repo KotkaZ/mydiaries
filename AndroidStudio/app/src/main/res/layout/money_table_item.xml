@@ -3,22 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/colorDarkMenuTrans">
 
 
     <TextView
-        android:id="@+id/txtDate"
+        android:id="@+id/txtMoneyDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="2dp"
         android:text="TextView"
         android:textAppearance="@style/ListItemText"
-        app:layout_constraintBottom_toBottomOf="@+id/txtFoodTitle"
-        app:layout_constraintStart_toEndOf="@+id/txtFoodTitle"
-        app:layout_constraintTop_toTopOf="@+id/txtFoodTitle" />
+        app:layout_constraintStart_toEndOf="@+id/txtMoneyTitle"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtToDoTitle"
+        android:id="@+id/txtMoneyTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -31,13 +32,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/txtPriority"
+        android:id="@+id/txtMoneyAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="10dp"
         android:text="TextView"
         android:textAppearance="@style/ListItemText"
-        app:layout_constraintBottom_toBottomOf="@+id/txtExpDate"
+        app:layout_constraintBottom_toBottomOf="@+id/txtMoneyTitle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/txtExpDate" />
+        app:layout_constraintTop_toTopOf="@+id/txtMoneyTitle" />
+
+    <TextView
+        android:id="@+id/txtMoneyUseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="2dp"
+        android:text="TextView"
+        android:textAppearance="@style/ListItemText"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txtMoneyTitle" />
 </androidx.constraintlayout.widget.ConstraintLayout>
