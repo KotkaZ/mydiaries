@@ -1,5 +1,5 @@
-import java.time.LocalDateTime;
+import org.joda.time.LocalDate;
 
 public abstract class DefaultEntry {
-    LocalDateTime inputDate;
+    LocalDate inputDate;
 }

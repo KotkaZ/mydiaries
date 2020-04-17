@@ -1,7 +1,7 @@
+import org.joda.time.LocalDate;
+import org.joda.time.format.DateTimeFormat;
+
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class Test {
@@ -19,7 +19,7 @@ public class Test {
         actionNames.add("add");
         actionNames.add("show");
 
-        System.out.println(LocalDateTime.now());
+        System.out.println(LocalDate.now());
 
 
         while (true) {
@@ -81,7 +81,7 @@ public class Test {
         } //Only for Testing. TODO.
 
         System.out.println("Enter use/get date:");
-        final LocalDateTime date = dateTimeControl(scanner);
+        final LocalDate date = dateTimeControl(scanner);
         System.out.println("Enter amount:");
         final double amount = scanner.nextDouble();
         System.out.println("Enter type:");
@@ -112,7 +112,7 @@ public class Test {
         } //Only for Testing. TODO.
 
         System.out.print("Enter exp. date:");
-        final LocalDateTime expDate = dateTimeControl(scanner);
+        final LocalDate expDate = dateTimeControl(scanner);
         System.out.print("Enter amount:");
         final int amount = scanner.nextInt();
         System.out.print("Enter type:");
@@ -141,7 +141,7 @@ public class Test {
         } //Only for Testing. TODO.
 
         System.out.println("Enter date:");
-        final LocalDateTime date = dateTimeControl(scanner);
+        final LocalDate date = dateTimeControl(scanner);
         System.out.println("Enter length:");
         final double amount = scanner.nextDouble();
         System.out.println("Enter type:");
@@ -175,7 +175,7 @@ public class Test {
         } //Only for Testing. TODO.
 
         System.out.println("Enter deadline:");
-        final LocalDateTime date = dateTimeControl(scanner);
+        final LocalDate date = dateTimeControl(scanner);
 
         System.out.println("Enter type:");
         final String type = scanner.nextLine();
@@ -205,8 +205,8 @@ public class Test {
             ioException.printStackTrace();
         } //Only for Testing. TODO.
 
-        final Map<LocalDateTime, Entries.MoneyTableEntry> tabel = moneyTable.getTabel();
-        for (Map.Entry<LocalDateTime, Entries.MoneyTableEntry> entry : tabel.entrySet()) {
+        final Map<LocalDate, Entries.MoneyTableEntry> tabel = moneyTable.getTabel();
+        for (Map.Entry<LocalDate, Entries.MoneyTableEntry> entry : tabel.entrySet()) {
             System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getAmount(), entry.getValue().getType(),
                     entry.getValue().getUseDate(), entry.getValue().getDescription());
@@ -228,12 +228,12 @@ public class Test {
         System.out.println("Do you want sorted data? (y/n)");
         String answer = scanner.nextLine().trim().toLowerCase();
 
-        Map<LocalDateTime, Entries.FoodTableEntry> tabel = foodTable.getTabel();
+        Map<LocalDate, Entries.FoodTableEntry> tabel = foodTable.getTabel();
         if (answer.equalsIgnoreCase("y"))
             tabel = foodTable.getOrderedByPriority();
 
 
-        for (Map.Entry<LocalDateTime, Entries.FoodTableEntry> entry : tabel.entrySet()) {
+        for (Map.Entry<LocalDate, Entries.FoodTableEntry> entry : tabel.entrySet()) {
             System.out.printf("%-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getExpDate(), entry.getValue().getAmount(),
                     entry.getValue().getType());
@@ -252,8 +252,8 @@ public class Test {
             ioException.printStackTrace();
         } //Only for Testing. TODO.
 
-        final Map<LocalDateTime, Entries.ExerciseTableEntry> tabel = exerciseTable.getTabel();
-        for (Map.Entry<LocalDateTime, Entries.ExerciseTableEntry> entry : tabel.entrySet()) {
+        final Map<LocalDate, Entries.ExerciseTableEntry> tabel = exerciseTable.getTabel();
+        for (Map.Entry<LocalDate, Entries.ExerciseTableEntry> entry : tabel.entrySet()) {
             System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getExerciseDate(), entry.getValue().getLength(),
                     entry.getValue().getType(), entry.getValue().getDescription(), entry.getValue().getLocation());
@@ -272,13 +272,13 @@ public class Test {
             ioException.printStackTrace();
         } //Only for Testing. TODO.
 
-        Map<LocalDateTime, Entries.ToDoTableEntry> tabel = toDoTable.getTabel();
+        Map<LocalDate, Entries.ToDoTableEntry> tabel = toDoTable.getTabel();
         System.out.println("Do you want sorted data? (y/n)");
         String answer = scanner.next();
         if (answer.equalsIgnoreCase("y"))
             tabel = toDoTable.getOrderedByExpDate();
 
-        for (Map.Entry<LocalDateTime, Entries.ToDoTableEntry> entry : tabel.entrySet()) {
+        for (Map.Entry<LocalDate, Entries.ToDoTableEntry> entry : tabel.entrySet()) {
             System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getDeadline(), entry.getValue().getPriority(),
                     entry.getValue().getType(), entry.getValue().getDescription());
@@ -292,8 +292,8 @@ public class Test {
      * @param scanner
      * @return Scannerist saadud kuupäev ajaga.
      */
-    private static LocalDateTime dateTimeControl(Scanner scanner) {
-        LocalDateTime date;
+    private static LocalDate dateTimeControl(Scanner scanner) {
+        LocalDate date;
         String sDate;
         while (true) {
             sDate = scanner.nextLine().trim();
@@ -301,12 +301,11 @@ public class Test {
             try {
                 //Paneb pange
                 System.out.println(sDate);
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                date = LocalDateTime.parse(sDate, formatter);
+                date = LocalDate.parse(sDate, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm"));
                 //date = LocalDateTime.parse(sDate);
                 //Kontrollib, kas kuupäev on minevikust või rohkem kui
                 // 10 aastat praegusest ja annab võimaluse parandada.
-                if (0 < date.compareTo(LocalDateTime.now()) || 0 < date.compareTo(LocalDateTime.now().plusYears(10)))
+                if (0 < date.compareTo(LocalDate.now()) || 0 < date.compareTo(LocalDate.now().plusYears(10)))
                     break;
                 else {
                     System.out.println("Are you sure that this date " + date + "is right? (y/n)");
@@ -315,7 +314,7 @@ public class Test {
                         break;
                 }
 
-            } catch (DateTimeParseException e) {
+            } catch (Exception e) {
                 System.out.println("Date input has to be in form yyyy-MM-dd HH:mm");
             }
         }
