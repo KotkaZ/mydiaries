@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 public class Entries {
 
-    static class TextEntry{
+    public static class TextEntry{
         private String text;
 
         public TextEntry(String text) {
@@ -16,7 +16,7 @@ public class Entries {
         }
     }
 
-    static class FoodTableEntry extends DefaultEntry implements Comparable<FoodTableEntry> {
+    public static class FoodTableEntry extends DefaultEntry implements Comparable<FoodTableEntry> {
         private LocalDateTime expDate;
         private String type;
         private int amount;

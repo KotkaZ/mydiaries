@@ -106,6 +106,7 @@ public class DefaultTable<T> {
      * @throws RuntimeException If table is corrupted. Shouldn't happen tho.
      */
     public Map<LocalDateTime, T> getTabel() throws RuntimeException{
+        //Should not happen.
         if(inputDate.size() != tabelData.size())
             throw new RuntimeException("Table is corrupted!");
 
