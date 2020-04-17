@@ -3,13 +3,14 @@ package Tables;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
-import org.joda.time.LocalDate;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 /**
  * Main table class
@@ -17,12 +18,11 @@ import java.util.*;
  * @param <T> Table Entry type
  */
 public class DefaultTable<T> {
-    private List<LocalDate> inputDate = new ArrayList<>();
+
     private List<T> tabelData = new ArrayList<>();
 
 
-    public DefaultTable(List<LocalDate> inputDate, List<T> tabelData) {
-        this.inputDate = inputDate;
+    public DefaultTable(List<T> tabelData) {
         this.tabelData = tabelData;
     }
 
@@ -30,26 +30,21 @@ public class DefaultTable<T> {
     }
 
     /**
-     * Adds new entries to table.
+     * Adds new entry to table.
      *
      * @param data Entry
      */
     public void addData(T data) {
-        inputDate.add(LocalDate.now());
         tabelData.add(data);
     }
 
-    public void removeData(List<LocalDate> inputDateArray) {
-        for (LocalDate inputDateToRemove : inputDateArray) {
-            for (int i = 0; i < inputDate.size(); ) {
-                if (inputDate.get(i) == inputDateToRemove) {
-                    inputDate.remove(i);
-                    tabelData.remove(i);
-                } else i++;
-
-            }
-        }
-
+    /**
+     * Removes entry from table.
+     *
+     * @param indeks
+     */
+    public void removeData(int indeks) {
+        tabelData.remove(indeks);
     }
 
 
@@ -67,7 +62,6 @@ public class DefaultTable<T> {
         try (final JsonReader jsonReader = new JsonReader(new FileReader(fileName))) {
             DefaultTable<T> defaultTable = gson.fromJson(jsonReader, this.getClass());
             if (defaultTable == null) return;
-            this.inputDate = defaultTable.inputDate;
             this.tabelData = defaultTable.tabelData;
         }
 
@@ -96,25 +90,34 @@ public class DefaultTable<T> {
 
 
     /**
-     * Puts two arrays into Map, where input date is key and entry is value.
+     * Tabel data Getter.
      *
-     * @return Map
-     * @throws RuntimeException If table is corrupted. Shouldn't happen tho.
+     * @return ArrayList of Entry T
      */
-    public Map<LocalDate, T> getTabel() throws RuntimeException {
-        if (inputDate.size() != tabelData.size())
-            throw new RuntimeException("Table is corrupted!");
-
-        Map<LocalDate, T> defaultTable = new LinkedHashMap<>();
-        for (int i = 0; i < inputDate.size(); i++)
-            defaultTable.put(inputDate.get(i), tabelData.get(i));
-
-        return defaultTable;
+    public List<T> getTabel() {
+        return tabelData;
     }
-    
-    public Map<LocalDate, T> getOrderedTable(Comparator comparator){
-        throw new UnsupportedOperationException("Not implemented");
-        // TODO: 17/04/2020
+
+    /**
+     * Table ordered data Getter
+     *
+     * @param comparator Comparator, that is being used to sort data.
+     * @return Ordered ArrayList of Entry T.
+     */
+    public List<T> getOrderedTable(Comparator<T> comparator) {
+        List<T> tempData = new ArrayList<>(tabelData);
+        tempData.sort(comparator);
+        return tempData;
+    }
+
+    /**
+     * Table entry Getter.
+     *
+     * @param index Entry indeks.
+     * @return Entry T
+     */
+    public T getEntry(int index) {
+        return tabelData.get(index);
     }
 
 

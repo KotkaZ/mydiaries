@@ -2,8 +2,6 @@ package Tables;
 
 import org.joda.time.LocalDate;
 
-import java.util.Map;
-
 public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
 
     public void addData(LocalDate useDate, double amount, String type, String description) {
@@ -11,6 +9,9 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
         super.addData(entries);
     }
 
+
+// TODO: 17/04/2020
+    /*
     public double getTotalSum(){
         Map<LocalDate,Entries.MoneyTableEntry> moneyTable = getTabel();
         double sum = 0;
@@ -19,5 +20,5 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
 
         return sum;
     }
-
+    */
 }

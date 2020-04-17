@@ -2,7 +2,7 @@ package Entries;
 
 import org.joda.time.LocalDate;
 
-public class FoodTableEntry{
+public class FoodTableEntry {
     private LocalDate expDate;
     private String type;
     private int amount;

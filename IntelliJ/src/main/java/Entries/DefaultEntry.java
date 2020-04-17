@@ -1,8 +1,8 @@
 package Entries;
 
-import org.joda.time.LocalDate;
+public interface DefaultEntry {
+    //LocalDate inputDate;
+    //String type;
+    // TODO: 17/04/2020  
 
-public abstract class DefaultEntry {
-    LocalDate inputDate;
-    String type;
 }

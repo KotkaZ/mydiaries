@@ -6,7 +6,10 @@ import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Scanner;
 
 public class Test {
 
@@ -73,9 +76,10 @@ public class Test {
 
     /**
      * Adding movement of money (date, amount, movement type and description) to moneyTabel.
+     *
      * @param scanner Scanner to get user input.
      */
-    private static void addMoney(Scanner scanner){
+    private static void addMoney(Scanner scanner) {
         final MoneyTable moneyTable = new MoneyTable();
 
         try {
@@ -104,9 +108,10 @@ public class Test {
 
     /**
      * Adding food (expire date, amount, type) to foodTabel.
+     *
      * @param scanner Scanner to get user input.
      */
-    private static void addFood(Scanner scanner){
+    private static void addFood(Scanner scanner) {
         final FoodTable foodTable = new FoodTable();
 
         try {
@@ -133,9 +138,10 @@ public class Test {
 
     /**
      * Adding exercise (date, length, type, description, location) to excerciseTabel.
+     *
      * @param scanner Scanner to get user input.
      */
-    private static void addExercise(Scanner scanner){
+    private static void addExercise(Scanner scanner) {
         final ExerciseTable exerciseTable = new ExerciseTable();
 
         try {
@@ -167,9 +173,10 @@ public class Test {
 
     /**
      * Adding exercise (deadline, type, priority, description) to toDoTabel.
+     *
      * @param scanner Scanner to get user input.
      */
-    private static void addTodo(Scanner scanner){
+    private static void addTodo(Scanner scanner) {
         final ToDoTable toDoTable = new ToDoTable();
 
         try {
@@ -200,7 +207,7 @@ public class Test {
     /**
      * Prints moneytabel JSON file content.
      */
-    private static void showMoney(){
+    private static void showMoney() {
         final MoneyTable moneyTable = new MoneyTable();
 
         try {
@@ -209,18 +216,19 @@ public class Test {
             ioException.printStackTrace();
         } //Only for Testing. TODO.
 
-        final Map<LocalDate, Entries.MoneyTableEntry> tabel = moneyTable.getTabel();
+        final List<Entries.MoneyTableEntry> tabel = moneyTable.getTabel();
+        /*
         for (Map.Entry<LocalDate, Entries.MoneyTableEntry> entry : tabel.entrySet()) {
             System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getAmount(), entry.getValue().getType(),
                     entry.getValue().getUseDate(), entry.getValue().getDescription());
-        }
+        }*/
     }
 
     /**
      * Prints foodtabel JSON file content.
      */
-    private static void showFood(Scanner scanner){
+    private static void showFood(Scanner scanner) {
         final FoodTable foodTable = new FoodTable();
 
         try {
@@ -232,8 +240,8 @@ public class Test {
         System.out.println("Do you want sorted data? (y/n)");
         String answer = scanner.nextLine().trim().toLowerCase();
 
-        Map<LocalDate, Entries.FoodTableEntry> tabel = foodTable.getTabel();
-        if (answer.equalsIgnoreCase("y"))
+        List<Entries.FoodTableEntry> tabel = foodTable.getTabel();
+        /*if (answer.equalsIgnoreCase("y"))
             tabel = foodTable.getOrderedByPriority();
 
 
@@ -241,13 +249,13 @@ public class Test {
             System.out.printf("%-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getExpDate(), entry.getValue().getAmount(),
                     entry.getValue().getType());
-        }
+        }*/
     }
 
     /**
      * Prints exercisetabel JSON file content.
      */
-    private static void showExercise(){
+    private static void showExercise() {
         final ExerciseTable exerciseTable = new ExerciseTable();
 
         try {
@@ -256,18 +264,19 @@ public class Test {
             ioException.printStackTrace();
         } //Only for Testing. TODO.
 
-        final Map<LocalDate, Entries.ExerciseTableEntry> tabel = exerciseTable.getTabel();
-        for (Map.Entry<LocalDate, Entries.ExerciseTableEntry> entry : tabel.entrySet()) {
+        final List<Entries.ExerciseTableEntry> tabel = exerciseTable.getTabel();
+
+        /*for (Map.Entry<LocalDate, Entries.ExerciseTableEntry> entry : tabel.entrySet()) {
             System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getExerciseDate(), entry.getValue().getLength(),
                     entry.getValue().getType(), entry.getValue().getDescription(), entry.getValue().getLocation());
-        }
+        }*/
     }
 
     /**
      * Prints todotabel JSON file content.
      */
-    private static void showTodo(Scanner scanner){
+    private static void showTodo(Scanner scanner) {
         final ToDoTable toDoTable = new ToDoTable();
 
         try {
@@ -276,8 +285,8 @@ public class Test {
             ioException.printStackTrace();
         } //Only for Testing. TODO.
 
-        Map<LocalDate, Entries.ToDoTableEntry> tabel = toDoTable.getTabel();
-        System.out.println("Do you want sorted data? (y/n)");
+        final List<Entries.ToDoTableEntry> tabel = toDoTable.getTabel();
+        /*System.out.println("Do you want sorted data? (y/n)");
         String answer = scanner.next();
         if (answer.equalsIgnoreCase("y"))
             tabel = toDoTable.getOrderedByExpDate();
@@ -286,13 +295,13 @@ public class Test {
             System.out.printf("%-10s; %-10s; %-10s; %-10s; %-10s %n",
                     entry.getKey(), entry.getValue().getDeadline(), entry.getValue().getPriority(),
                     entry.getValue().getType(), entry.getValue().getDescription());
-        }
+        }*/
     }
-
 
 
     /**
      * Kontrollib, kas kuupäev on õigesti sisestatud ja kas on mõistlik sisestus.
+     *
      * @param scanner
      * @return Scannerist saadud kuupäev ajaga.
      */
@@ -305,7 +314,7 @@ public class Test {
             try {
                 //Paneb pange
                 System.out.println(sDate);
-                date = LocalDate.parse(sDate, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm"));
+                date = LocalDate.parse(sDate, DateTimeFormat.forPattern("yyyy-MM-dd"));
                 //date = LocalDateTime.parse(sDate);
                 //Kontrollib, kas kuupäev on minevikust või rohkem kui
                 // 10 aastat praegusest ja annab võimaluse parandada.
@@ -319,7 +328,7 @@ public class Test {
                 }
 
             } catch (Exception e) {
-                System.out.println("Date input has to be in form yyyy-MM-dd HH:mm");
+                System.out.println("Date input has to be in form yyyy-MM-dd");
             }
         }
         return date;
