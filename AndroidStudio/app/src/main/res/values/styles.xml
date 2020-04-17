@@ -9,7 +9,12 @@
 
 
         <item name="buttonStyle">@style/MenuButton</item>
+        <item name="editTextStyle">@style/EditBox</item>
 
+    </style>
+
+    <style name="EditBox" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
 

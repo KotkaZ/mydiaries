@@ -1,10 +1,12 @@
 package com.kotkaz.mydiaries.screens;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
@@ -17,6 +19,8 @@ import com.kotkaz.mydiaries.diary.FoodTable;
 
 import org.joda.time.LocalDate;
 
+import java.util.Calendar;
+
 class DiaryScreen {
 
     private Activity activity;
@@ -25,7 +29,7 @@ class DiaryScreen {
 
         this.activity = activity;
         this.activity.setContentView(R.layout.diary_screen);
-        TextView diaryTitle =  this.activity.findViewById(R.id.txtDiaryTitle);
+        TextView diaryTitle = this.activity.findViewById(R.id.txtDiaryTitle);
         diaryTitle.setText(diaryTitleString);
 
         //For testing purposes only!!
@@ -61,7 +65,7 @@ class DiaryScreen {
      * Pops up box, where u can enter data for table. Dismisses on click next to it.
      * @param v View that called this method.
      */
-    private void popupAddNewEntry(View v){
+    private void popupAddNewEntry(View v) {
         //Gets this activity layout inflater.
         LayoutInflater inflater = this.activity.getLayoutInflater();
         View popupView = inflater.inflate(R.layout.add_food_entry, null);
@@ -74,6 +78,23 @@ class DiaryScreen {
         // Which view you pass in doesn't matter, it is only used for the window tolken.
         popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
 
+        final EditText editText = popupView.findViewById(R.id.boxFoodExpDate);
+
+        //Gets the current date.
+        final Calendar calendar = Calendar.getInstance();
+        final int cDay = calendar.get(Calendar.DAY_OF_MONTH);
+        final int cMonth = calendar.get(Calendar.MONTH);
+        final int cYear = calendar.get(Calendar.YEAR);
+
+        //Calendar date picker dialog.
+        editText.setText(String.format("%d-%d-%d", cYear, cMonth, cDay));
+        editText.setOnClickListener(v2 -> {
+            final DatePickerDialog datePickerDialog = new DatePickerDialog(activity, (view, year, month, dayOfMonth) ->
+                    editText.setText(String.format("%d-%d-%d", year, month, dayOfMonth)), cYear, cMonth, cDay);
+            datePickerDialog.show();
+        });
+
+        //Confirming adding entry.
         final Button btnAdd = popupView.findViewById(R.id.btnConfirmEntry);
         btnAdd.setOnClickListener(v1 -> System.out.println("test"));
     }
