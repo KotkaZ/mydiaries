@@ -1,10 +1,16 @@
 package com.kotkaz.mydiaries.screens;
 
 import android.app.Activity;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.kotkaz.mydiaries.CustomAdapter;
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.FoodTable;
@@ -46,6 +52,30 @@ class DiaryScreen {
             MenuScreen menuScreen = new MenuScreen(this.activity);
         });
 
+
+        FloatingActionButton btnAddNewEntry = this.activity.findViewById(R.id.btnAddEntry);
+        btnAddNewEntry.setOnClickListener(this::popupAddNewEntry);
+    }
+
+    /**
+     * Pops up box, where u can enter data for table. Dismisses on click next to it.
+     * @param v View that called this method.
+     */
+    private void popupAddNewEntry(View v){
+        //Gets this activity layout inflater.
+        LayoutInflater inflater = this.activity.getLayoutInflater();
+        View popupView = inflater.inflate(R.layout.add_food_entry, null);
+
+        final int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        final int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+        // Show the popup window.
+        // Which view you pass in doesn't matter, it is only used for the window tolken.
+        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        final Button btnAdd = popupView.findViewById(R.id.btnConfirmEntry);
+        btnAdd.setOnClickListener(v1 -> System.out.println("test"));
     }
 
 

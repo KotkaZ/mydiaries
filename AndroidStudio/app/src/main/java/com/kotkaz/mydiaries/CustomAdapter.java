@@ -15,7 +15,7 @@ import org.joda.time.LocalDate;
 import java.util.Map;
 
 /**
- * Right now it is working with food list.
+ * CustomAdapter class for listView.
  */
 public class CustomAdapter extends BaseAdapter {
 

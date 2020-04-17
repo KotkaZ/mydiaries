@@ -10,7 +10,38 @@
 
     //Button texts
     <string name="btnExit">Välju</string>
+    <string name="btnConfirmEntry">Kinnita</string>
+
 
     //TextView texts
     <string name="txtTitle">Pealkiri</string>
+
+
+    //Entries
+    //FoodEntry
+    <string name="boxFoodTitle">Toit</string>
+    <string name="boxFoodAmount">Kogus</string>
+    <string name="boxFoodExpDate">Aegub</string>
+
+
+    //MoneyEntry
+    <string name="boxMoenyTitle">Valdkond</string>
+    <string name="boxMoneyDesc">Kirjeldus</string>
+    <string name="boxMoneyAmount">Kogus</string>
+    <string name="boxMoneyUseDate">Kuupäev</string>
+
+
+    //Entry
+    <string name="boxToDoTitle">Ülesanne</string>
+    <string name="boxToDoPriority">Tähtsus</string>
+    <string name="boxToDoDate">Kuupäev</string>
+    <string name="boxToDoDesc">Kirjeldus</string>
+
+
+    //FoodEntry
+    <string name="boxExerciseTitle">Harjutus</string>
+    <string name="boxExerciseDesc">Kirjeldus</string>
+    <string name="boxExerciseLocation">Asukoht</string>
+    <string name="boxExerciseLength">Kestvus</string>
+    <string name="boxExerciseDate">Kuupäev</string>
 </resources>
