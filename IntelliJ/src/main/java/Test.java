@@ -1,3 +1,7 @@
+import Tables.ExerciseTable;
+import Tables.FoodTable;
+import Tables.MoneyTable;
+import Tables.ToDoTable;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 

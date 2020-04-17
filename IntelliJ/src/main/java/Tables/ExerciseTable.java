@@ -1,3 +1,5 @@
+package Tables;
+
 import org.joda.time.LocalDate;
 
 public class ExerciseTable extends DefaultTable<Entries.ExerciseTableEntry> {

@@ -1,9 +1,6 @@
-import org.joda.time.LocalDate;
+package Tables;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import org.joda.time.LocalDate;
 
 public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
 
@@ -15,8 +12,9 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
 
     /**
      * Sorteerib kuupäeva alusel, vanemad ees, ja väljastab tabeli kujul.
+     * OUTDATED.
      */
-    public Map<LocalDate, Entries.FoodTableEntry> getOrderedByPriority() {
+    /*public Map<LocalDate, Entries.FoodTableEntry> getOrderedByPriority() {
         Map<LocalDate, Entries.FoodTableEntry> toDoTableEntryMap = getTabel();
 
         List<Map.Entry<LocalDate, Entries.FoodTableEntry>> entries =
@@ -28,6 +26,6 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
         }
 
         return orderedByPriority;
-    }
+    }*/
 }
 

@@ -1,3 +1,5 @@
+package Tables;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -7,10 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Main table class
@@ -62,7 +61,7 @@ public class DefaultTable<T> {
      */
     public void loadTable(String fileName) throws IOException {
 
-        //final Type REVIEW_TYPE = new TypeToken<DefaultTable<T>>() {}.getType();
+        //final Type REVIEW_TYPE = new TypeToken<Tables.DefaultTable<T>>() {}.getType();
         final Gson gson = new Gson();
 
         try (final JsonReader jsonReader = new JsonReader(new FileReader(fileName))) {
@@ -111,6 +110,11 @@ public class DefaultTable<T> {
             defaultTable.put(inputDate.get(i), tabelData.get(i));
 
         return defaultTable;
+    }
+    
+    public Map<LocalDate, T> getOrderedTable(Comparator comparator){
+        throw new UnsupportedOperationException("Not implemented");
+        // TODO: 17/04/2020
     }
 
 

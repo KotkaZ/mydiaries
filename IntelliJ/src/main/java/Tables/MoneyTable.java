@@ -1,3 +1,5 @@
+package Tables;
+
 import org.joda.time.LocalDate;
 
 import java.util.Map;

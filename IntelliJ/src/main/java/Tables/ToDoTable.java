@@ -1,9 +1,6 @@
-import org.joda.time.LocalDate;
+package Tables;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import org.joda.time.LocalDate;
 
 public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
 
@@ -14,6 +11,11 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
     }
 
 
+    /**
+     * OUTDATED
+     * @return
+     */
+    /*
     public Map<LocalDate, Entries.ToDoTableEntry> getOrderedByExpDate() {
         Map<LocalDate, Entries.ToDoTableEntry> toDoTableEntryMap = getTabel();
 
@@ -26,7 +28,7 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
         }
 
         return orderedByExpDate;
-    }
+    }*/
 }
 
 
