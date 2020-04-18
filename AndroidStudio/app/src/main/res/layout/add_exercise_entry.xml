@@ -8,7 +8,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/boxFoodType"
+        android:id="@+id/boxExerciseType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,42 +18,75 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/boxFoodTitle"
+            android:hint="@string/boxExerciseTitle"
             android:imeOptions="actionDone"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/boxFoodAmount"
+        android:id="@+id/boxExerciseLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boxFoodType">
+        app:layout_constraintTop_toBottomOf="@+id/boxExerciseType">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/boxFoodAmount"
+            android:hint="@string/boxExerciseLength"
             android:imeOptions="actionDone"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/boxFoodExpDate"
+        android:id="@+id/boxExerciseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boxFoodAmount">
+        app:layout_constraintTop_toBottomOf="@+id/boxExerciseLength">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:focusable="false"
-            android:hint="@string/boxFoodExpDate"
+            android:hint="@string/boxExerciseDate"
             android:imeOptions="actionDone"
             android:inputType="date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxExerciseLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boxExerciseDate">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/boxExerciseLocation"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxExerciseDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boxExerciseLocation">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/boxExerciseDesc"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -62,7 +95,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/btnConfirmEntry"
-        app:layout_constraintEnd_toEndOf="@+id/boxFoodExpDate"
-        app:layout_constraintStart_toStartOf="@+id/boxFoodExpDate"
-        app:layout_constraintTop_toBottomOf="@+id/boxFoodExpDate" />
+        app:layout_constraintEnd_toEndOf="@+id/boxExerciseDesc"
+        app:layout_constraintStart_toStartOf="@+id/boxExerciseDesc"
+        app:layout_constraintTop_toBottomOf="@+id/boxExerciseDesc" />
 </androidx.constraintlayout.widget.ConstraintLayout>

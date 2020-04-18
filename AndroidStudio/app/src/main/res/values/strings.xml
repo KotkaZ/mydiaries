@@ -25,7 +25,7 @@
 
 
     //MoneyEntry
-    <string name="boxMoenyTitle">Valdkond</string>
+    <string name="boxMoneyTitle">Valdkond</string>
     <string name="boxMoneyDesc">Kirjeldus</string>
     <string name="boxMoneyAmount">Kogus</string>
     <string name="boxMoneyUseDate">Kuupäev</string>

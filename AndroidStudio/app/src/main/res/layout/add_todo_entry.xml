@@ -8,7 +8,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/boxFoodType"
+        android:id="@+id/boxToDoType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,42 +18,58 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/boxFoodTitle"
+            android:hint="@string/boxToDoTitle"
             android:imeOptions="actionDone"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/boxFoodAmount"
+        android:id="@+id/boxToDoDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boxFoodType">
+        app:layout_constraintTop_toBottomOf="@+id/boxToDoType">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/boxFoodAmount"
+            android:hint="@string/boxToDoDesc"
             android:imeOptions="actionDone"
             android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/boxFoodExpDate"
+        android:id="@+id/boxToDoDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/boxFoodAmount">
+        app:layout_constraintTop_toBottomOf="@+id/boxToDoDesc">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
             android:focusable="false"
-            android:hint="@string/boxFoodExpDate"
+            android:hint="@string/boxToDoDate"
             android:imeOptions="actionDone"
             android:inputType="date" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/boxToDoPriority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boxToDoDate">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/boxToDoPriority"
+            android:imeOptions="actionDone"
+            android:inputType="textPersonName" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
@@ -62,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="@string/btnConfirmEntry"
-        app:layout_constraintEnd_toEndOf="@+id/boxFoodExpDate"
-        app:layout_constraintStart_toStartOf="@+id/boxFoodExpDate"
-        app:layout_constraintTop_toBottomOf="@+id/boxFoodExpDate" />
+        app:layout_constraintEnd_toEndOf="@+id/boxToDoPriority"
+        app:layout_constraintStart_toStartOf="@+id/boxToDoPriority"
+        app:layout_constraintTop_toBottomOf="@+id/boxToDoPriority" />
 </androidx.constraintlayout.widget.ConstraintLayout>
