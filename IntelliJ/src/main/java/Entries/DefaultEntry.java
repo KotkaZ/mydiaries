@@ -4,8 +4,8 @@ package Entries;
 import org.joda.time.LocalDate;
 
 public class DefaultEntry {
-    LocalDate inputDate;
-    String type;
+    private LocalDate inputDate;
+    private String type;
     // TODO: 17/04/2020
 
 

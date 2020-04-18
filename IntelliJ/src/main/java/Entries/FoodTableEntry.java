@@ -1,8 +1,9 @@
 package Entries;
 
+import Tables.FoodTable;
 import org.joda.time.LocalDate;
 
-public class FoodTableEntry extends DefaultEntry{
+public class FoodTableEntry extends DefaultEntry implements Comparable{
     private LocalDate expDate;
     private int amount;
 
@@ -19,6 +20,20 @@ public class FoodTableEntry extends DefaultEntry{
 
     public int getAmount() {
         return amount;
+    }
+
+
+    /**
+     * Shows difference between two FoodTableEntry class objects
+     *
+     * @param o FoodTabelEntry class object
+     * @return Difference between expatriation date
+     */
+    @Override
+    public int compareTo(Object o) {
+        if (o.getClass().getTypeName() != "FoodTableEntry")
+            throw new IllegalArgumentException();
+        return this.compareTo(((FoodTableEntry)o).getExpDate());
     }
 
 }

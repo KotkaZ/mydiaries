@@ -2,7 +2,7 @@ package Entries;
 
 import org.joda.time.LocalDate;
 
-public class ToDoTableEntry extends DefaultEntry{
+public class ToDoTableEntry extends DefaultEntry implements Comparable{
     private LocalDate deadline;
     private String description;
     private int priority;
@@ -26,4 +26,18 @@ public class ToDoTableEntry extends DefaultEntry{
         return priority;
     }
 
+    /**
+     * Shows difference between two ToDoTableEntry class objects
+     *
+     * @param o ToDoTabelEntry class object
+     * @return Difference between priorities and  dates
+     */
+    @Override
+    public int compareTo(Object o) {
+        if (o.getClass().getTypeName() != "ToDoTableEntry")
+            throw new IllegalArgumentException();
+         int priorityDiff = this.priority - ((ToDoTableEntry)o).priority;
+         int deadLineDiff = this.deadline.compareTo(((ToDoTableEntry)o).deadline);
+         return priorityDiff + deadLineDiff;
+    }
 }
