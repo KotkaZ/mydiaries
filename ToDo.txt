@@ -1,25 +1,24 @@
 Karl:
 * [DONE] Leida asendus LocalDateTime. Võtsin kasutusele org.joda.time.LocalDate
-
+* EditBox jumping... android:imeOptions="actionDone"
 * Androidi visuaalne disain (peamenüü, tabelite vaated, tabelite lisamine)
 * Hetkel töötavate classide toomine üle Andriod Studio projekti.
 
 
 
 
-Ma arvan
 Tiit/Robert?
 
-* Elementide klass
+* [High priority] Elementide klass
 	Juhendajate selgitus:	table tüübis võiks luua oma klassi tabeli elementide jaoks, milles oleks date+T, siis pole vaja kahte eraldi listi luua ja eraldi "samade" indeksite pealt lugeda infot jne.
 				pealegi te kasutate entry tüübi, miks mitte lisada see kuupäev sinna? võiks olla ka abstraktne juur klass vms.
 	Karli selgitus: 	Hetkel Map<date,T> väga ei toida, kuna teen taast kuvades massivi. Võiks olla masiiv või arraylist elementide klassist, kust saaks indeksi alusel kätte.
-				Samuti ei sa programmiliset hetkel uusi väärtusi lisada, sest võttmeid võivad kattuda.
+				Samuti ei sa programmiliset hetkel uusi väärtusi lisada, sest võttmeid võivad kattuda. Midagi ma juba hakkasin looma...
 
-* Luua baasklass DefaultEntry 
+* [High priority] Luua baasklass DefaultEntry 
 	Juhendajate selgitus: 	Miks FoodTableEntry, MoneyTableEntry jne ei laienda baasklassi Entry? Siis poleks vaja dubleerida välju nendes klassides...
 
-* DefaultTable meetod, mis tagastab tabeli vastavalt etteantud Comparatorile.
+* [Almost done] DefaultTable meetod, mis tagastab tabeli vastavalt etteantud Comparatorile.
 	Juhendajate selgitus:	TodoTable ja FoodTable sisaldab duplikaatkoodi getOrderedByPriority ja getOrderedByExpDate. Miks mitte seda meetodit realiseerida baasklassis ja anda sellele Comparatorit kaasa?
 				Või koguni teha et Entry implementeeriks Comparable-i?
 
@@ -29,12 +28,12 @@ Tiit/Robert?
 	list tänaste tähtajaliste asjadega jms).
 	Karli selgitus:		Võiksid olla staatilised meetodid, mist võtavad argumendina selle samma klassi tabeli.
 
-*Entride eemaldamine
+* [Done?] Entride eemaldamine
 
-*Kokapäevik? Reisipäevik? Tsitaatide päevik? Ideede päevik? Auto päevik/hooldusraamat? Või siis arendada custom päeviku classi loomist, mis oleks dünaamiline ja uuesti laetav tänu jsoni omanudstele.
+* [Very low priority] Kokapäevik? Reisipäevik? Tsitaatide päevik? Ideede päevik? Auto päevik/hooldusraamat? Või siis arendada custom päeviku classi loomist, mis oleks dünaamiline ja uuesti laetav tänu jsoni omanudstele.
 
-*Hetkel puudub toidu kogusel ühiku võimalus. Sama probleem on ka teiste tabelite korral. Hetkel ei oska täpselt 
+* [Nice to have] Hetkel puudub toidu kogusel ühiku võimalus. Sama probleem on ka teiste tabelite korral. Hetkel ei oska täpselt 
 
-*Sisse võiks tuua Visitori Patterni https://github.com/sim642/oop-visitor-template. Kohati tundub mul mõttetu vajadus iga tabeli jaosk eraldi ListView CustomAdapter klass luua. 
+* [High priority] Sisse võiks tuua Visitori Patterni https://github.com/sim642/oop-visitor-template. Kohati tundub mul mõttetu vajadus iga tabeli jaosk eraldi ListView CustomAdapter klass luua. 
 
-* https://github.com/Zukkari/testing-template näitel luua testid? AStudio loob projekti, kus on need testid vaikimisi sees.
+* [Low priority] https://github.com/Zukkari/testing-template näitel luua testid? AStudio loob projekti, kus on need testid vaikimisi sees.
