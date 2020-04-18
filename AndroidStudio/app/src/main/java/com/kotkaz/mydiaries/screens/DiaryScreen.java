@@ -13,6 +13,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.kotkaz.mydiaries.CustomAdapter;
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.FoodTable;
@@ -78,7 +80,7 @@ class DiaryScreen {
         // Which view you pass in doesn't matter, it is only used for the window tolken.
         popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
 
-        final EditText editText = popupView.findViewById(R.id.boxFoodExpDate);
+        final TextInputLayout editText = popupView.findViewById(R.id.boxFoodExpDate);
 
         //Gets the current date.
         final Calendar calendar = Calendar.getInstance();
@@ -87,10 +89,10 @@ class DiaryScreen {
         final int cYear = calendar.get(Calendar.YEAR);
 
         //Calendar date picker dialog.
-        editText.setText(String.format("%d-%d-%d", cYear, cMonth, cDay));
-        editText.setOnClickListener(v2 -> {
+        editText.getEditText().setText(String.format("%d-%d-%d", cYear, cMonth, cDay));
+        editText.getEditText().setOnClickListener(v2 -> {
             final DatePickerDialog datePickerDialog = new DatePickerDialog(activity, (view, year, month, dayOfMonth) ->
-                    editText.setText(String.format("%d-%d-%d", year, month, dayOfMonth)), cYear, cMonth, cDay);
+                    editText.getEditText().setText(String.format("%d-%d-%d", year, month, dayOfMonth)), cYear, cMonth, cDay);
             datePickerDialog.show();
         });
 
