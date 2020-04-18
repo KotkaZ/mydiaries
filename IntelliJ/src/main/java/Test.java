@@ -97,7 +97,7 @@ public class Test {
         System.out.println("Enter desc.:");
         final String desc = scanner.nextLine();
 
-        moneyTable.addData(date, amount, type, desc);
+        moneyTable.addData(type, date, amount,  desc);
 
         try {
             moneyTable.saveTabel("moneyTable.json");
@@ -127,7 +127,7 @@ public class Test {
         System.out.print("Enter type:");
         final String type = scanner.next();
 
-        foodTable.addData(expDate, type, amount);
+        foodTable.addData(type, expDate,  amount);
 
         try {
             foodTable.saveTabel("foodTable.json");
@@ -195,7 +195,7 @@ public class Test {
         System.out.println("Enter desc.:");
         final String desc = scanner.nextLine();
 
-        toDoTable.addData(date, desc, amount, type);
+        toDoTable.addData(type, date, desc, amount);
 
         try {
             toDoTable.saveTabel("toDoTable.json");

@@ -2,17 +2,16 @@ package Entries;
 
 import org.joda.time.LocalDate;
 
-public class ToDoTableEntry {
+public class ToDoTableEntry extends DefaultEntry{
     private LocalDate deadline;
     private String description;
     private int priority;
-    private String type;
 
-    public ToDoTableEntry(LocalDate deadline, String description, int priority, String type) {
+    public ToDoTableEntry(String type, LocalDate deadline, String description, int priority) {
+        super(type);
         this.deadline = deadline;
         this.description = description;
         this.priority = priority;
-        this.type = type;
     }
 
     public LocalDate getDeadline() {
@@ -25,10 +24,6 @@ public class ToDoTableEntry {
 
     public int getPriority() {
         return priority;
-    }
-
-    public String getType() {
-        return type;
     }
 
 }

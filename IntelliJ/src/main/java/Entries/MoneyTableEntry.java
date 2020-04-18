@@ -2,16 +2,15 @@ package Entries;
 
 import org.joda.time.LocalDate;
 
-public class MoneyTableEntry {
+public class MoneyTableEntry  extends DefaultEntry{
     private LocalDate useDate;
     private double amount;
-    private String type;
     private String description;
 
-    public MoneyTableEntry(LocalDate useDate, double amount, String type, String description) {
+    public MoneyTableEntry(String type, LocalDate useDate, double amount, String description) {
+        super(type);
         this.useDate = useDate;
         this.amount = amount;
-        this.type = type;
         this.description = description;
     }
 
@@ -21,10 +20,6 @@ public class MoneyTableEntry {
 
     public double getAmount() {
         return amount;
-    }
-
-    public String getType() {
-        return type;
     }
 
     public String getDescription() {

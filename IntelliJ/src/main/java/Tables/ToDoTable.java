@@ -5,8 +5,8 @@ import org.joda.time.LocalDate;
 public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
 
 
-    public void addData(LocalDate deadline, String description, int priority, String type) {
-        Entries.ToDoTableEntry entries = new Entries.ToDoTableEntry(deadline, description, priority, type);
+    public void addData(String type, LocalDate deadline, String description, int priority) {
+        Entries.ToDoTableEntry entries = new Entries.ToDoTableEntry(type, deadline, description, priority);
         super.addData(entries);
     }
 

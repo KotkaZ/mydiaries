@@ -2,16 +2,15 @@ package Entries;
 
 import org.joda.time.LocalDate;
 
-public class ExerciseTableEntry {
+public class ExerciseTableEntry extends DefaultEntry {
     private LocalDate exerciseDate;
-    private String type;
     private double length;
     private String description;
     private String location;
 
-    public ExerciseTableEntry(LocalDate exerciseDate, String type, double length, String description, String location) {
+    public ExerciseTableEntry(String type, LocalDate exerciseDate, double length, String description, String location) {
+        super(type);
         this.exerciseDate = exerciseDate;
-        this.type = type;
         this.length = length;
         this.description = description;
         this.location = location;

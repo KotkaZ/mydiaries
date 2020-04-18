@@ -5,8 +5,8 @@ import org.joda.time.LocalDate;
 public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
 
 
-    public void addData(LocalDate expDate, String type, int amount) {
-        Entries.FoodTableEntry entries = new Entries.FoodTableEntry(expDate, type, amount);
+    public void addData(String type, LocalDate expDate, int amount) {
+        Entries.FoodTableEntry entries = new Entries.FoodTableEntry(type, expDate,  amount);
         super.addData(entries);
     }
 
