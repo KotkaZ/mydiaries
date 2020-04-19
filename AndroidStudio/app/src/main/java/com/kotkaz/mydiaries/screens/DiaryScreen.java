@@ -5,6 +5,8 @@ import android.app.DatePickerDialog;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -58,6 +60,13 @@ class DiaryScreen {
         }
 
 
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            defaultTable.removeData(position);
+            BaseAdapter adapter = (BaseAdapter) listView.getAdapter();
+            adapter.notifyDataSetChanged();
+            return true;
+        });
+
         Button exitButton = this.activity.findViewById(R.id.btnDiaryExit);
         exitButton.setOnClickListener(v -> {
             MenuScreen menuScreen = new MenuScreen(this.activity);
@@ -74,8 +83,8 @@ class DiaryScreen {
      * @param v View that called this method.
      */
     private void popupAddNewEntry(View v) {
-        //Gets this activity layout inflater.
 
+        //Gets this activity layout inflater.
         View popupView = popupView();
 
         final int width = LinearLayout.LayoutParams.WRAP_CONTENT;
