@@ -10,6 +10,14 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
         super.addData(entries);
     }
 
+    /**
+     * Sums all incomes on given period and returns the value
+     * @param moneyTable
+     * @param start inclusive
+     * @param end inclusive
+     * @return Posiitive int
+     */
+
     public static double getIncome(MoneyTable moneyTable, LocalDate start, LocalDate end ){
         double income = 0;
         for (MoneyTableEntry entry :
@@ -23,6 +31,15 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
         }
         return income;
     }
+
+    /**
+     * Sums all outgoes on given period and returns the value
+     *
+     * @param moneyTable
+     * @param start inclusive
+     * @param end inclusive
+     * @return Negative int
+     */
 
     public static double getOutgo(MoneyTable moneyTable, LocalDate start, LocalDate end){
         double outgo = 0;
@@ -39,6 +56,14 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
         return outgo;
     }
 
+    /**
+     * Sums all money movements on given period and returns the value
+     *
+     * @param moneyTable
+     * @param start inclusive
+     * @param end inclusive
+     * @return Negative or positive int
+     */
     public static double getTurnover(MoneyTable moneyTable, LocalDate start, LocalDate end){
         double turnover = 0;
         //ToDo
