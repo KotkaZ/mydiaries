@@ -4,7 +4,6 @@ import Entries.FoodTableEntry;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {

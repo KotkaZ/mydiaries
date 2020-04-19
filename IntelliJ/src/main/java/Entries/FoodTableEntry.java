@@ -1,11 +1,11 @@
 package Entries;
 
-import Tables.FoodTable;
 import org.joda.time.LocalDate;
 
 public class FoodTableEntry extends DefaultEntry implements Comparable{
     private LocalDate expDate;
     private int amount;
+    public static String[] UNITS = new String[]{"g", "kg", "ml", "l", "piece(s)", "package(s)"};
 
     public FoodTableEntry(String type, LocalDate expDate, int amount) {
         super(type);
