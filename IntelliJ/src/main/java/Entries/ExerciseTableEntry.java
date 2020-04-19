@@ -1,14 +1,14 @@
 package Entries;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 public class ExerciseTableEntry extends DefaultEntry implements Comparable {
-    private LocalDate exerciseDate;
+    private LocalDateTime exerciseDate;
     private double length;
     private String description;
     private String location;
 
-    public ExerciseTableEntry(String type, LocalDate exerciseDate, double length, String description, String location) {
+    public ExerciseTableEntry(String type, LocalDateTime exerciseDate, double length, String description, String location) {
         super(type);
         this.exerciseDate = exerciseDate;
         this.length = length;
@@ -16,7 +16,7 @@ public class ExerciseTableEntry extends DefaultEntry implements Comparable {
         this.location = location;
     }
 
-    public LocalDate getExerciseDate() {
+    public LocalDateTime getExerciseDate() {
         return exerciseDate;
     }
 

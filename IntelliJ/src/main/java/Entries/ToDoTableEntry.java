@@ -1,20 +1,20 @@
 package Entries;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 public class ToDoTableEntry extends DefaultEntry implements Comparable{
-    private LocalDate deadline;
+    private LocalDateTime deadline;
     private String description;
     private int priority;
 
-    public ToDoTableEntry(String type, LocalDate deadline, String description, int priority) {
+    public ToDoTableEntry(String type, LocalDateTime deadline, String description, int priority) {
         super(type);
         this.deadline = deadline;
         this.description = description;
         this.priority = priority;
     }
 
-    public LocalDate getDeadline() {
+    public LocalDateTime getDeadline() {
         return deadline;
     }
 
