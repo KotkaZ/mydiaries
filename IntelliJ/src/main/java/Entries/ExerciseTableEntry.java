@@ -2,7 +2,7 @@ package Entries;
 
 import org.joda.time.LocalDate;
 
-public class ExerciseTableEntry extends DefaultEntry {
+public class ExerciseTableEntry extends DefaultEntry implements Comparable {
     private LocalDate exerciseDate;
     private double length;
     private String description;
@@ -20,10 +20,6 @@ public class ExerciseTableEntry extends DefaultEntry {
         return exerciseDate;
     }
 
-    public String getType() {
-        return type;
-    }
-
     public double getLength() {
         return length;
     }
@@ -34,5 +30,10 @@ public class ExerciseTableEntry extends DefaultEntry {
 
     public String getLocation() {
         return location;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.exerciseDate.compareTo(((ExerciseTableEntry)o).exerciseDate);
     }
 }
