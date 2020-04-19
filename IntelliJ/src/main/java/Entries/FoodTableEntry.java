@@ -24,6 +24,9 @@ public class FoodTableEntry extends DefaultEntry implements Comparable{
         return amount;
     }
 
+    public String getUnit() {
+        return unit;
+    }
 
     /**
      * Shows difference between two FoodTableEntry class objects
