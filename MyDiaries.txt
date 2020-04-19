@@ -1,0 +1,35 @@
+MyDiaries (TBA)
+
+
+GRUPI LIIKMED:
+1. Karl Rapur
+2. Robert Reimann
+3. Tiit Vaino
+ÜLDINE MÕTE:
+Androidile  (vb ka arvutis) selline aplikatsioon, mis koondab kokku erinevad päevikud, imekirjad ja tabelid.
+
+
+Kasutaja kogemuse kirjeldus:
+Avab aplikatsiooni -> Teeb baas päevikusse märkmeid ja/või
+valib, siis meeldiva alampäeviku, kust ta näeb vastavalt alam päevikule eelnevate sissekannete kokkuvõtteid.
+
+
+IDEE FUNKTSIONAALSUSED:
+1. Tekstipõhine baas päevik
+2. Raha
+3. ToDo list
+4. Treeningud
+5. Toidunimekiri
+
+1. Faili salvestamine (.csv)
+Plaanid tulevikuks:
+* Kasutajad/paroolid süsteem (krüpteeritult)
+* Andmebaasi salvestamine
+* Kohandatavad päeviku liigid (custom diary)
+
+ARENDUSPLAAN:
+1. Põhiline liides või alamklass, millest sõltuvad teised päeviku liigid (klassid)
+2. Esmases etapis salvestatakse päevikud seadmesse .cvs formaadis. Hiljem plaan siduda rakendus andmebaasiga (ühendada projekt aine Andmebaasid rühmatööga)
+3. Andmete sisselugemine
+4. Töötamine läbi konsooli.
+5. Androidi kasutajaliides
