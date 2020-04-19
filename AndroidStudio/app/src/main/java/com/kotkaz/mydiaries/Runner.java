@@ -14,6 +14,7 @@ public class Runner extends AppCompatActivity {
 
     /**
      * Main method. Shows menu screen.
+     *
      * @param savedInstanceState
      */
     @Override

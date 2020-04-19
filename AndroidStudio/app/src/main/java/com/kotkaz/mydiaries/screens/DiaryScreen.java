@@ -6,18 +6,16 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kotkaz.mydiaries.CustomAdapter;
 import com.kotkaz.mydiaries.R;
-import com.kotkaz.mydiaries.diary.FoodTable;
+import com.kotkaz.mydiaries.diary.tables.FoodTable;
 
 import org.joda.time.LocalDate;
 
@@ -37,15 +35,10 @@ class DiaryScreen {
         //For testing purposes only!!
         FoodTable foodTable = new FoodTable();
         try {
-            foodTable.addData(LocalDate.parse("1999-10-10"), "Eggs", 10);
-            Thread.sleep(100);
-            foodTable.addData(LocalDate.parse("1998-10-10"), "Milk", 5);
-            Thread.sleep(100);
-            foodTable.addData(LocalDate.parse("1999-11-10"), "Flour", 500);
-            Thread.sleep(100);
-            foodTable.addData(LocalDate.parse("1999-10-12"), "Bread", 2);
-            Thread.sleep(100);
-            foodTable.addData(LocalDate.parse("2012-11-11"), "Steak", 2);
+            foodTable.addData("Eggs", LocalDate.parse("1999-10-10"), 10);
+            foodTable.addData("Milk", LocalDate.parse("1992-11-10"), 100);
+            foodTable.addData("Flour", LocalDate.parse("2000-02-08"), 120);
+            foodTable.addData("Bread", LocalDate.parse("1992-11-11"), 100);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -65,6 +58,7 @@ class DiaryScreen {
 
     /**
      * Pops up box, where u can enter data for table. Dismisses on click next to it.
+     *
      * @param v View that called this method.
      */
     private void popupAddNewEntry(View v) {

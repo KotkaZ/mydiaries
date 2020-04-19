@@ -6,13 +6,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.kotkaz.mydiaries.diary.Entries;
-import com.kotkaz.mydiaries.diary.FoodTable;
-
+import com.kotkaz.mydiaries.diary.entries.FoodTableEntry;
+import com.kotkaz.mydiaries.diary.tables.FoodTable;
 
 import org.joda.time.LocalDate;
 
-import java.util.Map;
+import java.util.List;
 
 /**
  * CustomAdapter class for listView.
@@ -20,19 +19,18 @@ import java.util.Map;
 public class CustomAdapter extends BaseAdapter {
 
     private LocalDate[] entries;
-    private Map<LocalDate, Entries.FoodTableEntry> foodTableEntryMap; //Has to be changed.
+    private List<FoodTableEntry> foodTableEntries; //Has to be changed.
     private LayoutInflater layoutInflater;
 
     public CustomAdapter(FoodTable foodTableDefaultTable, LayoutInflater layoutInflater) {
-        this.foodTableEntryMap = foodTableDefaultTable.getTabel();
-        this.entries = foodTableEntryMap.keySet().toArray(new LocalDate[0]);
+        this.foodTableEntries = foodTableDefaultTable.getTabel();
         this.layoutInflater = layoutInflater;
     }
 
 
     @Override
     public int getCount() {
-        return foodTableEntryMap.size();
+        return foodTableEntries.size();
     }
 
     @Override
@@ -53,9 +51,9 @@ public class CustomAdapter extends BaseAdapter {
         TextView foodDate = convertView.findViewById(R.id.txtFoodExpDate);
         TextView foodAmount = convertView.findViewById(R.id.txtFoodAmount);
 
-        foodTitle.setText(foodTableEntryMap.get(entries[position]).getType());
-        foodDate.setText(foodTableEntryMap.get(entries[position]).getExpDate().toString());
-        foodAmount.setText(String.valueOf(foodTableEntryMap.get(entries[position]).getAmount()) );
+        foodTitle.setText(foodTableEntries.get(position).getType());
+        foodDate.setText(foodTableEntries.get(position).getExpDate().toString());
+        foodAmount.setText(String.valueOf(foodTableEntries.get(position).getAmount()));
 
         return convertView;
     }
