@@ -25,12 +25,15 @@ import com.kotkaz.mydiaries.diary.tables.FoodTable;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
 
+import org.joda.time.LocalDate;
+
 import java.util.Calendar;
 
 class DiaryScreen {
 
     private Activity activity;
     private DefaultTable defaultTable;
+    private ListView listView;
 
     DiaryScreen(Activity activity, DefaultTable defaultTable) {
 
@@ -39,7 +42,7 @@ class DiaryScreen {
         this.defaultTable = defaultTable;
         TextView diaryTitle = this.activity.findViewById(R.id.txtDiaryTitle);
 
-        ListView listView = this.activity.findViewById(R.id.listEntries);
+        this.listView = this.activity.findViewById(R.id.listEntries);
         if (defaultTable instanceof FoodTable) {
             diaryTitle.setText(R.string.FoodList);
             listView.setAdapter(new FoodTableAdapter((FoodTable) defaultTable, this.activity.getLayoutInflater()));
@@ -102,7 +105,10 @@ class DiaryScreen {
 
         //Confirming adding entry.
         final Button btnAdd = popupView.findViewById(R.id.btnConfirmEntry);
-        btnAdd.setOnClickListener(v1 -> System.out.println("test"));
+        btnAdd.setOnClickListener(v1 -> {
+            addNewEntry(popupView);
+            popupWindow.dismiss();
+        });
     }
 
 
@@ -129,6 +135,62 @@ class DiaryScreen {
         } else if (this.defaultTable instanceof ExerciseTable) {
             return popupView.findViewById(R.id.boxExerciseDate);
         } else return null;
+    }
+
+    private void addNewEntry(View popupView){
+        if (this.defaultTable instanceof FoodTable) {
+            FoodTable foodTable = (FoodTable) defaultTable;
+            TextInputLayout foodTitle = popupView.findViewById(R.id.boxFoodType);
+            TextInputLayout foodDate = popupView.findViewById(R.id.boxFoodExpDate);
+            TextInputLayout foodAmount = popupView.findViewById(R.id.boxFoodAmount);
+            foodTable.addData(foodTitle.getEditText().getText().toString(),
+                    LocalDate.parse(foodDate.getEditText().getText().toString()),
+                    Integer.parseInt(foodAmount.getEditText().getText().toString()));
+            FoodTableAdapter foodTableAdapter = (FoodTableAdapter) this.listView.getAdapter();
+            foodTableAdapter.notifyDataSetChanged();
+        }
+        else if (this.defaultTable instanceof ExerciseTable) {
+            ExerciseTable exerciseTable = (ExerciseTable) defaultTable;
+            TextInputLayout boxExerciseType = popupView.findViewById(R.id.boxExerciseType);
+            TextInputLayout boxExerciseDate = popupView.findViewById(R.id.boxExerciseDate);
+            TextInputLayout boxExerciseDesc = popupView.findViewById(R.id.boxExerciseDesc);
+            TextInputLayout boxExerciseLength = popupView.findViewById(R.id.boxExerciseLength);
+            TextInputLayout boxExerciseLocation = popupView.findViewById(R.id.boxExerciseLocation);
+            exerciseTable.addData(
+                    LocalDate.parse(boxExerciseDate.getEditText().getText().toString()),
+                    boxExerciseType.getEditText().getText().toString(),
+                    Double.parseDouble(boxExerciseLength.getEditText().getText().toString()),
+                    boxExerciseDesc.getEditText().getText().toString(),
+                    boxExerciseLocation.getEditText().getText().toString());
+            ExerciseTableAdapter exerciseTableAdapter = (ExerciseTableAdapter) this.listView.getAdapter();
+            exerciseTableAdapter.notifyDataSetChanged();
+        }
+        else if (this.defaultTable instanceof MoneyTable) {
+            MoneyTable moneyTable = (MoneyTable) defaultTable;
+            TextInputLayout boxMoneyType = popupView.findViewById(R.id.boxMoneyType);
+            TextInputLayout boxMoneyUseDate = popupView.findViewById(R.id.boxMoneyUseDate);
+            TextInputLayout boxMoneyAmount = popupView.findViewById(R.id.boxMoneyAmount);
+            TextInputLayout boxMoneyDesc = popupView.findViewById(R.id.boxMoneyDesc);
+            moneyTable.addData(boxMoneyType.getEditText().getText().toString(),
+                    LocalDate.parse(boxMoneyUseDate.getEditText().getText().toString()),
+                    Double.parseDouble(boxMoneyAmount.getEditText().getText().toString()),
+                    boxMoneyDesc.getEditText().getText().toString());
+            MoneyTableAdapter moneyTableAdapter = (MoneyTableAdapter) this.listView.getAdapter();
+            moneyTableAdapter.notifyDataSetChanged();
+        }
+        else if (this.defaultTable instanceof ToDoTable) {
+            ToDoTable toDoTable = (ToDoTable) defaultTable;
+            TextInputLayout boxToDoDate = popupView.findViewById(R.id.boxToDoDate);
+            TextInputLayout boxToDoType = popupView.findViewById(R.id.boxToDoType);
+            TextInputLayout boxToDoDesc = popupView.findViewById(R.id.boxToDoDesc);
+            TextInputLayout boxToDoPriority = popupView.findViewById(R.id.boxToDoPriority);
+            toDoTable.addData(boxToDoType.getEditText().getText().toString(),
+                    LocalDate.parse(boxToDoDate.getEditText().getText().toString()),
+                    boxToDoDesc.getEditText().getText().toString(),
+                    Integer.parseInt(boxToDoPriority.getEditText().getText().toString()));
+            ToDoTableAdapter toDoTableAdapter = (ToDoTableAdapter) this.listView.getAdapter();
+            toDoTableAdapter.notifyDataSetChanged();
+        }
     }
 
 
