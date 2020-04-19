@@ -5,12 +5,14 @@ import org.joda.time.LocalDate;
 public class FoodTableEntry extends DefaultEntry implements Comparable{
     private LocalDate expDate;
     private int amount;
+    private String unit;
     public static String[] UNITS = new String[]{"g", "kg", "ml", "l", "piece(s)", "package(s)"};
 
-    public FoodTableEntry(String type, LocalDate expDate, int amount) {
+    public FoodTableEntry(String type, LocalDate expDate, int amount, int unitIndex) {
         super(type);
         this.expDate = expDate;
         this.amount = amount;
+        this.unit = UNITS[unitIndex];
     }
 
     public LocalDate getExpDate() {
