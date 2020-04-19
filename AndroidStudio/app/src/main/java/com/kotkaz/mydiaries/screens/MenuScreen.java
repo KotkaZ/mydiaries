@@ -4,6 +4,12 @@ import android.app.Activity;
 import android.widget.Button;
 
 import com.kotkaz.mydiaries.R;
+import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
+import com.kotkaz.mydiaries.diary.tables.FoodTable;
+import com.kotkaz.mydiaries.diary.tables.MoneyTable;
+import com.kotkaz.mydiaries.diary.tables.ToDoTable;
+
+import java.io.IOException;
 
 public class MenuScreen {
 
@@ -21,22 +27,38 @@ public class MenuScreen {
 
         Button buttonFoodTable = this.activity.findViewById(R.id.btnFoodList);
         buttonFoodTable.setOnClickListener(v -> {
-            DiaryScreen diaryScreen = new DiaryScreen(this.activity, R.string.FoodList);
+            FoodTable foodTable = new FoodTable();
+            try {foodTable.loadTable("food_table.json");}
+            catch (IOException e) {
+                System.out.println("No saved table found!"); }
+            DiaryScreen diaryScreen = new DiaryScreen(this.activity, foodTable);
         });
 
         Button buttonExerciseTable = this.activity.findViewById(R.id.btnExerciseList);
         buttonExerciseTable.setOnClickListener(v -> {
-            DiaryScreen diaryScreen = new DiaryScreen(this.activity, R.string.Exercise);
+            ExerciseTable exerciseTable = new ExerciseTable();
+            try {exerciseTable.loadTable("exercise_table.json");}
+            catch (IOException e) {
+                System.out.println("No saved table found!"); }
+            DiaryScreen diaryScreen = new DiaryScreen(this.activity, exerciseTable);
         });
 
         Button buttonToDoTable = this.activity.findViewById(R.id.btnToDoList);
         buttonToDoTable.setOnClickListener(v -> {
-            DiaryScreen diaryScreen = new DiaryScreen(this.activity, R.string.ToDoList);
+            ToDoTable toDoTable = new ToDoTable();
+            try {toDoTable.loadTable("todo _table.json");}
+            catch (IOException e) {
+                System.out.println("No saved table found!"); }
+            DiaryScreen diaryScreen = new DiaryScreen(this.activity, toDoTable);
         });
 
         Button buttonMoneyTable = this.activity.findViewById(R.id.btnMoneyList);
         buttonMoneyTable.setOnClickListener(v -> {
-            DiaryScreen diaryScreen = new DiaryScreen(this.activity, R.string.MoneyList);
+            MoneyTable moneyTable = new MoneyTable();
+            try {moneyTable.loadTable("money_table.json");}
+            catch (IOException e) {
+                System.out.println("No saved table found!"); }
+            DiaryScreen diaryScreen = new DiaryScreen(this.activity, moneyTable);
         });
     }
 }
