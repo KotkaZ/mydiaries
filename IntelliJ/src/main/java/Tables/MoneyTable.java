@@ -1,11 +1,11 @@
 package Tables;
 
 import Entries.MoneyTableEntry;
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
 
-    public void addData(String type, LocalDate useDate, double amount, String description) {
+    public void addData(String type, LocalDateTime useDate, double amount, String description) {
         Entries.MoneyTableEntry entries = new Entries.MoneyTableEntry(type, useDate, amount,  description);
         super.addData(entries);
     }
@@ -18,7 +18,7 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
      * @return Posiitive int
      */
 
-    public static double getIncome(MoneyTable moneyTable, LocalDate start, LocalDate end ){
+    public static double getIncome(MoneyTable moneyTable, LocalDateTime start, LocalDateTime end ){
         double income = 0;
         for (MoneyTableEntry entry :
                 moneyTable.getOrderedTable(MoneyTableEntry::compareTo)) {
@@ -41,7 +41,7 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
      * @return Negative int
      */
 
-    public static double getOutgo(MoneyTable moneyTable, LocalDate start, LocalDate end){
+    public static double getOutgo(MoneyTable moneyTable, LocalDateTime start, LocalDateTime end){
         double outgo = 0;
         //ToDo
         for (MoneyTableEntry entry :
@@ -64,7 +64,7 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
      * @param end inclusive
      * @return Negative or positive int
      */
-    public static double getTurnover(MoneyTable moneyTable, LocalDate start, LocalDate end){
+    public static double getTurnover(MoneyTable moneyTable, LocalDateTime start, LocalDateTime end){
         double turnover = 0;
         //ToDo
         for (MoneyTableEntry entry :

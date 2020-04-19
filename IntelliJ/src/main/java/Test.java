@@ -1,8 +1,11 @@
+import Entries.FoodTableEntry;
 import Tables.ExerciseTable;
 import Tables.FoodTable;
 import Tables.MoneyTable;
 import Tables.ToDoTable;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 import org.joda.time.format.DateTimeFormat;
 
 import java.io.IOException;
@@ -89,7 +92,7 @@ public class Test {
         } //Only for Testing. TODO.
 
         System.out.println("Enter use/get date:");
-        final LocalDate date = dateTimeControl(scanner);
+        final LocalDateTime date = dateTimeControl(scanner).toLocalDateTime(LocalTime.MIDNIGHT);
         System.out.println("Enter amount:");
         final double amount = scanner.nextDouble();
         System.out.println("Enter type:");
@@ -126,8 +129,10 @@ public class Test {
         final int amount = scanner.nextInt();
         System.out.print("Enter type:");
         final String type = scanner.next();
+        System.out.print("Enter unit "+ Arrays.toString(FoodTableEntry.UNITS) +": ");
+        final int unitIndex = scanner.nextInt();
 
-        foodTable.addData(type, expDate,  amount);
+        foodTable.addData(type, expDate,  amount,  unitIndex);
 
         try {
             foodTable.saveTabel("foodTable.json");
@@ -151,7 +156,7 @@ public class Test {
         } //Only for Testing. TODO.
 
         System.out.println("Enter date:");
-        final LocalDate date = dateTimeControl(scanner);
+        final LocalDateTime date = dateTimeControl(scanner).toLocalDateTime(LocalTime.MIDNIGHT);
         System.out.println("Enter length:");
         final double amount = scanner.nextDouble();
         System.out.println("Enter type:");
@@ -186,7 +191,7 @@ public class Test {
         } //Only for Testing. TODO.
 
         System.out.println("Enter deadline:");
-        final LocalDate date = dateTimeControl(scanner);
+        final LocalDateTime date = dateTimeControl(scanner).toLocalDateTime(LocalTime.MIDNIGHT);
 
         System.out.println("Enter type:");
         final String type = scanner.nextLine();

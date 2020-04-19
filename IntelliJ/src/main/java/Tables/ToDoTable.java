@@ -1,7 +1,7 @@
 package Tables;
 
 import Entries.ToDoTableEntry;
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,7 +10,7 @@ import java.util.List;
 public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
 
 
-    public void addData(String type, LocalDate deadline, String description, int priority) {
+    public void addData(String type, LocalDateTime deadline, String description, int priority) {
         Entries.ToDoTableEntry entries = new Entries.ToDoTableEntry(type, deadline, description, priority);
         super.addData(entries);
     }
@@ -22,7 +22,7 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
      * @param date
      * @return
      */
-    public static List<ToDoTableEntry> getTasks4Date(ToDoTable toDoTable, LocalDate date){
+    public static List<ToDoTableEntry> getTasks4Date(ToDoTable toDoTable, LocalDateTime date){
         List<ToDoTableEntry> list = new ArrayList<>();
         for (ToDoTableEntry entry :
                 toDoTable.getTabel()) {
@@ -40,7 +40,7 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
      * @return
      */
     public static List<ToDoTableEntry> getTodaysTasks(ToDoTable toDoTable){
-        return getTasks4Date(toDoTable, LocalDate.now());
+        return getTasks4Date(toDoTable, LocalDateTime.now());
     }
 
 
