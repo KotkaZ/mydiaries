@@ -2,7 +2,7 @@ package Entries;
 
 import org.joda.time.LocalDate;
 
-public class MoneyTableEntry  extends DefaultEntry{
+public class MoneyTableEntry  extends DefaultEntry implements Comparable{
     private LocalDate useDate;
     private double amount;
     private String description;
@@ -24,5 +24,10 @@ public class MoneyTableEntry  extends DefaultEntry{
 
     public String getDescription() {
         return description;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return this.getUseDate().compareTo(((MoneyTableEntry)o).getUseDate());
     }
 }

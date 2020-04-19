@@ -25,11 +25,10 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
     public static List<FoodTableEntry> getExp4Date(FoodTable foodTable, LocalDate date){
         List<FoodTableEntry> list = new ArrayList<>();
         for (FoodTableEntry entry :
-                foodTable.getTabel()) {
+                foodTable.getOrderedTable(FoodTableEntry::compareTo)) {
             if (entry.getExpDate() == date)
                 list.add(entry);
         }
-        Collections.sort(list);
         return list;
     }
 

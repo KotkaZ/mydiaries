@@ -34,10 +34,15 @@ public class ToDoTableEntry extends DefaultEntry implements Comparable{
      */
     @Override
     public int compareTo(Object o) {
-        if (o.getClass().getTypeName() != "ToDoTableEntry")
+        if (! o.getClass().getTypeName().equals("ToDoTableEntry"))
             throw new IllegalArgumentException();
+
          int priorityDiff = this.priority - ((ToDoTableEntry)o).priority;
          int deadLineDiff = this.deadline.compareTo(((ToDoTableEntry)o).deadline);
-         return priorityDiff + deadLineDiff;
+
+         if (deadLineDiff == 0)
+             return  priorityDiff;
+         else
+             return deadLineDiff;
     }
 }
