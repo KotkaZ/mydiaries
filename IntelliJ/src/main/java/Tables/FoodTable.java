@@ -9,8 +9,8 @@ import java.util.List;
 public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
 
 
-    public void addData(String type, LocalDate expDate, int amount) {
-        Entries.FoodTableEntry entries = new Entries.FoodTableEntry(type, expDate,  amount);
+    public void addData(String type, LocalDate expDate, int amount, int unitIndex) {
+        Entries.FoodTableEntry entries = new Entries.FoodTableEntry(type, expDate,  amount, unitIndex);
         super.addData(entries);
     }
 
