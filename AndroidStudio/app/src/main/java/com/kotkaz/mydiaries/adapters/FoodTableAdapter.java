@@ -1,4 +1,4 @@
-package com.kotkaz.mydiaries;
+package com.kotkaz.mydiaries.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,23 +6,21 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.FoodTableEntry;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
-
-import org.joda.time.LocalDate;
 
 import java.util.List;
 
 /**
  * CustomAdapter class for listView.
  */
-public class CustomAdapter extends BaseAdapter {
+public class FoodTableAdapter extends BaseAdapter {
 
-    private LocalDate[] entries;
     private List<FoodTableEntry> foodTableEntries; //Has to be changed.
     private LayoutInflater layoutInflater;
 
-    public CustomAdapter(FoodTable foodTableDefaultTable, LayoutInflater layoutInflater) {
+    public FoodTableAdapter(FoodTable foodTableDefaultTable, LayoutInflater layoutInflater) {
         this.foodTableEntries = foodTableDefaultTable.getTabel();
         this.layoutInflater = layoutInflater;
     }
@@ -35,12 +33,12 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return foodTableEntries.get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
 
     @Override
@@ -51,9 +49,10 @@ public class CustomAdapter extends BaseAdapter {
         TextView foodDate = convertView.findViewById(R.id.txtFoodExpDate);
         TextView foodAmount = convertView.findViewById(R.id.txtFoodAmount);
 
-        foodTitle.setText(foodTableEntries.get(position).getType());
-        foodDate.setText(foodTableEntries.get(position).getExpDate().toString());
-        foodAmount.setText(String.valueOf(foodTableEntries.get(position).getAmount()));
+        FoodTableEntry foodTableEntry = foodTableEntries.get(position);
+        foodTitle.setText(foodTableEntry.getType());
+        foodDate.setText(foodTableEntry.getExpDate().toString());
+        foodAmount.setText(String.valueOf(foodTableEntry.getAmount()));
 
         return convertView;
     }

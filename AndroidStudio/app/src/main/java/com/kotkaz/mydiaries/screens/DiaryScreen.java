@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
-import com.kotkaz.mydiaries.CustomAdapter;
+import com.kotkaz.mydiaries.adapters.FoodTableAdapter;
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 
@@ -44,7 +44,7 @@ class DiaryScreen {
         }
 
         ListView listView = this.activity.findViewById(R.id.listEntries);
-        listView.setAdapter(new CustomAdapter(foodTable, this.activity.getLayoutInflater()));
+        listView.setAdapter(new FoodTableAdapter(foodTable, this.activity.getLayoutInflater()));
 
         Button exitButton = this.activity.findViewById(R.id.btnDiaryExit);
         exitButton.setOnClickListener(v -> {
