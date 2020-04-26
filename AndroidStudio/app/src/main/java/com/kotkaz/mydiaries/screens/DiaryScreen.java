@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kotkaz.mydiaries.R;
-import com.kotkaz.mydiaries.ValidationTextWatcher;
+import com.kotkaz.mydiaries.validators.ValidationTextWatcher;
 import com.kotkaz.mydiaries.adapters.ExerciseTableAdapter;
 import com.kotkaz.mydiaries.adapters.FoodTableAdapter;
 import com.kotkaz.mydiaries.adapters.MoneyTableAdapter;
@@ -105,6 +105,8 @@ class DiaryScreen {
         // Which view you pass in doesn't matter, it is only used for the window token.
         popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
 
+        setTextInputValidators((ViewGroup) popupView);
+
         final EditText editText = findDateBox(popupView).getEditText();
 
         //Gets the current date.
@@ -133,13 +135,12 @@ class DiaryScreen {
 
     private void setTextInputValidators(ViewGroup viewGroup){
 
-
             int count = viewGroup.getChildCount();
             for (int i = 0; i < count; i++) {
                 View view = viewGroup.getChildAt(i);
                 if (view instanceof TextInputLayout){
                     ((TextInputLayout) view).getEditText()
-                            .addTextChangedListener(new ValidationTextWatcher(view));
+                            .addTextChangedListener(new ValidationTextWatcher((TextInputLayout) view, activity.getResources()));
                 }
             }
 

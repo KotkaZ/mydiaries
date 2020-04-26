@@ -44,4 +44,15 @@
     <string name="boxExerciseLocation">Asukoht</string>
     <string name="boxExerciseLength">Kestvus</string>
     <string name="boxExerciseDate">Kuupäev</string>
+
+
+    //Validator errors
+    <string name="textEmpty">See väli on nõutud!</string>
+    <string name="textTooShort">Sisend on lühem kui %1$d tähemärki!</string>
+    <string name="textTooLong">Sisend on pikem kui %1$d tähemärki!</string>
+
+    <string name="textNotNumbers">See väli peab koosnema numbritest!</string>
+    <string name="textNumberTooSmall">Väärtus peab olema suurem kui %1$d!</string>
+    <string name="textNumberTooBig">Väärtus peab olema väiksem kui %1$d!</string>
+    <string name="test">aw</string>
 </resources>

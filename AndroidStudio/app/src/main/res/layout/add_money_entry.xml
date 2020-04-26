@@ -36,7 +36,7 @@
             android:ems="10"
             android:hint="@string/boxMoneyAmount"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName" />
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout

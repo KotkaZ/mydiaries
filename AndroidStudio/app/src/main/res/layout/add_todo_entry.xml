@@ -69,7 +69,7 @@
             android:ems="10"
             android:hint="@string/boxToDoPriority"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName" />
+            android:inputType="numberDecimal" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
