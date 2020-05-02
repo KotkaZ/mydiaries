@@ -29,29 +29,29 @@ public class ValidationTextWatcher implements TextWatcher {
 
     @Override
     public void afterTextChanged(Editable s) {
-        switch (textInputLayout.getId()){
+        switch (textInputLayout.getId()) {
 
             case R.id.boxFoodType:
             case R.id.boxExerciseType:
             case R.id.boxExerciseLocation:
             case R.id.boxMoneyType:
             case R.id.boxToDoType: {
-                validators.textFieldValidator(textInputLayout,4,30);
+                validators.textFieldValidator(textInputLayout, 4, 30);
                 break;
             }
 
             case R.id.boxToDoPriority:
             case R.id.boxMoneyAmount:
             case R.id.boxExerciseLength:
-            case R.id.boxFoodAmount:{
-                validators.numberFieldValdiator(textInputLayout,1,1000);
+            case R.id.boxFoodAmount: {
+                validators.numberFieldValdiator(textInputLayout, 1, 1000);
                 break;
             }
 
             case R.id.boxToDoDate:
             case R.id.boxMoneyUseDate:
             case R.id.boxExerciseDate:
-            case R.id.boxFoodExpDate:{
+            case R.id.boxFoodExpDate: {
                 break;
             }
 
@@ -59,7 +59,7 @@ public class ValidationTextWatcher implements TextWatcher {
             case R.id.boxExerciseDesc:
             case R.id.boxToDoDesc:
             case R.id.boxMoneyDesc: {
-                validators.textFieldValidator(textInputLayout,4,200);
+                validators.textFieldValidator(textInputLayout, 4, 200);
                 break;
             }
 

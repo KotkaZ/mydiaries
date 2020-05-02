@@ -1,7 +1,6 @@
 package com.kotkaz.mydiaries.screens;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.widget.Button;
 
 import com.kotkaz.mydiaries.R;
@@ -9,7 +8,6 @@ import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
-import com.kotkaz.mydiaries.validators.Validators;
 
 import java.io.IOException;
 

@@ -17,7 +17,6 @@ import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kotkaz.mydiaries.R;
-import com.kotkaz.mydiaries.validators.ValidationTextWatcher;
 import com.kotkaz.mydiaries.adapters.ExerciseTableAdapter;
 import com.kotkaz.mydiaries.adapters.FoodTableAdapter;
 import com.kotkaz.mydiaries.adapters.MoneyTableAdapter;
@@ -27,6 +26,7 @@ import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
+import com.kotkaz.mydiaries.validators.ValidationTextWatcher;
 
 import org.joda.time.LocalDate;
 
@@ -76,8 +76,7 @@ class DiaryScreen {
                 else if (defaultTable instanceof ExerciseTable) defaultTable.saveTabel("exercise_table.json");
                 else if (defaultTable instanceof ToDoTable) defaultTable.saveTabel("todo _table.json");*/
                 MenuScreen menuScreen = new MenuScreen(this.activity);
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 e.printStackTrace(); // TODO: 19/04/2020
             }
         });
@@ -127,22 +126,39 @@ class DiaryScreen {
         //Confirming adding entry.
         final Button btnAdd = popupView.findViewById(R.id.btnConfirmEntry);
         btnAdd.setOnClickListener(v1 -> {
-            addNewEntry(popupView);
+            ViewGroup viewGroup = (ViewGroup) v1.getParent();
+            int count = viewGroup.getChildCount();
+            boolean errorEnabled = false;
+
+            for (int i = 0; i < count; i++) {
+                View view = viewGroup.getChildAt(i);
+                if (view instanceof TextInputLayout) {
+                    //If textfield is empty, then call out onTextChanged event for showing error.
+                    if(((TextInputLayout) view).getEditText().getText().toString().trim().equals(""))
+                        ((TextInputLayout) view).getEditText().setText("");
+
+                    if(((TextInputLayout) view).isErrorEnabled()) errorEnabled = true;
+
+                }
+            }
+            if(errorEnabled) return;
+
+            DiaryScreen.this.addNewEntry(popupView);
             popupWindow.dismiss();
         });
 
     }
 
-    private void setTextInputValidators(ViewGroup viewGroup){
+    private void setTextInputValidators(ViewGroup viewGroup) {
 
-            int count = viewGroup.getChildCount();
-            for (int i = 0; i < count; i++) {
-                View view = viewGroup.getChildAt(i);
-                if (view instanceof TextInputLayout){
-                    ((TextInputLayout) view).getEditText()
-                            .addTextChangedListener(new ValidationTextWatcher((TextInputLayout) view, activity.getResources()));
-                }
+        int count = viewGroup.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View view = viewGroup.getChildAt(i);
+            if (view instanceof TextInputLayout) {
+                ((TextInputLayout) view).getEditText()
+                        .addTextChangedListener(new ValidationTextWatcher((TextInputLayout) view, activity.getResources()));
             }
+        }
 
 
     }
