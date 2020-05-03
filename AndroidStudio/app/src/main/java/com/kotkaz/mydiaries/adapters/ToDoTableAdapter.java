@@ -1,10 +1,14 @@
 package com.kotkaz.mydiaries.adapters;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.ToDoTableEntry;
@@ -19,10 +23,12 @@ public class ToDoTableAdapter extends BaseAdapter {
 
     private List<ToDoTableEntry> toDoTableEntries; //Has to be changed.
     private LayoutInflater layoutInflater;
+    private Context context;
 
-    public ToDoTableAdapter(ToDoTable toDoTable, LayoutInflater layoutInflater) {
+    public ToDoTableAdapter(ToDoTable toDoTable, LayoutInflater layoutInflater, Context context) {
         this.toDoTableEntries = toDoTable.getTabel();
         this.layoutInflater = layoutInflater;
+        this.context = context;
     }
 
 
@@ -55,6 +61,13 @@ public class ToDoTableAdapter extends BaseAdapter {
         toDoDesc.setText(toDoTableEntry.getDescription());
         toDoPriority.setText(String.valueOf(toDoTableEntry.getPriority()));
         toDoDate.setText(toDoTableEntry.getDeadline().toString());
+
+        if (toDoTableEntry.getPriority() == 1)
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorDarkMenuTrans));
+        else if (toDoTableEntry.getPriority() == 2)
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorMedPriorityTrans));
+        else if (toDoTableEntry.getPriority() == 3)
+            convertView.setBackgroundColor(ContextCompat.getColor(context, R.color.colorHighPriorityTrans));
 
         return convertView;
     }

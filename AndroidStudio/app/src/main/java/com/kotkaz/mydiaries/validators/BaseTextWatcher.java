@@ -7,12 +7,14 @@ import android.text.TextWatcher;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kotkaz.mydiaries.R;
 
-public class ValidationTextWatcher implements TextWatcher {
+public class BaseTextWatcher implements TextWatcher {
     private TextInputLayout textInputLayout;
     private Validators validators;
+    private Resources resources;
 
-    public ValidationTextWatcher(TextInputLayout view, Resources resources) {
+    public BaseTextWatcher(TextInputLayout view, Resources resources) {
         this.textInputLayout = view;
+        this.resources = resources;
         this.validators = new Validators(resources);
     }
 
@@ -40,8 +42,15 @@ public class ValidationTextWatcher implements TextWatcher {
                 break;
             }
 
-            case R.id.boxToDoPriority:
-            case R.id.boxMoneyAmount:
+            case R.id.boxToDoPriority: {
+                validators.numberFieldValdiator(textInputLayout, 1, 3);
+                break;
+            }
+
+            case R.id.boxMoneyAmount: {
+                validators.numberFieldValdiator(textInputLayout, -1_000_000_00, 1_000_000_000);
+                break;
+            }
             case R.id.boxExerciseLength:
             case R.id.boxFoodAmount: {
                 validators.numberFieldValdiator(textInputLayout, 1, 1000);
@@ -62,9 +71,14 @@ public class ValidationTextWatcher implements TextWatcher {
                 validators.textFieldValidator(textInputLayout, 4, 200);
                 break;
             }
-
-
         }
+    }
 
+    public TextInputLayout getTextInputLayout() {
+        return textInputLayout;
+    }
+
+    public Resources getResources() {
+        return resources;
     }
 }

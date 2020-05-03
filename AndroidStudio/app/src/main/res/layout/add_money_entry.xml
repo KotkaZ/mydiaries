@@ -20,7 +20,8 @@
             android:ems="10"
             android:hint="@string/boxMoneyTitle"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="30" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -36,7 +37,8 @@
             android:ems="10"
             android:hint="@string/boxMoneyAmount"
             android:imeOptions="actionDone"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal|numberSigned"
+            android:maxLength="@integer/moneyAmountMaxLength" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -67,10 +69,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:focusable="false"
             android:hint="@string/boxMoneyDesc"
             android:imeOptions="actionDone"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:maxLength="100" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

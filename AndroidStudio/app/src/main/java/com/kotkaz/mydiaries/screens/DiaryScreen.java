@@ -26,7 +26,9 @@ import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
-import com.kotkaz.mydiaries.validators.ValidationTextWatcher;
+import com.kotkaz.mydiaries.validators.MoneyTextWatcher;
+import com.kotkaz.mydiaries.validators.BaseTextWatcher;
+import com.kotkaz.mydiaries.validators.TimeTextWatcher;
 
 import org.joda.time.LocalDate;
 
@@ -51,13 +53,13 @@ class DiaryScreen {
             listView.setAdapter(new FoodTableAdapter((FoodTable) defaultTable, this.activity.getLayoutInflater()));
         } else if (defaultTable instanceof MoneyTable) {
             diaryTitle.setText(R.string.MoneyList);
-            listView.setAdapter(new MoneyTableAdapter((MoneyTable) defaultTable, this.activity.getLayoutInflater()));
+            listView.setAdapter(new MoneyTableAdapter((MoneyTable) defaultTable, this.activity.getLayoutInflater(), activity.getApplicationContext()));
         } else if (defaultTable instanceof ExerciseTable) {
             diaryTitle.setText(R.string.Exercise);
             listView.setAdapter(new ExerciseTableAdapter((ExerciseTable) defaultTable, this.activity.getLayoutInflater()));
         } else if (defaultTable instanceof ToDoTable) {
             diaryTitle.setText(R.string.ToDoList);
-            listView.setAdapter(new ToDoTableAdapter((ToDoTable) defaultTable, this.activity.getLayoutInflater()));
+            listView.setAdapter(new ToDoTableAdapter((ToDoTable) defaultTable, this.activity.getLayoutInflater(), activity.getApplicationContext()));
         }
 
 
@@ -134,14 +136,14 @@ class DiaryScreen {
                 View view = viewGroup.getChildAt(i);
                 if (view instanceof TextInputLayout) {
                     //If textfield is empty, then call out onTextChanged event for showing error.
-                    if(((TextInputLayout) view).getEditText().getText().toString().trim().equals(""))
+                    if (((TextInputLayout) view).getEditText().getText().toString().trim().equals(""))
                         ((TextInputLayout) view).getEditText().setText("");
 
-                    if(((TextInputLayout) view).isErrorEnabled()) errorEnabled = true;
+                    if (((TextInputLayout) view).isErrorEnabled()) errorEnabled = true;
 
                 }
             }
-            if(errorEnabled) return;
+            if (errorEnabled) return;
 
             DiaryScreen.this.addNewEntry(popupView);
             popupWindow.dismiss();
@@ -155,8 +157,15 @@ class DiaryScreen {
         for (int i = 0; i < count; i++) {
             View view = viewGroup.getChildAt(i);
             if (view instanceof TextInputLayout) {
-                ((TextInputLayout) view).getEditText()
-                        .addTextChangedListener(new ValidationTextWatcher((TextInputLayout) view, activity.getResources()));
+                if (view.getId() == R.id.boxMoneyAmount)
+                    ((TextInputLayout) view).getEditText()
+                            .addTextChangedListener(new MoneyTextWatcher((TextInputLayout) view, activity.getResources()));
+                else if (view.getId() == R.id.boxExerciseLength)
+                    ((TextInputLayout) view).getEditText()
+                            .addTextChangedListener(new TimeTextWatcher((TextInputLayout) view, activity.getResources()));
+                else
+                    ((TextInputLayout) view).getEditText()
+                            .addTextChangedListener(new BaseTextWatcher((TextInputLayout) view, activity.getResources()));
             }
         }
 
@@ -210,7 +219,7 @@ class DiaryScreen {
             exerciseTable.addData(
                     LocalDate.parse(boxExerciseDate.getEditText().getText().toString()),
                     boxExerciseType.getEditText().getText().toString(),
-                    Double.parseDouble(boxExerciseLength.getEditText().getText().toString()),
+                    Integer.parseInt(boxExerciseLength.getEditText().getText().toString().replaceAll("[ min]", "")),
                     boxExerciseDesc.getEditText().getText().toString(),
                     boxExerciseLocation.getEditText().getText().toString());
             ExerciseTableAdapter exerciseTableAdapter = (ExerciseTableAdapter) this.listView.getAdapter();
@@ -223,7 +232,7 @@ class DiaryScreen {
             TextInputLayout boxMoneyDesc = popupView.findViewById(R.id.boxMoneyDesc);
             moneyTable.addData(boxMoneyType.getEditText().getText().toString(),
                     LocalDate.parse(boxMoneyUseDate.getEditText().getText().toString()),
-                    Double.parseDouble(boxMoneyAmount.getEditText().getText().toString()),
+                    Double.parseDouble(boxMoneyAmount.getEditText().getText().toString().replaceAll("[$€,.]", "")),
                     boxMoneyDesc.getEditText().getText().toString());
             MoneyTableAdapter moneyTableAdapter = (MoneyTableAdapter) this.listView.getAdapter();
             moneyTableAdapter.notifyDataSetChanged();

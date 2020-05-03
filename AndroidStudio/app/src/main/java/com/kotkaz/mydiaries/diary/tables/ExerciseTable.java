@@ -7,7 +7,7 @@ import org.joda.time.LocalDate;
 public class ExerciseTable extends DefaultTable<ExerciseTableEntry> {
 
 
-    public void addData(LocalDate exerciseDate, String type, double length, String description, String location) {
+    public void addData(LocalDate exerciseDate, String type, int length, String description, String location) {
         ExerciseTableEntry entries = new ExerciseTableEntry(type, exerciseDate, length, description, location);
         super.addData(entries);
     }

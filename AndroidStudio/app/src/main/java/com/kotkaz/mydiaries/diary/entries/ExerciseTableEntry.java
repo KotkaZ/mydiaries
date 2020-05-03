@@ -4,11 +4,11 @@ import org.joda.time.LocalDate;
 
 public class ExerciseTableEntry extends DefaultEntry implements Comparable {
     private LocalDate exerciseDate;
-    private double length;
+    private int length;
     private String description;
     private String location;
 
-    public ExerciseTableEntry(String type, LocalDate exerciseDate, double length, String description, String location) {
+    public ExerciseTableEntry(String type, LocalDate exerciseDate, int length, String description, String location) {
         super(type);
         this.exerciseDate = exerciseDate;
         this.length = length;
@@ -20,7 +20,7 @@ public class ExerciseTableEntry extends DefaultEntry implements Comparable {
         return exerciseDate;
     }
 
-    public double getLength() {
+    public int getLength() {
         return length;
     }
 

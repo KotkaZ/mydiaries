@@ -1,15 +1,20 @@
 package com.kotkaz.mydiaries.adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
+
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.MoneyTableEntry;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.List;
 
 /**
@@ -19,10 +24,12 @@ public class MoneyTableAdapter extends BaseAdapter {
 
     private List<MoneyTableEntry> moneyTableEntries; //Has to be changed.
     private LayoutInflater layoutInflater;
+    private Context context;
 
-    public MoneyTableAdapter(MoneyTable moneyTable, LayoutInflater layoutInflater) {
+    public MoneyTableAdapter(MoneyTable moneyTable, LayoutInflater layoutInflater, Context context) {
         this.moneyTableEntries = moneyTable.getTabel();
         this.layoutInflater = layoutInflater;
+        this.context = context;
     }
 
 
@@ -53,8 +60,17 @@ public class MoneyTableAdapter extends BaseAdapter {
         MoneyTableEntry moneyTableEntry = moneyTableEntries.get(position);
         moneyTitle.setText(moneyTableEntry.getType());
         moneyDesc.setText(moneyTableEntry.getDescription());
-        moneyAmount.setText(String.valueOf(moneyTableEntry.getAmount()));
+
+        DecimalFormat moneyFormat = new DecimalFormat("€#,##0.00;-€#,##0.00");
+
+        moneyAmount.setText(moneyFormat.format(moneyTableEntry.getAmount() / 100));
         moneyUseDate.setText(moneyTableEntry.getUseDate().toString());
+
+        if (moneyTableEntry.getAmount() < 0)
+            moneyAmount.setTextColor(ContextCompat.getColor(context, R.color.colorNegativeMoney));
+        else
+            moneyAmount.setTextColor(ContextCompat.getColor(context, R.color.colorPositiveMoney));
+
 
         return convertView;
     }

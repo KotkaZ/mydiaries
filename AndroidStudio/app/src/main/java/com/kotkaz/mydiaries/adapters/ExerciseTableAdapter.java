@@ -10,6 +10,8 @@ import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.ExerciseTableEntry;
 import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 
+import org.apache.commons.lang3.math.NumberUtils;
+
 import java.util.List;
 
 /**
@@ -57,7 +59,7 @@ public class ExerciseTableAdapter extends BaseAdapter {
         exerciseLocation.setText(exerciseTableEntry.getLocation());
         exerciseDesc.setText(exerciseTableEntry.getDescription());
         exerciseDate.setText(exerciseTableEntry.getExerciseDate().toString());
-        exerciseLength.setText(String.valueOf(exerciseTableEntry.getLength()));
+        exerciseLength.setText(String.valueOf(exerciseTableEntry.getLength()) + " min");
 
         return convertView;
     }
