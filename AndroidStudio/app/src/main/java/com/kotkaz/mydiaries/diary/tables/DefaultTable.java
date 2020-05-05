@@ -5,8 +5,8 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @param <T> Table Entry type
  */
-public class DefaultTable<T> {
+public class DefaultTable<T> implements Serializable {
 
     private List<T> tabelData = new ArrayList<>();
 
@@ -71,20 +71,20 @@ public class DefaultTable<T> {
 
     /**
      * Saves table to JSON file.
-     *
-     * @param fileName Filename with extension.
-     * @throws IOException If file was not found.
      */
-    public void saveTabel(String fileName) throws IOException {
+    public String saveTabel(String fileName) {
         final Gson gson = new Gson();
 
         final Type REVIEW_TYPE = new TypeToken<DefaultTable<T>>() {
         }.getType();
-        String jsonFile = gson.toJson(this, REVIEW_TYPE);
 
+        return gson.toJson(this, REVIEW_TYPE);
+
+
+        /*
         try (final FileWriter fileWriter = new FileWriter(fileName)) {
             fileWriter.write(jsonFile);
-        }
+        }*/
 
 
     }

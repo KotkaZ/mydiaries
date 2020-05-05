@@ -1,7 +1,8 @@
 package com.kotkaz.mydiaries.screens;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,40 +29,44 @@ import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
-import com.kotkaz.mydiaries.validators.MoneyTextWatcher;
 import com.kotkaz.mydiaries.validators.BaseTextWatcher;
+import com.kotkaz.mydiaries.validators.MoneyTextWatcher;
 import com.kotkaz.mydiaries.validators.TimeTextWatcher;
 
 import org.joda.time.LocalDate;
 
 import java.util.Calendar;
 
-class DiaryScreen {
+public class DiaryScreen extends AppCompatActivity {
 
-    private Activity activity;
     private DefaultTable defaultTable;
     private ListView listView;
 
-    DiaryScreen(Activity activity, DefaultTable defaultTable) {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.diary_screen);
 
-        this.activity = activity;
-        this.activity.setContentView(R.layout.diary_screen);
-        this.defaultTable = defaultTable;
-        TextView diaryTitle = this.activity.findViewById(R.id.txtDiaryTitle);
+        Intent intent = this.getIntent();
 
-        this.listView = this.activity.findViewById(R.id.listEntries);
+
+        defaultTable = (DefaultTable) intent.getSerializableExtra("TABLE");
+
+        TextView diaryTitle = findViewById(R.id.txtDiaryTitle);
+        listView = findViewById(R.id.listEntries);
+
         if (defaultTable instanceof FoodTable) {
             diaryTitle.setText(R.string.FoodList);
-            listView.setAdapter(new FoodTableAdapter((FoodTable) defaultTable, this.activity.getLayoutInflater()));
+            listView.setAdapter(new FoodTableAdapter((FoodTable) defaultTable, getLayoutInflater()));
         } else if (defaultTable instanceof MoneyTable) {
             diaryTitle.setText(R.string.MoneyList);
-            listView.setAdapter(new MoneyTableAdapter((MoneyTable) defaultTable, this.activity.getLayoutInflater(), activity.getApplicationContext()));
+            listView.setAdapter(new MoneyTableAdapter((MoneyTable) defaultTable, getLayoutInflater(), getApplicationContext()));
         } else if (defaultTable instanceof ExerciseTable) {
             diaryTitle.setText(R.string.Exercise);
-            listView.setAdapter(new ExerciseTableAdapter((ExerciseTable) defaultTable, this.activity.getLayoutInflater()));
+            listView.setAdapter(new ExerciseTableAdapter((ExerciseTable) defaultTable, getLayoutInflater()));
         } else if (defaultTable instanceof ToDoTable) {
             diaryTitle.setText(R.string.ToDoList);
-            listView.setAdapter(new ToDoTableAdapter((ToDoTable) defaultTable, this.activity.getLayoutInflater(), activity.getApplicationContext()));
+            listView.setAdapter(new ToDoTableAdapter((ToDoTable) defaultTable, getLayoutInflater(), getApplicationContext()));
         }
 
 
@@ -70,23 +77,27 @@ class DiaryScreen {
             return true;
         });
 
-        Button exitButton = this.activity.findViewById(R.id.btnDiaryExit);
+        Button exitButton = findViewById(R.id.btnDiaryExit);
         exitButton.setOnClickListener(v -> {
             try {
-                /*if (defaultTable instanceof FoodTable) defaultTable.saveTabel("food_table.json");
-                else if (defaultTable instanceof MoneyTable) defaultTable.saveTabel("money_table.json");
-                else if (defaultTable instanceof ExerciseTable) defaultTable.saveTabel("exercise_table.json");
-                else if (defaultTable instanceof ToDoTable) defaultTable.saveTabel("todo _table.json");*/
-                MenuScreen menuScreen = new MenuScreen(this.activity);
+                if (defaultTable instanceof FoodTable) defaultTable.saveTabel("food_table.json");
+                else if (defaultTable instanceof MoneyTable)
+                    defaultTable.saveTabel("money_table.json");
+                else if (defaultTable instanceof ExerciseTable)
+                    defaultTable.saveTabel("exercise_table.json");
+                else if (defaultTable instanceof ToDoTable)
+                    defaultTable.saveTabel("todo _table.json");
+                MenuScreen menuScreen = new MenuScreen();
             } catch (Exception e) {
                 e.printStackTrace(); // TODO: 19/04/2020
             }
         });
 
 
-        FloatingActionButton btnAddNewEntry = this.activity.findViewById(R.id.btnAddEntry);
+        FloatingActionButton btnAddNewEntry = findViewById(R.id.btnAddEntry);
         btnAddNewEntry.setOnClickListener(this::popupAddNewEntry);
     }
+
 
     /**
      * Pops up box, where u can enter data for table. Dismisses on click next to it.
@@ -120,7 +131,7 @@ class DiaryScreen {
         //Calendar date picker dialog.
         editText.setText(String.format("%d-%d-%d", cYear, cMonth, cDay));
         editText.setOnClickListener(v2 -> {
-            final DatePickerDialog datePickerDialog = new DatePickerDialog(activity, (view, year, month, dayOfMonth) ->
+            final DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) ->
                     editText.setText(String.format("%d-%d-%d", year, month, dayOfMonth)), cYear, cMonth, cDay);
             datePickerDialog.show();
         });
@@ -145,7 +156,7 @@ class DiaryScreen {
             }
             if (errorEnabled) return;
 
-            DiaryScreen.this.addNewEntry(popupView);
+            addNewEntry(popupView);
             popupWindow.dismiss();
         });
 
@@ -159,13 +170,13 @@ class DiaryScreen {
             if (view instanceof TextInputLayout) {
                 if (view.getId() == R.id.boxMoneyAmount)
                     ((TextInputLayout) view).getEditText()
-                            .addTextChangedListener(new MoneyTextWatcher((TextInputLayout) view, activity.getResources()));
+                            .addTextChangedListener(new MoneyTextWatcher((TextInputLayout) view, getResources()));
                 else if (view.getId() == R.id.boxExerciseLength)
                     ((TextInputLayout) view).getEditText()
-                            .addTextChangedListener(new TimeTextWatcher((TextInputLayout) view, activity.getResources()));
+                            .addTextChangedListener(new TimeTextWatcher((TextInputLayout) view, getResources()));
                 else
                     ((TextInputLayout) view).getEditText()
-                            .addTextChangedListener(new BaseTextWatcher((TextInputLayout) view, activity.getResources()));
+                            .addTextChangedListener(new BaseTextWatcher((TextInputLayout) view, getResources()));
             }
         }
 
@@ -174,32 +185,32 @@ class DiaryScreen {
 
 
     private View popupView() {
-        LayoutInflater inflater = this.activity.getLayoutInflater();
-        if (this.defaultTable instanceof FoodTable) {
+        LayoutInflater inflater = getLayoutInflater();
+        if (defaultTable instanceof FoodTable) {
             return inflater.inflate(R.layout.add_food_entry, null);
-        } else if (this.defaultTable instanceof MoneyTable) {
+        } else if (defaultTable instanceof MoneyTable) {
             return inflater.inflate(R.layout.add_money_entry, null);
-        } else if (this.defaultTable instanceof ToDoTable) {
+        } else if (defaultTable instanceof ToDoTable) {
             return inflater.inflate(R.layout.add_todo_entry, null);
-        } else if (this.defaultTable instanceof ExerciseTable) {
+        } else if (defaultTable instanceof ExerciseTable) {
             return inflater.inflate(R.layout.add_exercise_entry, null);
         } else return null;
     }
 
     private TextInputLayout findDateBox(View popupView) {
-        if (this.defaultTable instanceof FoodTable) {
+        if (defaultTable instanceof FoodTable) {
             return popupView.findViewById(R.id.boxFoodExpDate);
-        } else if (this.defaultTable instanceof MoneyTable) {
+        } else if (defaultTable instanceof MoneyTable) {
             return popupView.findViewById(R.id.boxMoneyUseDate);
-        } else if (this.defaultTable instanceof ToDoTable) {
+        } else if (defaultTable instanceof ToDoTable) {
             return popupView.findViewById(R.id.boxToDoDate);
-        } else if (this.defaultTable instanceof ExerciseTable) {
+        } else if (defaultTable instanceof ExerciseTable) {
             return popupView.findViewById(R.id.boxExerciseDate);
         } else return null;
     }
 
     private void addNewEntry(View popupView) {
-        if (this.defaultTable instanceof FoodTable) {
+        if (defaultTable instanceof FoodTable) {
             FoodTable foodTable = (FoodTable) defaultTable;
             TextInputLayout foodTitle = popupView.findViewById(R.id.boxFoodType);
             TextInputLayout foodDate = popupView.findViewById(R.id.boxFoodExpDate);
@@ -207,9 +218,9 @@ class DiaryScreen {
             foodTable.addData(foodTitle.getEditText().getText().toString(),
                     LocalDate.parse(foodDate.getEditText().getText().toString()),
                     Integer.parseInt(foodAmount.getEditText().getText().toString()));
-            FoodTableAdapter foodTableAdapter = (FoodTableAdapter) this.listView.getAdapter();
+            FoodTableAdapter foodTableAdapter = (FoodTableAdapter) listView.getAdapter();
             foodTableAdapter.notifyDataSetChanged();
-        } else if (this.defaultTable instanceof ExerciseTable) {
+        } else if (defaultTable instanceof ExerciseTable) {
             ExerciseTable exerciseTable = (ExerciseTable) defaultTable;
             TextInputLayout boxExerciseType = popupView.findViewById(R.id.boxExerciseType);
             TextInputLayout boxExerciseDate = popupView.findViewById(R.id.boxExerciseDate);
@@ -222,9 +233,9 @@ class DiaryScreen {
                     Integer.parseInt(boxExerciseLength.getEditText().getText().toString().replaceAll("[ min]", "")),
                     boxExerciseDesc.getEditText().getText().toString(),
                     boxExerciseLocation.getEditText().getText().toString());
-            ExerciseTableAdapter exerciseTableAdapter = (ExerciseTableAdapter) this.listView.getAdapter();
+            ExerciseTableAdapter exerciseTableAdapter = (ExerciseTableAdapter) listView.getAdapter();
             exerciseTableAdapter.notifyDataSetChanged();
-        } else if (this.defaultTable instanceof MoneyTable) {
+        } else if (defaultTable instanceof MoneyTable) {
             MoneyTable moneyTable = (MoneyTable) defaultTable;
             TextInputLayout boxMoneyType = popupView.findViewById(R.id.boxMoneyType);
             TextInputLayout boxMoneyUseDate = popupView.findViewById(R.id.boxMoneyUseDate);
@@ -234,9 +245,9 @@ class DiaryScreen {
                     LocalDate.parse(boxMoneyUseDate.getEditText().getText().toString()),
                     Double.parseDouble(boxMoneyAmount.getEditText().getText().toString().replaceAll("[$€,.]", "")),
                     boxMoneyDesc.getEditText().getText().toString());
-            MoneyTableAdapter moneyTableAdapter = (MoneyTableAdapter) this.listView.getAdapter();
+            MoneyTableAdapter moneyTableAdapter = (MoneyTableAdapter) listView.getAdapter();
             moneyTableAdapter.notifyDataSetChanged();
-        } else if (this.defaultTable instanceof ToDoTable) {
+        } else if (defaultTable instanceof ToDoTable) {
             ToDoTable toDoTable = (ToDoTable) defaultTable;
             TextInputLayout boxToDoDate = popupView.findViewById(R.id.boxToDoDate);
             TextInputLayout boxToDoType = popupView.findViewById(R.id.boxToDoType);
@@ -246,7 +257,7 @@ class DiaryScreen {
                     LocalDate.parse(boxToDoDate.getEditText().getText().toString()),
                     boxToDoDesc.getEditText().getText().toString(),
                     Integer.parseInt(boxToDoPriority.getEditText().getText().toString()));
-            ToDoTableAdapter toDoTableAdapter = (ToDoTableAdapter) this.listView.getAdapter();
+            ToDoTableAdapter toDoTableAdapter = (ToDoTableAdapter) listView.getAdapter();
             toDoTableAdapter.notifyDataSetChanged();
         }
     }

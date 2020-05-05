@@ -1,9 +1,13 @@
 package com.kotkaz.mydiaries.screens;
 
-import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
 import android.widget.Button;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.kotkaz.mydiaries.R;
+import com.kotkaz.mydiaries.diary.tables.DefaultTable;
 import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
@@ -11,21 +15,27 @@ import com.kotkaz.mydiaries.diary.tables.ToDoTable;
 
 import java.io.IOException;
 
-public class MenuScreen {
+public class MenuScreen extends AppCompatActivity {
 
-    private Activity activity;
+    /**
+     * Main method. Shows menu screen.
+     *
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-    public MenuScreen(Activity activity) {
-        this.activity = activity;
+        setContentView(R.layout.menu_screen);
+        setOnClickListeners();
+    }
+
+    private void setOnClickListeners() {
+        Button buttonExit = findViewById(R.id.btnExit);
+        buttonExit.setOnClickListener(v -> finish());
 
 
-        this.activity.setContentView(R.layout.menu_screen);
-
-        Button buttonExit = this.activity.findViewById(R.id.btnExit);
-        buttonExit.setOnClickListener(v -> System.exit(0));
-
-
-        Button buttonFoodTable = this.activity.findViewById(R.id.btnFoodList);
+        Button buttonFoodTable = findViewById(R.id.btnFoodList);
         buttonFoodTable.setOnClickListener(v -> {
             FoodTable foodTable = new FoodTable();
             try {
@@ -33,10 +43,11 @@ public class MenuScreen {
             } catch (IOException e) {
                 System.out.println("No saved table found!");
             }
-            DiaryScreen diaryScreen = new DiaryScreen(this.activity, foodTable);
+            showUpDiaryScreen(foodTable);
         });
 
-        Button buttonExerciseTable = this.activity.findViewById(R.id.btnExerciseList);
+
+        Button buttonExerciseTable = findViewById(R.id.btnExerciseList);
         buttonExerciseTable.setOnClickListener(v -> {
             ExerciseTable exerciseTable = new ExerciseTable();
             try {
@@ -44,10 +55,11 @@ public class MenuScreen {
             } catch (IOException e) {
                 System.out.println("No saved table found!");
             }
-            DiaryScreen diaryScreen = new DiaryScreen(this.activity, exerciseTable);
+            showUpDiaryScreen(exerciseTable);
         });
 
-        Button buttonToDoTable = this.activity.findViewById(R.id.btnToDoList);
+
+        Button buttonToDoTable = findViewById(R.id.btnToDoList);
         buttonToDoTable.setOnClickListener(v -> {
             ToDoTable toDoTable = new ToDoTable();
             try {
@@ -55,10 +67,11 @@ public class MenuScreen {
             } catch (IOException e) {
                 System.out.println("No saved table found!");
             }
-            DiaryScreen diaryScreen = new DiaryScreen(this.activity, toDoTable);
+            showUpDiaryScreen(toDoTable);
         });
 
-        Button buttonMoneyTable = this.activity.findViewById(R.id.btnMoneyList);
+
+        Button buttonMoneyTable = findViewById(R.id.btnMoneyList);
         buttonMoneyTable.setOnClickListener(v -> {
             MoneyTable moneyTable = new MoneyTable();
             try {
@@ -66,7 +79,15 @@ public class MenuScreen {
             } catch (IOException e) {
                 System.out.println("No saved table found!");
             }
-            DiaryScreen diaryScreen = new DiaryScreen(this.activity, moneyTable);
+            showUpDiaryScreen(moneyTable);
         });
+    }
+
+    private void showUpDiaryScreen(DefaultTable defaultTable) {
+        Intent diaryScreenIntent = new Intent(this, DiaryScreen.class);
+        finish();  //Kill the activity from which you will go to next activity
+        diaryScreenIntent.putExtra("TABLE", defaultTable);
+        startActivity(diaryScreenIntent);
+
     }
 }
