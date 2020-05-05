@@ -11,6 +11,7 @@
         android:id="@+id/boxFoodType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -28,6 +29,7 @@
         android:id="@+id/boxFoodAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxFoodType">
 
@@ -45,6 +47,7 @@
         android:id="@+id/boxFoodExpDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxFoodAmount">
 

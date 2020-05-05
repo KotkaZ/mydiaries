@@ -11,6 +11,7 @@
         android:id="@+id/boxToDoType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -28,6 +29,7 @@
         android:id="@+id/boxToDoDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxToDoType">
 
@@ -45,6 +47,7 @@
         android:id="@+id/boxToDoDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxToDoDesc">
 
@@ -62,6 +65,7 @@
         android:id="@+id/boxToDoPriority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxToDoDate">
 

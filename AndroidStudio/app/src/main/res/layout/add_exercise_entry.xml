@@ -11,6 +11,7 @@
         android:id="@+id/boxExerciseType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -29,6 +30,7 @@
         android:id="@+id/boxExerciseLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxExerciseType">
 
@@ -46,6 +48,7 @@
         android:id="@+id/boxExerciseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxExerciseLength">
 
@@ -63,6 +66,7 @@
         android:id="@+id/boxExerciseLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxExerciseDate">
 
@@ -80,6 +84,7 @@
         android:id="@+id/boxExerciseDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxExerciseLocation">
 

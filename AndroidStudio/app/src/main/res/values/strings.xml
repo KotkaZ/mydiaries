@@ -54,5 +54,7 @@
     <string name="textNotNumbers">See väli peab koosnema numbritest!</string>
     <string name="textNumberTooSmall">Väärtus peab olema suurem kui %1$d!</string>
     <string name="textNumberTooBig">Väärtus peab olema väiksem kui %1$d!</string>
-    <string name="test">aw</string>
+
+    <string name="toastHoldToDelete">Hoia sõrm sissekandel, et see kustutada!</string>
+
 </resources>

@@ -11,6 +11,7 @@
         android:id="@+id/boxMoneyType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -28,6 +29,7 @@
         android:id="@+id/boxMoneyAmount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxMoneyType">
 
@@ -45,6 +47,7 @@
         android:id="@+id/boxMoneyUseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxMoneyAmount">
 
@@ -62,6 +65,7 @@
         android:id="@+id/boxMoneyDesc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:errorTextAppearance="@style/ErrorAppearance"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxMoneyUseDate">
 

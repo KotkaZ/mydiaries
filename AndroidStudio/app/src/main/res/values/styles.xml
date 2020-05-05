@@ -10,6 +10,7 @@
 
         <item name="buttonStyle">@style/MenuButton</item>
         <item name="editTextStyle">@style/EditBox</item>
+        <item name="android:datePickerStyle">@style/DatePickerAppearance</item>
         <item name="android:textColorHint">@color/colorWhite</item>
 
     </style>
@@ -38,8 +39,27 @@
     </style>
 
     <style name="TableTitle">
-        <item name="android:textColor">@color/colorDarkMenu</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:shadowColor">#000000</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">3</item>
         <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="DatePickerAppearance" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/colorDarkMenu</item>
+        <item name="android:buttonBarNegativeButtonStyle">
+            @style/DatePickerTheme.ButtonBarNegativeButtonStyle
+        </item>
+    </style>
+
+    <style name="DatePickerTheme.ButtonBarNegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@android:color/holo_red_light</item>
+    </style>
+
+    <style name="ErrorAppearance">
+        <item name="android:textColor">@color/colorError</item>
     </style>
 
 </resources>

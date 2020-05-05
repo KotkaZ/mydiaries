@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,12 +25,12 @@ import com.kotkaz.mydiaries.adapters.ExerciseTableAdapter;
 import com.kotkaz.mydiaries.adapters.FoodTableAdapter;
 import com.kotkaz.mydiaries.adapters.MoneyTableAdapter;
 import com.kotkaz.mydiaries.adapters.ToDoTableAdapter;
-import com.kotkaz.mydiaries.diary.tools.TableManager;
 import com.kotkaz.mydiaries.diary.tables.DefaultTable;
 import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
+import com.kotkaz.mydiaries.diary.tools.TableManager;
 import com.kotkaz.mydiaries.validators.BaseTextWatcher;
 import com.kotkaz.mydiaries.validators.MoneyTextWatcher;
 import com.kotkaz.mydiaries.validators.TimeTextWatcher;
@@ -69,6 +70,9 @@ public class DiaryScreen extends AppCompatActivity {
             diaryTitle.setText(R.string.ToDoList);
             listView.setAdapter(new ToDoTableAdapter((ToDoTable) defaultTable, getLayoutInflater(), getApplicationContext()));
         }
+
+        listView.setOnItemClickListener((parent, view, position, id) ->
+                Toast.makeText(DiaryScreen.this, DiaryScreen.this.getResources().getString(R.string.toastHoldToDelete), Toast.LENGTH_SHORT).show());
 
 
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
@@ -136,7 +140,10 @@ public class DiaryScreen extends AppCompatActivity {
         editText.setOnClickListener(v2 -> {
             final DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) ->
                     editText.setText(String.format("%d-%d-%d", year, month, dayOfMonth)), cYear, cMonth, cDay);
+
             datePickerDialog.show();
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
+            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
         });
 
         //Confirming adding entry.
