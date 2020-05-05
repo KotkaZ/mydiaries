@@ -3,7 +3,9 @@ package com.kotkaz.mydiaries.diary.entries;
 
 import org.joda.time.LocalDate;
 
-public class DefaultEntry {
+import java.io.Serializable;
+
+public class DefaultEntry implements Serializable {
     private LocalDate inputDate;
     private String type;
     // TODO: 17/04/2020

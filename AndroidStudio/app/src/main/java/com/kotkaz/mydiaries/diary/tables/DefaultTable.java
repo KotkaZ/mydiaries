@@ -1,10 +1,12 @@
 package com.kotkaz.mydiaries.diary.tables;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
-import com.google.gson.stream.JsonReader;
+import com.kotkaz.mydiaries.diary.tools.LocalDateSerializer;
 
-import java.io.FileReader;
+import org.joda.time.LocalDate;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.lang.reflect.Type;
@@ -51,20 +53,19 @@ public class DefaultTable<T> implements Serializable {
 
     /**
      * Loads table from JSON file.
-     *
-     * @param fileName Filename with extension.
-     * @throws IOException If file was not found.
      */
-    public void loadTable(String fileName) throws IOException {
+    public void fromBytes(byte[] bytes) throws IOException {
 
-        //final Type REVIEW_TYPE = new TypeToken<Tables.DefaultTable<T>>() {}.getType();
-        final Gson gson = new Gson();
+        final GsonBuilder builder = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
+        final Gson gson = builder.create();
 
-        try (final JsonReader jsonReader = new JsonReader(new FileReader(fileName))) {
-            DefaultTable<T> defaultTable = gson.fromJson(jsonReader, this.getClass());
-            if (defaultTable == null) return;
-            this.tabelData = defaultTable.tabelData;
-        }
+        String data = new String(bytes);
+
+        DefaultTable defaultTable = gson.fromJson(data, this.getClass());
+        if (defaultTable == null) return;
+        this.tabelData = defaultTable.tabelData;
+
 
     }
 
@@ -72,13 +73,15 @@ public class DefaultTable<T> implements Serializable {
     /**
      * Saves table to JSON file.
      */
-    public String saveTabel(String fileName) {
-        final Gson gson = new Gson();
+    public byte[] toBytes() {
+        final GsonBuilder builder = new GsonBuilder()
+                .registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
+        final Gson gson = builder.create();
 
         final Type REVIEW_TYPE = new TypeToken<DefaultTable<T>>() {
         }.getType();
 
-        return gson.toJson(this, REVIEW_TYPE);
+        return gson.toJson(this, REVIEW_TYPE).getBytes();
 
 
         /*

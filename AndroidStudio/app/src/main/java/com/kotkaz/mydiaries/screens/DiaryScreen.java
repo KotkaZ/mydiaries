@@ -24,6 +24,7 @@ import com.kotkaz.mydiaries.adapters.ExerciseTableAdapter;
 import com.kotkaz.mydiaries.adapters.FoodTableAdapter;
 import com.kotkaz.mydiaries.adapters.MoneyTableAdapter;
 import com.kotkaz.mydiaries.adapters.ToDoTableAdapter;
+import com.kotkaz.mydiaries.diary.tools.TableManager;
 import com.kotkaz.mydiaries.diary.tables.DefaultTable;
 import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
@@ -80,14 +81,16 @@ public class DiaryScreen extends AppCompatActivity {
         Button exitButton = findViewById(R.id.btnDiaryExit);
         exitButton.setOnClickListener(v -> {
             try {
-                if (defaultTable instanceof FoodTable) defaultTable.saveTabel("food_table.json");
+                if (defaultTable instanceof FoodTable)
+                    TableManager.saveTable(getApplicationContext(), defaultTable, "food_table.json");
                 else if (defaultTable instanceof MoneyTable)
-                    defaultTable.saveTabel("money_table.json");
+                    TableManager.saveTable(getApplicationContext(), defaultTable, "money_table.json");
                 else if (defaultTable instanceof ExerciseTable)
-                    defaultTable.saveTabel("exercise_table.json");
+                    TableManager.saveTable(getApplicationContext(), defaultTable, "exercise_table.json");
                 else if (defaultTable instanceof ToDoTable)
-                    defaultTable.saveTabel("todo _table.json");
-                MenuScreen menuScreen = new MenuScreen();
+                    TableManager.saveTable(getApplicationContext(), defaultTable, "todo _table.json");
+
+                goToMenuScreen();
             } catch (Exception e) {
                 e.printStackTrace(); // TODO: 19/04/2020
             }
@@ -260,6 +263,13 @@ public class DiaryScreen extends AppCompatActivity {
             ToDoTableAdapter toDoTableAdapter = (ToDoTableAdapter) listView.getAdapter();
             toDoTableAdapter.notifyDataSetChanged();
         }
+    }
+
+
+    private void goToMenuScreen() {
+        Intent menuScreenIntent = new Intent(this, MenuScreen.class);
+        finish();
+        startActivity(menuScreenIntent);
     }
 
 
