@@ -36,7 +36,7 @@ public class FoodTableEntry extends DefaultEntry implements Comparable{
      */
     @Override
     public int compareTo(Object o) {
-        if (! o.getClass().getTypeName().equals("FoodTableEntry"))
+        if (!(o instanceof FoodTableEntry))
             throw new IllegalArgumentException();
         return this.expDate.compareTo(((FoodTableEntry)o).getExpDate());
     }

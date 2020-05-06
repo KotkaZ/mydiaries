@@ -7,6 +7,7 @@ import com.google.gson.stream.JsonReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,7 +18,7 @@ import java.util.List;
  *
  * @param <T> Table Entry type
  */
-public class DefaultTable<T> {
+public class DefaultTable<T> implements Serializable {
 
     private List<T> tabelData = new ArrayList<>();
 

@@ -26,7 +26,7 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
         List<ToDoTableEntry> list = new ArrayList<>();
         for (ToDoTableEntry entry :
                 toDoTable.getTabel()) {
-            if (entry.getDeadline() == date)
+            if (entry.getDeadline().equals(date) )
                 list.add(entry);
         }
         Collections.sort(list);

@@ -158,7 +158,7 @@ public class Test {
         System.out.println("Enter date:");
         final LocalDateTime date = dateTimeControl(scanner).toLocalDateTime(LocalTime.MIDNIGHT);
         System.out.println("Enter length:");
-        final double amount = scanner.nextDouble();
+        final int amount = scanner.nextInt();
         System.out.println("Enter type:");
         final String type = scanner.nextLine();
         System.out.println("Enter desc.:");
