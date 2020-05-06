@@ -136,10 +136,10 @@ public class DiaryScreen extends AppCompatActivity {
 
 
         //Calendar date picker dialog.
-        editText.setText(String.format("%d-%d-%d", cYear, cMonth, cDay));
+        editText.setText(String.format("%d-%d-%d", cYear, cMonth + 1, cDay));
         editText.setOnClickListener(v2 -> {
             final DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) ->
-                    editText.setText(String.format("%d-%d-%d", year, month, dayOfMonth)), cYear, cMonth, cDay);
+                    editText.setText(String.format("%d-%d-%d", year, month + 1, dayOfMonth)), cYear, cMonth, cDay);
 
             datePickerDialog.show();
             datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));

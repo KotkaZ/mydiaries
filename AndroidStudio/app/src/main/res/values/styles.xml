@@ -49,14 +49,8 @@
 
     <style name="DatePickerAppearance" parent="@android:style/Widget.Material.Light.DatePicker">
         <item name="android:headerBackground">@color/colorDarkMenu</item>
-        <item name="android:buttonBarNegativeButtonStyle">
-            @style/DatePickerTheme.ButtonBarNegativeButtonStyle
-        </item>
     </style>
 
-    <style name="DatePickerTheme.ButtonBarNegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@android:color/holo_red_light</item>
-    </style>
 
     <style name="ErrorAppearance">
         <item name="android:textColor">@color/colorError</item>
