@@ -7,19 +7,19 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.kotkaz.mydiaries.R;
-import com.kotkaz.mydiaries.diary.tools.TableManager;
 import com.kotkaz.mydiaries.diary.tables.DefaultTable;
 import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
+import com.kotkaz.mydiaries.diary.tools.TableManager;
 
 public class MenuScreen extends AppCompatActivity {
 
     /**
      * Main method. Shows menu screen.
      *
-     * @param savedInstanceState
+     * @param savedInstanceState lastSavedInstanceState
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +29,12 @@ public class MenuScreen extends AppCompatActivity {
         setOnClickListeners();
     }
 
+
+    /**
+     * Setting up all onClickListeners.
+     */
     private void setOnClickListeners() {
+        //Exit button will close activity.
         Button buttonExit = findViewById(R.id.btnExit);
         buttonExit.setOnClickListener(v -> finish());
 
@@ -70,10 +75,16 @@ public class MenuScreen extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * ShowUpDiaryScreen closes current screen & activity and shows diary screen according to table.
+     *
+     * @param defaultTable Table (Food, Money, Exercise...) Will be passed via intent extras.
+     */
     private void showUpDiaryScreen(DefaultTable defaultTable) {
         Intent diaryScreenIntent = new Intent(this, DiaryScreen.class);
         finish();  //Kill the activity from which you will go to next activity
-        diaryScreenIntent.putExtra("TABLE", defaultTable);
+        diaryScreenIntent.putExtra("TABLE", defaultTable); //Passes table as intent extra.
         startActivity(diaryScreenIntent);
 
     }

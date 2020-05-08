@@ -7,13 +7,22 @@ import android.text.TextWatcher;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kotkaz.mydiaries.R;
 
+/**
+ * BaseTextWatcher class. Implements TextWatcher interface. Is used to set validators for input fields.
+ */
 public class BaseTextWatcher implements TextWatcher {
     private TextInputLayout textInputLayout;
     private Validators validators;
     private Resources resources;
 
-    public BaseTextWatcher(TextInputLayout view, Resources resources) {
-        this.textInputLayout = view;
+    /**
+     * Constructor.
+     *
+     * @param textInputLayout TextInputLayout that will have validator set.
+     * @param resources       Application resources for colors and string values.
+     */
+    public BaseTextWatcher(TextInputLayout textInputLayout, Resources resources) {
+        this.textInputLayout = textInputLayout;
         this.resources = resources;
         this.validators = new Validators(resources);
     }
@@ -21,16 +30,17 @@ public class BaseTextWatcher implements TextWatcher {
 
     @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+        //Won't be implemented.
     }
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+        //Won't be implemented. Can be overrided in subclasses.
     }
 
     @Override
     public void afterTextChanged(Editable s) {
+        //Setting validators according to textInputLayout id.
         switch (textInputLayout.getId()) {
 
             case R.id.boxFoodType:
@@ -74,7 +84,7 @@ public class BaseTextWatcher implements TextWatcher {
         }
     }
 
-    public TextInputLayout getTextInputLayout() {
+    TextInputLayout getTextInputLayout() {
         return textInputLayout;
     }
 

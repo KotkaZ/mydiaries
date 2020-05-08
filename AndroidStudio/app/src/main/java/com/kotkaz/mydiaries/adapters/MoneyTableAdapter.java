@@ -14,11 +14,10 @@ import com.kotkaz.mydiaries.diary.entries.MoneyTableEntry;
 import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.List;
 
 /**
- * CustomAdapter class for listView.
+ * CustomMoneyTableAdapter class for listView.
  */
 public class MoneyTableAdapter extends BaseAdapter {
 
@@ -26,6 +25,13 @@ public class MoneyTableAdapter extends BaseAdapter {
     private LayoutInflater layoutInflater;
     private Context context;
 
+    /**
+     * MoneyTableAdapter default constructor.
+     *
+     * @param moneyTable     MoneyTable
+     * @param layoutInflater ApplicationContext layoutInflater.
+     * @param context        ApplicationContext. For getting resources and colors.
+     */
     public MoneyTableAdapter(MoneyTable moneyTable, LayoutInflater layoutInflater, Context context) {
         this.moneyTableEntries = moneyTable.getTabel();
         this.layoutInflater = layoutInflater;
@@ -48,24 +54,39 @@ public class MoneyTableAdapter extends BaseAdapter {
         return position;
     }
 
+    /**
+     * Inflates new view view, finds all textviews and sets texts.
+     *
+     * @param position    View index, is common with entry index.
+     * @param convertView Will be inflated from layout.
+     * @param parent      ListView.
+     * @return Returns inflated view, where text is set according to entry values.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.money_table_item, null);
+        if (convertView == null)
+            convertView = layoutInflater.inflate(R.layout.money_table_item, parent, false);
 
+        //Finding all views.
         TextView moneyTitle = convertView.findViewById(R.id.txtMoneyTitle);
         TextView moneyDesc = convertView.findViewById(R.id.txtMoneyDesc);
         TextView moneyAmount = convertView.findViewById(R.id.txtMoneyAmount);
         TextView moneyUseDate = convertView.findViewById(R.id.txtMoneyUseDate);
 
+        //Getting entry with the same index.
         MoneyTableEntry moneyTableEntry = moneyTableEntries.get(position);
+
+        //Setting textview texts with entry values.
         moneyTitle.setText(moneyTableEntry.getType());
         moneyDesc.setText(moneyTableEntry.getDescription());
 
+        //Formatting string for money textview.
         DecimalFormat moneyFormat = new DecimalFormat("€#,##0.00;-€#,##0.00");
 
         moneyAmount.setText(moneyFormat.format(moneyTableEntry.getAmount() / 100));
         moneyUseDate.setText(moneyTableEntry.getUseDate().toString());
 
+        //Outgoes are set red, incomes green.
         if (moneyTableEntry.getAmount() < 0)
             moneyAmount.setTextColor(ContextCompat.getColor(context, R.color.colorNegativeMoney));
         else
