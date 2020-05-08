@@ -32,11 +32,6 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
         return list;
     }
 
-    @Override
-    public List<FoodTableEntry> getOrderedTable(int n) {
-        return super.getOrderedTable(comparator);
-    }
-
     /**
      * Returns sorted list of today's expiring food.
      *
