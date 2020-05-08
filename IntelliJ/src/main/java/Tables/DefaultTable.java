@@ -112,31 +112,6 @@ public class DefaultTable<T> implements Serializable {
         return tempData;
     }
 
-    /**
-     * This method orderes list by Entry-classes object variables.
-     *
-     * @param orderingType Int typenumber
-     *                     1- type
-     *                     2- inputdate
-     *                     3- type & inputdate
-     * @param isAscending
-     * @return
-     */
-    public List<T> getOrderedTabelByColumns(int orderingType, boolean isAscending){
-        switch (orderingType){
-            case 1:return getOrderedTable(new Comparator<T>() {
-                @Override
-                public int compare(T o1, T o2) {
-                    return ((DefaultEntry)o1).getType().compareTo(((DefaultEntry)o2).getType());
-                }
-            });
-            case 2:;
-            case 3:;
-            default:
-                throw new IllegalArgumentException("DefaultTable.getOrderedTabelByColumns wrong ordering type");
-        }
-        return new ArrayList<>();//Todo
-    }
 
     /**
      * Table entry Getter.

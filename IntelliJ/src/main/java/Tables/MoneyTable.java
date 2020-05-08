@@ -14,37 +14,31 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
         Entries.MoneyTableEntry entries = new Entries.MoneyTableEntry(type, useDate, amount,  description);
         super.addData(entries);
     }
-
+    /**
+     * This method orderes list by Entry-classes object variables.
+     *
+     * @param type Int typenumber
+     *             0- type
+     *             1- inputdate
+     *             2- amount
+     *             3- useDate
+     * @param ascending
+     * @return
+     */
     public List<MoneyTableEntry> getOrderedTable(int type, boolean ascending){
-        switch (type){
-            case 0: {
-                //Kui ascending on tõene, siis tagastakse kasvavases järjekorras, kus on sorteeritud tüübi alusel.
-                //VAstasel juhul tagastatakse kahanevas tüüvi järjekorras.
-                return ascending ? super.getOrderedTable(Comparator.comparing(DefaultEntry::getType)) :
-                        super.getOrderedTable((moneyTableEntry, t1) -> t1.getType().compareTo(moneyTableEntry.getType()));
+        return super.getOrderedTable((o1, o2) -> {
+            int value;
+            switch (type){
 
+                case 0: value = o1.getType().compareTo(o2.getType()) ;break;
+                case 1: value = o1.getInputDate().compareTo(o2.getInputDate());break;
+                case 2: value = Double.compare(o1.getAmount(), o2.getAmount());break;
+                case 3: value = o1.getUseDate().compareTo(o2.getUseDate());break;
+                default:
+                    throw new IllegalArgumentException("MoneyTable#getOrderedTabel wrong ordering type");
             }
-            case 1: {
-                //Todo
-                return super.getOrderedTable(Comparator.comparing(DefaultEntry::getInputDate));
-            }
-            case 2: {
-                //Todo
-                return super.getOrderedTable(Comparator.comparingDouble(MoneyTableEntry::getAmount));
-            }
-            case 3: {
-                //Esmalt võrreldakse tüübi alusel. Kui need on võrdsed siis võrreldakse sisestamis kuupäeva alusel. Kasvav järjekord.
-                //KUi on ascending false siis tagastataskse kahanevas järjekorras.
-                return ascending ? super.getOrderedTable(Comparator.comparing((Function<MoneyTableEntry, String>) DefaultEntry::getType).thenComparing(DefaultEntry::getInputDate)) :
-                        super.getOrderedTable((moneyTableEntry, t1) -> {
-                            int sComp = t1.getType().compareTo(moneyTableEntry.getType());
-
-                            if(sComp != 0) return sComp;
-                            return t1.getInputDate().compareTo(moneyTableEntry.getInputDate());
-                        });
-            }
-            default:return getTabel();
-        }
+            return value  * (ascending ? 1 : -1);
+        });
     }
 
 
