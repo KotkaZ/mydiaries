@@ -1,7 +1,6 @@
 package Tables;
 
 import Entries.DefaultEntry;
-import Entries.FoodTableEntry;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -39,6 +38,14 @@ public class DefaultTable<T> implements Serializable {
      */
     public void addData(T data) {
         tabelData.add(data);
+    }
+
+    /**
+     * Sets tableData field.
+     * @param data
+     */
+    public void setData (List<T> data){
+        tabelData = data;
     }
 
     /**

@@ -3,7 +3,7 @@ package Entries;
 import Toode.Toode;
 import org.joda.time.LocalDate;
 
-public class FoodTableEntry extends DefaultEntry implements Comparable{
+public class FoodTableEntry extends DefaultEntry {
     private LocalDate expDate;
     private Toode toode;
     public static String[] UNITS = new String[]{"g", "kg", "ml", "l", "piece(s)", "package(s)"};
@@ -11,7 +11,7 @@ public class FoodTableEntry extends DefaultEntry implements Comparable{
     public FoodTableEntry(String type, LocalDate expDate, int amount, String unit) {
         super(type);
         this.expDate = expDate;
-        this.toode = new Toode(amount,unit);
+        this.toode = new Toode(amount, unit);
     }
 
     public LocalDate getExpDate() {
@@ -28,10 +28,11 @@ public class FoodTableEntry extends DefaultEntry implements Comparable{
      * @param o FoodTabelEntry class object
      * @return Difference between expatriation date
      */
-    @Override
+    /*@Override
     public int compareTo(Object o) {
         if (!(o instanceof FoodTableEntry))
             throw new IllegalArgumentException();
         return this.expDate.compareTo(((FoodTableEntry)o).getExpDate());
     }
+         */
 }

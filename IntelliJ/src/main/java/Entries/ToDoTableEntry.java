@@ -2,7 +2,7 @@ package Entries;
 
 import org.joda.time.LocalDateTime;
 
-public class ToDoTableEntry extends DefaultEntry implements Comparable{
+public class ToDoTableEntry extends DefaultEntry {
     private LocalDateTime deadline;
     private String description;
     private int priority;
@@ -32,6 +32,7 @@ public class ToDoTableEntry extends DefaultEntry implements Comparable{
      * @param o ToDoTabelEntry class object
      * @return Difference between priorities and  dates
      */
+    /*
     @Override
     public int compareTo(Object o) {
         if (!(o instanceof ToDoTableEntry))
@@ -44,5 +45,5 @@ public class ToDoTableEntry extends DefaultEntry implements Comparable{
              return  priorityDiff;
          else
              return deadLineDiff;
-    }
+    }*/
 }

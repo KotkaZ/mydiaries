@@ -1,11 +1,8 @@
 package Tables;
 
-import Entries.FoodTableEntry;
 import Entries.ToDoTableEntry;
 import org.joda.time.LocalDateTime;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
@@ -23,6 +20,8 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
      * @param date
      * @return
      */
+    /*
+    @Deprecated
     public static List<ToDoTableEntry> getTasks4Date(ToDoTable toDoTable, LocalDateTime date){
         List<ToDoTableEntry> list = new ArrayList<>();
         for (ToDoTableEntry entry :
@@ -32,7 +31,7 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
         }
         Collections.sort(list);
         return list;
-    }
+    }*/
 
     /**
      * Returns sorted list of today's tasks.
@@ -40,9 +39,13 @@ public class ToDoTable extends DefaultTable<Entries.ToDoTableEntry> {
      * @param toDoTable
      * @return
      */
+    /*
+    @Deprecated
     public static List<ToDoTableEntry> getTodaysTasks(ToDoTable toDoTable){
         return getTasks4Date(toDoTable, LocalDateTime.now());
     }
+
+     */
 
     /**
      * This method orderes list by Entry-class object variables.

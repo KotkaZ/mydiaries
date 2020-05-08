@@ -1,12 +1,8 @@
 package Tables;
 
-import Entries.ExerciseTableEntry;
 import Entries.FoodTableEntry;
 import org.joda.time.LocalDate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 
 public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
@@ -24,6 +20,8 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
      * @param date
      * @return
      */
+    /*
+    @Deprecated
     public static List<FoodTableEntry> getExp4Date(FoodTable foodTable, LocalDate date){
         List<FoodTableEntry> list = new ArrayList<>();
         for (FoodTableEntry entry :
@@ -32,7 +30,7 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
                 list.add(entry);
         }
         return list;
-    }
+    }*/
 
     /**
      * Returns sorted list of today's expiring food.
@@ -40,9 +38,12 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
      * @param foodTable
      * @return
      */
+    /*
+    @Deprecated
     public static List<FoodTableEntry> getTodaysExp(FoodTable foodTable){
         return getExp4Date(foodTable, LocalDate.now());
-    }
+    }*/
+
     /**
      * This method orderes list by Entry-class object variables.
      *
@@ -80,6 +81,7 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
      * @param ascending
      * @return
      */
+    /*
     public List<FoodTableEntry> getOrderedTableTry(int type, boolean ascending){
         List<Integer> arguments;
         switch (type){
@@ -116,7 +118,11 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
             }
             return value  * (ascending ? 1 : -1);
         });
+
+
     }
+
+     */
 
 }
 
