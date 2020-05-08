@@ -12,7 +12,6 @@ public class FoodTableEntryTest{
     private static LocalDate expDate = LocalDate.parse("2020-01-01") ;
     private static int amount = 5;
     private static String unit = "g";
-    private static int unitIndex = 0;
     public static String[] UNITS = new String[]{"g", "kg", "ml", "l", "piece(s)", "package(s)"};
     final private Toode toode = new Toode(amount, unit);
 

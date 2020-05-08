@@ -112,6 +112,21 @@ public class DefaultTable<T> implements Serializable {
     }
 
     /**
+     * This method orderes list by Entry-classes object variables.
+     *
+     * @param orderingType Int typenumber
+     *                     1- type
+     *                     2- inputdate
+     *                     3-  type & inputdate
+     * @param isAscending
+     * @return
+     */
+    public List<T> getOrderedTabelByColumns(int orderingType, boolean isAscending){
+
+        return new ArrayList<>();//Todo
+    }
+
+    /**
      * Table entry Getter.
      *
      * @param index Entry indeks.

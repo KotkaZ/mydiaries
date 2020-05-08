@@ -20,7 +20,7 @@ Tiit/Robert?
 
 * [High priority] Luua klass toode, mis sisaldab kogust ja ühikut. ToString meetod, mis tagastab sõnena koguse ja ühiku.
 			Implementeerida see klass kõikide seniste arvuliste väärtuste asemele, kus on kogused (Toit...). Hetkel implementeeritud ühikute haldus ei toida.
-			
+			Tiit: Tegin
 
 * [High priority] Sorteerimine kõigi väljade alusel. Üks konkreetne meetod, mis võtab argumendiks sorteerimisindeksi. Näiteks 0, siis sorteeritakse pealkirja alusel. 1, siis koguse alusel jms.
 			KARL: Mul on lihtsam väärtustada tekstiväljad ning võtta valitud välja indeks, mis anda edasi "sorteerimis" meetodisse. Hetkel on olemas väga segased sorteerimised, millest

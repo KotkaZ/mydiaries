@@ -4,6 +4,7 @@ import Entries.FoodTableEntry;
 import org.joda.time.LocalDate;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
@@ -29,6 +30,11 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
                 list.add(entry);
         }
         return list;
+    }
+
+    @Override
+    public List<FoodTableEntry> getOrderedTable(int n) {
+        return super.getOrderedTable(comparator);
     }
 
     /**
