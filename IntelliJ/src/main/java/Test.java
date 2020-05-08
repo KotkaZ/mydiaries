@@ -129,10 +129,10 @@ public class Test {
         final int amount = scanner.nextInt();
         System.out.print("Enter type:");
         final String type = scanner.next();
-        System.out.print("Enter unit "+ Arrays.toString(FoodTableEntry.UNITS) +": ");
-        final int unitIndex = scanner.nextInt();
+        System.out.print("Enter unit "+ Arrays.toString(FoodTableEntry.UNITS) + "or something else: ");
+        final String unit = scanner.next();
 
-        foodTable.addData(type, expDate,  amount,  unitIndex);
+        foodTable.addData(type, expDate,  amount,  unit);
 
         try {
             foodTable.saveTabel("foodTable.json");
