@@ -1,6 +1,7 @@
 package com.kotkaz.mydiaries.validators;
 
 import android.content.res.Resources;
+import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputLayout;
 import com.kotkaz.mydiaries.R;
@@ -10,7 +11,7 @@ import org.apache.commons.lang3.math.NumberUtils;
 
 public class TimeTextWatcher extends BaseTextWatcher {
 
-    private String formatTimeText = "";
+    private String formattedText = "";
 
     public TimeTextWatcher(TextInputLayout view, Resources resources) {
         super(view, resources);
@@ -19,25 +20,30 @@ public class TimeTextWatcher extends BaseTextWatcher {
 
     @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
+        //Getting editText from textInputLayout. May return null.
+        EditText editText = getTextInputLayout().getEditText();
+        if (editText == null) return;
+
         if (s.toString().length() > getResources().getInteger(R.integer.exerciseTimeMaxLength)) {
-            getTextInputLayout().getEditText().setText(formatTimeText);
+            editText.setText(formattedText);
         } else {
             //We have to turn off current TextWatcher, because it will get to infinity loop.
-            getTextInputLayout().getEditText().removeTextChangedListener(this);
+            editText.removeTextChangedListener(this);
 
-            String currentString = s.toString().replaceAll("[ min]", "");
+            String currentFormat = s.toString().replaceAll("[ min]", "");
 
-            if (before > 0) currentString = StringUtils.chop(currentString);
-            if (NumberUtils.toInt(currentString) == 0) currentString = "";
-            if (currentString.length() > 0) currentString = currentString + " min";
+            //If user is deleting then we remove the last character with chopping.
+            if (before > 0) currentFormat = StringUtils.chop(currentFormat);
 
+            if (NumberUtils.toInt(currentFormat) == 0) currentFormat = ""; //Field is empty.
+            if (currentFormat.length() > 0) currentFormat = currentFormat + " min";
 
-            formatTimeText = currentString;
+            formattedText = currentFormat;
 
-            getTextInputLayout().getEditText().setText(currentString);
-            getTextInputLayout().getEditText().setSelection(currentString.length());
+            editText.setText(currentFormat);
+            editText.setSelection(currentFormat.length());
 
-            getTextInputLayout().getEditText().addTextChangedListener(this);
+            editText.addTextChangedListener(this);
         }
 
     }

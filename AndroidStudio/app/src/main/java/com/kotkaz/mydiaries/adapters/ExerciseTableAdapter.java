@@ -10,18 +10,22 @@ import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.ExerciseTableEntry;
 import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
 
-import org.apache.commons.lang3.math.NumberUtils;
-
 import java.util.List;
 
 /**
- * CustomAdapter class for listView.
+ * CustomExerciseAdapter class for listView.
  */
 public class ExerciseTableAdapter extends BaseAdapter {
 
     private List<ExerciseTableEntry> exerciseTableEntries; //Has to be changed.
     private LayoutInflater layoutInflater;
 
+    /**
+     * Exercise Table Adapter Constructor.
+     *
+     * @param exerciseTable  ExerciseTable
+     * @param layoutInflater ApplicationContext layoutInflater.
+     */
     public ExerciseTableAdapter(ExerciseTable exerciseTable, LayoutInflater layoutInflater) {
         this.exerciseTableEntries = exerciseTable.getTabel();
         this.layoutInflater = layoutInflater;
@@ -43,23 +47,35 @@ public class ExerciseTableAdapter extends BaseAdapter {
         return position;
     }
 
+    /**
+     * Inflates new view view, finds all textviews and sets texts.
+     *
+     * @param position    View index, is common with entry index.
+     * @param convertView Will be inflated from layout.
+     * @param parent      ListView.
+     * @return Returns inflated view, where text is set according to entry values.
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        convertView = layoutInflater.inflate(R.layout.exercise_table_item, null);
+        if (convertView == null)
+            convertView = layoutInflater.inflate(R.layout.exercise_table_item, parent, false);
 
+        //Finding all views.
         TextView exerciseTitle = convertView.findViewById(R.id.txtExerciseTitle);
         TextView exerciseDate = convertView.findViewById(R.id.txtExerciseDate);
         TextView exerciseLength = convertView.findViewById(R.id.txtExerciseLength);
         TextView exerciseDesc = convertView.findViewById(R.id.txtExerciseDesc);
         TextView exerciseLocation = convertView.findViewById(R.id.txtExerciseLocation);
 
+        //Getting entry with the same index.
         ExerciseTableEntry exerciseTableEntry = exerciseTableEntries.get(position);
 
+        //Setting textview texts with entry values.
         exerciseTitle.setText(exerciseTableEntry.getType());
         exerciseLocation.setText(exerciseTableEntry.getLocation());
         exerciseDesc.setText(exerciseTableEntry.getDescription());
         exerciseDate.setText(exerciseTableEntry.getExerciseDate().toString());
-        exerciseLength.setText(String.valueOf(exerciseTableEntry.getLength()) + " min");
+        exerciseLength.setText(String.format("%s min", String.valueOf(exerciseTableEntry.getLength())));
 
         return convertView;
     }

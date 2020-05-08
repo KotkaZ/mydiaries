@@ -38,6 +38,7 @@ import com.kotkaz.mydiaries.validators.TimeTextWatcher;
 import org.joda.time.LocalDate;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class DiaryScreen extends AppCompatActivity {
 
@@ -50,10 +51,134 @@ public class DiaryScreen extends AppCompatActivity {
         setContentView(R.layout.diary_screen);
 
         Intent intent = this.getIntent();
-
-
         defaultTable = (DefaultTable) intent.getSerializableExtra("TABLE");
 
+        setUpTileAndListView();
+        setListViewItemListeners();
+        setUpExitButtonClickListener();
+
+        //Setting up addButton onClickListener that pops up adding entry screen.
+        FloatingActionButton btnAddNewEntry = findViewById(R.id.btnAddEntry);
+        btnAddNewEntry.setOnClickListener(v -> popupAddNewEntry(v.getRootView()));
+    }
+
+
+    /**
+     * Pops up box, where u can enter data for table. Dismisses on click next to it.
+     *
+     * @param v View that called this method.
+     */
+    private void popupAddNewEntry(View v) {
+
+        View popupView = popupView((ViewGroup) v);
+        if (popupView == null) return;
+
+        final int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        final int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
+
+        // Show the popup window.
+        // Which view you pass in doesn't matter, it is only used for the window token.
+        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
+
+        setTextInputValidators((ViewGroup) popupView);
+
+
+        final EditText editText = findDateBox(popupView).getEditText();
+
+        //Gets the current date.
+        final Calendar calendar = Calendar.getInstance();
+        final int cDay = calendar.get(Calendar.DAY_OF_MONTH);
+        final int cMonth = calendar.get(Calendar.MONTH);
+        final int cYear = calendar.get(Calendar.YEAR);
+
+
+        //Calendar date picker dialog.
+        if (editText != null) {
+            editText.setText(String.format(Locale.getDefault(), "%d-%d-%d", cYear, cMonth + 1, cDay));
+
+            editText.setOnClickListener(v2 -> {
+                final DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        this, (view, year, month, dayOfMonth) ->
+                        editText.setText(String.format(Locale.getDefault(), "%d-%d-%d",
+                                year, month + 1, dayOfMonth)), cYear, cMonth, cDay);
+
+                datePickerDialog.show();
+                datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
+                datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
+            });
+        }
+
+        //Confirming adding entry.
+        final Button btnAdd = popupView.findViewById(R.id.btnConfirmEntry);
+        btnAdd.setOnClickListener(v1 -> {
+            ViewGroup viewGroup = (ViewGroup) v1.getParent();
+            int count = viewGroup.getChildCount();
+            boolean errorEnabled = false;
+
+            for (int i = 0; i < count; i++) {
+                View view = viewGroup.getChildAt(i);
+                if (view instanceof TextInputLayout) {
+                    EditText textInputLayoutEditText = ((TextInputLayout) view).getEditText();
+                    if (textInputLayoutEditText == null) continue;
+
+                    //If textfield is empty, then call out onTextChanged event for showing error.
+                    if (textInputLayoutEditText.getText().toString().trim().equals(""))
+                        textInputLayoutEditText.setText("");
+                    if (((TextInputLayout) view).isErrorEnabled()) errorEnabled = true;
+                }
+            }
+            if (errorEnabled) return;
+
+            addNewEntry(popupView);
+            popupWindow.dismiss();
+        });
+
+    }
+
+
+    /**
+     * Sets up listView item onClickListeners.
+     */
+    private void setListViewItemListeners() {
+        //Clicking once will show deleting guide.
+        listView.setOnItemClickListener((parent, view, position, id) ->
+                Toast.makeText(DiaryScreen.this, getResources().
+                        getString(R.string.toastHoldToDelete), Toast.LENGTH_SHORT).show());
+
+        //Long click will delete table entry.
+        listView.setOnItemLongClickListener((parent, view, position, id) -> {
+            defaultTable.removeData(position);
+            BaseAdapter adapter = (BaseAdapter) listView.getAdapter();
+            adapter.notifyDataSetChanged(); //Updates listView.
+            return true;
+        });
+    }
+
+    /**
+     * setUpExitButtonClickListener method will try to save table and then exit.
+     */
+    private void setUpExitButtonClickListener() {
+        Button exitButton = findViewById(R.id.btnDiaryExit);
+        exitButton.setOnClickListener(v -> {
+            if (defaultTable instanceof FoodTable)
+                TableManager.saveTable(getApplicationContext(), defaultTable, "food_table.json");
+            else if (defaultTable instanceof MoneyTable)
+                TableManager.saveTable(getApplicationContext(), defaultTable, "money_table.json");
+            else if (defaultTable instanceof ExerciseTable)
+                TableManager.saveTable(getApplicationContext(), defaultTable, "exercise_table.json");
+            else if (defaultTable instanceof ToDoTable)
+                TableManager.saveTable(getApplicationContext(), defaultTable, "todo _table.json");
+
+            goToMenuScreen(); //Closes activity and shows menu screen.
+        });
+    }
+
+
+    /**
+     * setUpTileAndListView replaces diaryScreen title with correct title and shows entries in listView.
+     */
+    private void setUpTileAndListView() {
         TextView diaryTitle = findViewById(R.id.txtDiaryTitle);
         listView = findViewById(R.id.listEntries);
 
@@ -70,123 +195,29 @@ public class DiaryScreen extends AppCompatActivity {
             diaryTitle.setText(R.string.ToDoList);
             listView.setAdapter(new ToDoTableAdapter((ToDoTable) defaultTable, getLayoutInflater(), getApplicationContext()));
         }
-
-        listView.setOnItemClickListener((parent, view, position, id) ->
-                Toast.makeText(DiaryScreen.this, DiaryScreen.this.getResources().getString(R.string.toastHoldToDelete), Toast.LENGTH_SHORT).show());
-
-
-        listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            defaultTable.removeData(position);
-            BaseAdapter adapter = (BaseAdapter) listView.getAdapter();
-            adapter.notifyDataSetChanged();
-            return true;
-        });
-
-        Button exitButton = findViewById(R.id.btnDiaryExit);
-        exitButton.setOnClickListener(v -> {
-            try {
-                if (defaultTable instanceof FoodTable)
-                    TableManager.saveTable(getApplicationContext(), defaultTable, "food_table.json");
-                else if (defaultTable instanceof MoneyTable)
-                    TableManager.saveTable(getApplicationContext(), defaultTable, "money_table.json");
-                else if (defaultTable instanceof ExerciseTable)
-                    TableManager.saveTable(getApplicationContext(), defaultTable, "exercise_table.json");
-                else if (defaultTable instanceof ToDoTable)
-                    TableManager.saveTable(getApplicationContext(), defaultTable, "todo _table.json");
-
-                goToMenuScreen();
-            } catch (Exception e) {
-                e.printStackTrace(); // TODO: 19/04/2020
-            }
-        });
-
-
-        FloatingActionButton btnAddNewEntry = findViewById(R.id.btnAddEntry);
-        btnAddNewEntry.setOnClickListener(this::popupAddNewEntry);
     }
 
 
     /**
-     * Pops up box, where u can enter data for table. Dismisses on click next to it.
+     * setTextInputValidators adds textWatchers to editTexts.
      *
-     * @param v View that called this method.
+     * @param viewGroup TextInputLayout parent viewGroup.
      */
-    private void popupAddNewEntry(View v) {
-
-        //Gets this activity layout inflater.
-        View popupView = popupView();
-
-        final int width = LinearLayout.LayoutParams.WRAP_CONTENT;
-        final int height = LinearLayout.LayoutParams.WRAP_CONTENT;
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, true);
-
-        // Show the popup window.
-        // Which view you pass in doesn't matter, it is only used for the window token.
-        popupWindow.showAtLocation(v, Gravity.CENTER, 0, 0);
-
-        setTextInputValidators((ViewGroup) popupView);
-
-        final EditText editText = findDateBox(popupView).getEditText();
-
-        //Gets the current date.
-        final Calendar calendar = Calendar.getInstance();
-        final int cDay = calendar.get(Calendar.DAY_OF_MONTH);
-        final int cMonth = calendar.get(Calendar.MONTH);
-        final int cYear = calendar.get(Calendar.YEAR);
-
-
-        //Calendar date picker dialog.
-        editText.setText(String.format("%d-%d-%d", cYear, cMonth + 1, cDay));
-        editText.setOnClickListener(v2 -> {
-            final DatePickerDialog datePickerDialog = new DatePickerDialog(this, (view, year, month, dayOfMonth) ->
-                    editText.setText(String.format("%d-%d-%d", year, month + 1, dayOfMonth)), cYear, cMonth, cDay);
-
-            datePickerDialog.show();
-            datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
-            datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
-        });
-
-        //Confirming adding entry.
-        final Button btnAdd = popupView.findViewById(R.id.btnConfirmEntry);
-        btnAdd.setOnClickListener(v1 -> {
-            ViewGroup viewGroup = (ViewGroup) v1.getParent();
-            int count = viewGroup.getChildCount();
-            boolean errorEnabled = false;
-
-            for (int i = 0; i < count; i++) {
-                View view = viewGroup.getChildAt(i);
-                if (view instanceof TextInputLayout) {
-                    //If textfield is empty, then call out onTextChanged event for showing error.
-                    if (((TextInputLayout) view).getEditText().getText().toString().trim().equals(""))
-                        ((TextInputLayout) view).getEditText().setText("");
-
-                    if (((TextInputLayout) view).isErrorEnabled()) errorEnabled = true;
-
-                }
-            }
-            if (errorEnabled) return;
-
-            addNewEntry(popupView);
-            popupWindow.dismiss();
-        });
-
-    }
-
     private void setTextInputValidators(ViewGroup viewGroup) {
-
         int count = viewGroup.getChildCount();
+
         for (int i = 0; i < count; i++) {
             View view = viewGroup.getChildAt(i);
             if (view instanceof TextInputLayout) {
+                EditText editText = ((TextInputLayout) view).getEditText();
+                if (editText == null) return;
+
                 if (view.getId() == R.id.boxMoneyAmount)
-                    ((TextInputLayout) view).getEditText()
-                            .addTextChangedListener(new MoneyTextWatcher((TextInputLayout) view, getResources()));
+                    editText.addTextChangedListener(new MoneyTextWatcher((TextInputLayout) view, getResources()));
                 else if (view.getId() == R.id.boxExerciseLength)
-                    ((TextInputLayout) view).getEditText()
-                            .addTextChangedListener(new TimeTextWatcher((TextInputLayout) view, getResources()));
+                    editText.addTextChangedListener(new TimeTextWatcher((TextInputLayout) view, getResources()));
                 else
-                    ((TextInputLayout) view).getEditText()
-                            .addTextChangedListener(new BaseTextWatcher((TextInputLayout) view, getResources()));
+                    editText.addTextChangedListener(new BaseTextWatcher((TextInputLayout) view, getResources()));
             }
         }
 
@@ -194,19 +225,32 @@ public class DiaryScreen extends AppCompatActivity {
     }
 
 
-    private View popupView() {
+    /**
+     * popupView method inflates adding entries box and returns it.
+     *
+     * @param parent popupView parent.
+     * @return Returns inflated popupView.
+     */
+    private View popupView(ViewGroup parent) {
         LayoutInflater inflater = getLayoutInflater();
         if (defaultTable instanceof FoodTable) {
-            return inflater.inflate(R.layout.add_food_entry, null);
+            return inflater.inflate(R.layout.add_food_entry, parent, false);
         } else if (defaultTable instanceof MoneyTable) {
-            return inflater.inflate(R.layout.add_money_entry, null);
+            return inflater.inflate(R.layout.add_money_entry, parent, false);
         } else if (defaultTable instanceof ToDoTable) {
-            return inflater.inflate(R.layout.add_todo_entry, null);
+            return inflater.inflate(R.layout.add_todo_entry, parent, false);
         } else if (defaultTable instanceof ExerciseTable) {
-            return inflater.inflate(R.layout.add_exercise_entry, null);
+            return inflater.inflate(R.layout.add_exercise_entry, parent, false);
         } else return null;
     }
 
+
+    /**
+     * findDateBox method finds TextInputLayout that is used to enter date and returns that.
+     *
+     * @param popupView editText parent view.
+     * @return Returns TextInputLayout which is used to enter date.
+     */
     private TextInputLayout findDateBox(View popupView) {
         if (defaultTable instanceof FoodTable) {
             return popupView.findViewById(R.id.boxFoodExpDate);
@@ -219,6 +263,12 @@ public class DiaryScreen extends AppCompatActivity {
         } else return null;
     }
 
+
+    /**
+     * addNewEntry method is getting values from used input and adds new entry to table.
+     *
+     * @param popupView popupView where are userInputFields.
+     */
     private void addNewEntry(View popupView) {
         if (defaultTable instanceof FoodTable) {
             FoodTable foodTable = (FoodTable) defaultTable;
@@ -273,6 +323,9 @@ public class DiaryScreen extends AppCompatActivity {
     }
 
 
+    /**
+     * goToMenuScreen closes current screen & activity, goes back to menu screen.
+     */
     private void goToMenuScreen() {
         Intent menuScreenIntent = new Intent(this, MenuScreen.class);
         finish();
