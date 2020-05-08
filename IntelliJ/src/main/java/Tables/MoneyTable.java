@@ -30,7 +30,7 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
             int value;
             switch (type){
 
-                case 0: value = o1.getType().compareTo(o2.getType()) ;break;
+                case 0: value = o1.getType().compareTo(o2.getType());break;
                 case 1: value = o1.getInputDate().compareTo(o2.getInputDate());break;
                 case 2: value = Double.compare(o1.getAmount(), o2.getAmount());break;
                 case 3: value = o1.getUseDate().compareTo(o2.getUseDate());break;

@@ -1,6 +1,7 @@
 package Tables;
 
 import Entries.DefaultEntry;
+import Entries.FoodTableEntry;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
@@ -112,6 +113,28 @@ public class DefaultTable<T> implements Serializable {
         return tempData;
     }
 
+    /**
+     * This method orderes list by Entry-class object variables.
+     *
+     * @param type Int typenumber
+     *             0- type
+     *             1- inputdate
+     *             2- expDate
+     * @param ascending
+     * @return
+     */
+    public List<T> getOrderedTable(int type, boolean ascending){
+        return this.getOrderedTable((o1, o2) -> {
+            int value;
+            switch (type){
+                case 0: value = ((DefaultEntry)o1).getType().compareTo(((DefaultEntry)o2).getType());break;
+                case 1: value = ((DefaultEntry)o1).getInputDate().compareTo(((DefaultEntry)o2).getInputDate());break;
+                default:
+                    throw new IllegalArgumentException("DefaultTable#getOrderedTabel wrong ordering type");
+            }
+            return value  * (ascending ? 1 : -1);
+        });
+    }
 
     /**
      * Table entry Getter.
