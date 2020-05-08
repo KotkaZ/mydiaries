@@ -129,10 +129,10 @@ public class Test {
         final int amount = scanner.nextInt();
         System.out.print("Enter type:");
         final String type = scanner.next();
-        System.out.print("Enter unit "+ Arrays.toString(FoodTableEntry.UNITS) +": ");
-        final int unitIndex = scanner.nextInt();
+        System.out.print("Enter unit "+ Arrays.toString(FoodTableEntry.UNITS) + "or something else: ");
+        final String unit = scanner.next();
 
-        foodTable.addData(type, expDate,  amount,  unitIndex);
+        foodTable.addData(type, expDate,  amount,  unit);
 
         try {
             foodTable.saveTabel("foodTable.json");
@@ -158,7 +158,7 @@ public class Test {
         System.out.println("Enter date:");
         final LocalDateTime date = dateTimeControl(scanner).toLocalDateTime(LocalTime.MIDNIGHT);
         System.out.println("Enter length:");
-        final double amount = scanner.nextDouble();
+        final int amount = scanner.nextInt();
         System.out.println("Enter type:");
         final String type = scanner.nextLine();
         System.out.println("Enter desc.:");

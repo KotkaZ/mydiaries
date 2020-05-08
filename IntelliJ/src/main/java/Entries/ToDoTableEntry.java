@@ -34,7 +34,7 @@ public class ToDoTableEntry extends DefaultEntry implements Comparable{
      */
     @Override
     public int compareTo(Object o) {
-        if (! o.getClass().getTypeName().equals("ToDoTableEntry"))
+        if (!(o instanceof ToDoTableEntry))
             throw new IllegalArgumentException();
 
          int priorityDiff = this.priority - ((ToDoTableEntry)o).priority;

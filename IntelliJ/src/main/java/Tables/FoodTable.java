@@ -9,8 +9,8 @@ import java.util.List;
 public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
 
 
-    public void addData(String type, LocalDate expDate, int amount, int unitIndex) {
-        Entries.FoodTableEntry entries = new Entries.FoodTableEntry(type, expDate,  amount, unitIndex);
+    public void addData(String type, LocalDate expDate, int amount, String unit) {
+        Entries.FoodTableEntry entries = new Entries.FoodTableEntry(type, expDate,  amount, unit);
         super.addData(entries);
     }
 
@@ -25,7 +25,7 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
         List<FoodTableEntry> list = new ArrayList<>();
         for (FoodTableEntry entry :
                 foodTable.getOrderedTable(FoodTableEntry::compareTo)) {
-            if (entry.getExpDate() == date)
+            if (entry.getExpDate().equals(date))
                 list.add(entry);
         }
         return list;
@@ -41,22 +41,5 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
         return getExp4Date(foodTable, LocalDate.now());
     }
 
-    /**
-     * Sorteerib kuupäeva alusel, vanemad ees, ja väljastab tabeli kujul.
-     * OUTDATED.
-     */
-    /*public Map<LocalDate, Entries.FoodTableEntry> getOrderedByPriority() {
-        Map<LocalDate, Entries.FoodTableEntry> toDoTableEntryMap = getTabel();
-
-        List<Map.Entry<LocalDate, Entries.FoodTableEntry>> entries =
-                new ArrayList<>(toDoTableEntryMap.entrySet());
-        entries.sort(Map.Entry.comparingByValue());
-        Map<LocalDate, Entries.FoodTableEntry> orderedByPriority = new LinkedHashMap<>();
-        for (Map.Entry<LocalDate, Entries.FoodTableEntry> entry : entries) {
-            orderedByPriority.put(entry.getKey(), entry.getValue());
-        }
-
-        return orderedByPriority;
-    }*/
 }
 
