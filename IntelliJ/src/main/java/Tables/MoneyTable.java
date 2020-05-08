@@ -1,7 +1,12 @@
 package Tables;
 
+import Entries.DefaultEntry;
 import Entries.MoneyTableEntry;
 import org.joda.time.LocalDateTime;
+
+import java.util.Comparator;
+import java.util.List;
+import java.util.function.Function;
 
 public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
 
@@ -9,6 +14,40 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
         Entries.MoneyTableEntry entries = new Entries.MoneyTableEntry(type, useDate, amount,  description);
         super.addData(entries);
     }
+
+    public List<MoneyTableEntry> getOrderedTable(int type, boolean ascending){
+        switch (type){
+            case 0: {
+                //Kui ascending on tõene, siis tagastakse kasvavases järjekorras, kus on sorteeritud tüübi alusel.
+                //VAstasel juhul tagastatakse kahanevas tüüvi järjekorras.
+                return ascending ? super.getOrderedTable(Comparator.comparing(DefaultEntry::getType)) :
+                        super.getOrderedTable((moneyTableEntry, t1) -> t1.getType().compareTo(moneyTableEntry.getType()));
+
+            }
+            case 1: {
+                //Todo
+                return super.getOrderedTable(Comparator.comparing(DefaultEntry::getInputDate));
+            }
+            case 2: {
+                //Todo
+                return super.getOrderedTable(Comparator.comparingDouble(MoneyTableEntry::getAmount));
+            }
+            case 3: {
+                //Esmalt võrreldakse tüübi alusel. Kui need on võrdsed siis võrreldakse sisestamis kuupäeva alusel. Kasvav järjekord.
+                //KUi on ascending false siis tagastataskse kahanevas järjekorras.
+                return ascending ? super.getOrderedTable(Comparator.comparing((Function<MoneyTableEntry, String>) DefaultEntry::getType).thenComparing(DefaultEntry::getInputDate)) :
+                        super.getOrderedTable((moneyTableEntry, t1) -> {
+                            int sComp = t1.getType().compareTo(moneyTableEntry.getType());
+
+                            if(sComp != 0) return sComp;
+                            return t1.getInputDate().compareTo(moneyTableEntry.getInputDate());
+                        });
+            }
+            default:return getTabel();
+        }
+    }
+
+
 
     /**
      * Sums all incomes on given period and returns the value
