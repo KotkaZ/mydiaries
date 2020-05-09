@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.ExerciseTableEntry;
-import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
+import com.kotkaz.mydiaries.diary.tools.TableManager;
 
 import java.util.List;
 
@@ -23,8 +23,8 @@ public class ExerciseTableAdapter extends BaseAdapter {
     /**
      * Exercise Table Adapter Constructor.
      *
-     * @param exerciseTableEntries  ExerciseTable
-     * @param layoutInflater ApplicationContext layoutInflater.
+     * @param exerciseTableEntries ExerciseTable
+     * @param layoutInflater       ApplicationContext layoutInflater.
      */
     public ExerciseTableAdapter(List<ExerciseTableEntry> exerciseTableEntries, LayoutInflater layoutInflater) {
         this.exerciseTableEntries = exerciseTableEntries;
@@ -74,7 +74,7 @@ public class ExerciseTableAdapter extends BaseAdapter {
         exerciseTitle.setText(exerciseTableEntry.getType());
         exerciseLocation.setText(exerciseTableEntry.getLocation());
         exerciseDesc.setText(exerciseTableEntry.getDescription());
-        exerciseDate.setText(exerciseTableEntry.getExerciseDate().toString());
+        exerciseDate.setText(TableManager.lDateTimetoString(exerciseTableEntry.getExerciseDate()));
         exerciseLength.setText(String.format("%s min", String.valueOf(exerciseTableEntry.getLength())));
 
         return convertView;

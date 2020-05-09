@@ -11,11 +11,10 @@ import androidx.core.content.ContextCompat;
 
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.MoneyTableEntry;
-import com.kotkaz.mydiaries.diary.tables.MoneyTable;
+import com.kotkaz.mydiaries.diary.tools.TableManager;
 
 import java.text.DecimalFormat;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * CustomMoneyTableAdapter class for listView.
@@ -29,9 +28,9 @@ public class MoneyTableAdapter extends BaseAdapter {
     /**
      * MoneyTableAdapter default constructor.
      *
-     * @param moneyTableEntries     MoneyTable
-     * @param layoutInflater ApplicationContext layoutInflater.
-     * @param context        ApplicationContext. For getting resources and colors.
+     * @param moneyTableEntries MoneyTable
+     * @param layoutInflater    ApplicationContext layoutInflater.
+     * @param context           ApplicationContext. For getting resources and colors.
      */
     public MoneyTableAdapter(List<MoneyTableEntry> moneyTableEntries, LayoutInflater layoutInflater, Context context) {
         this.moneyTableEntries = moneyTableEntries;
@@ -85,11 +84,7 @@ public class MoneyTableAdapter extends BaseAdapter {
         DecimalFormat moneyFormat = new DecimalFormat("€#,##0.00;-€#,##0.00");
 
         moneyAmount.setText(moneyFormat.format(moneyTableEntry.getAmount() / 100));
-        moneyUseDate.setText( String.format(Locale.getDefault(), "%d.%d.%d %d:%d",moneyTableEntry.getUseDate().getDayOfMonth()
-                ,moneyTableEntry.getUseDate().getMonthOfYear()
-                ,moneyTableEntry.getUseDate().getYear()
-                ,moneyTableEntry.getUseDate().getHourOfDay()
-                ,moneyTableEntry.getUseDate().getMinuteOfHour()));
+        moneyUseDate.setText(TableManager.lDateTimetoString(moneyTableEntry.getUseDate()));
 
         //Outgoes are set red, incomes green.
         if (moneyTableEntry.getAmount() < 0)

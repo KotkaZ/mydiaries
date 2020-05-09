@@ -16,6 +16,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.Type;
+import java.util.Locale;
 
 public class TableManager {
 
@@ -60,5 +61,20 @@ public class TableManager {
         } catch (IOException e) {
             System.out.println("IOException: " + e.getMessage());
         }
+    }
+
+
+    public static String lDateTimetoString(LocalDateTime localDateTime){
+        return String.format(Locale.getDefault(), "%d. %d. %d %d:%d",localDateTime.getDayOfMonth()
+                ,localDateTime.getMonthOfYear()
+                ,localDateTime.getYear()
+                ,localDateTime.getHourOfDay()
+                ,localDateTime.getMinuteOfHour());
+    }
+
+    public static String lDatetoString(LocalDate localDate){
+        return String.format(Locale.getDefault(), "%d. %d. %d",localDate.getDayOfMonth()
+                ,localDate.getMonthOfYear()
+                ,localDate.getYear());
     }
 }

@@ -8,10 +8,9 @@ import android.widget.TextView;
 
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.FoodTableEntry;
-import com.kotkaz.mydiaries.diary.tables.FoodTable;
+import com.kotkaz.mydiaries.diary.tools.TableManager;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * CustomFoodTableAdapter class for listView.
@@ -25,7 +24,7 @@ public class FoodTableAdapter extends BaseAdapter {
      * FoodTableAdapter Constructor.
      *
      * @param foodTableEntries FoodTable
-     * @param layoutInflater        ApplicationContext layoutInflater.
+     * @param layoutInflater   ApplicationContext layoutInflater.
      */
     public FoodTableAdapter(List<FoodTableEntry> foodTableEntries, LayoutInflater layoutInflater) {
         this.foodTableEntries = foodTableEntries;
@@ -73,9 +72,7 @@ public class FoodTableAdapter extends BaseAdapter {
 
         //Setting textview texts with entry values.
         foodTitle.setText(foodTableEntry.getType());
-        foodDate.setText(String.format(Locale.getDefault(), "%d.%d.%d",foodTableEntry.getExpDate().getDayOfMonth()
-                ,foodTableEntry.getExpDate().getMonthOfYear()
-                ,foodTableEntry.getExpDate().getYear()));
+        foodDate.setText(TableManager.lDatetoString(foodTableEntry.getExpDate()));
 
         foodAmount.setText(foodTableEntry.getToode().toString());
 

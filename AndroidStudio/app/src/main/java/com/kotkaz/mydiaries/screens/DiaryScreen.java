@@ -89,7 +89,6 @@ public class DiaryScreen extends AppCompatActivity {
 
         setTextInputValidators((ViewGroup) popupView);
 
-
         final EditText editText = findDateBox(popupView).getEditText();
 
         //Gets the current date.
@@ -104,6 +103,8 @@ public class DiaryScreen extends AppCompatActivity {
             editText.setText(String.format(Locale.getDefault(), "%d-%d-%d", cYear, cMonth + 1, cDay));
 
             editText.setOnClickListener(v2 -> {
+
+
                 final DatePickerDialog datePickerDialog = new DatePickerDialog(
                         this, (view, year, month, dayOfMonth) ->
                         editText.setText(String.format(Locale.getDefault(), "%d-%d-%d",
@@ -408,11 +409,12 @@ public class DiaryScreen extends AppCompatActivity {
         }
     }
 
+
     private void setListViewAdapter() {
         Spinner sortSpinner = findViewById(R.id.spr_sortItem);
         Spinner sortOrderSpinner = findViewById(R.id.spr_sortOrder);
 
-        if(sortSpinner.getSelectedItemPosition() == -1)
+        if (sortSpinner.getSelectedItemPosition() == -1)
             setListViewAdapter(0, true);
         else
             setListViewAdapter(sortSpinner.getSelectedItemPosition(), sortOrderSpinner.getSelectedItemPosition() == 0);

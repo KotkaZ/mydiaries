@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.ToDoTableEntry;
+import com.kotkaz.mydiaries.diary.tools.TableManager;
 
 import java.util.List;
 import java.util.Locale;
@@ -71,7 +72,6 @@ public class ToDoTableAdapter extends BaseAdapter {
         TextView toDoTitle = convertView.findViewById(R.id.txtToDoTitle);
         TextView toDoDesc = convertView.findViewById(R.id.txtToDoDesc);
         TextView toDoDate = convertView.findViewById(R.id.txtToDoDate);
-        TextView toDoPriority = convertView.findViewById(R.id.txtToDoPriority);
 
         //Getting entry with the same index.
         ToDoTableEntry toDoTableEntry = toDoTableEntries.get(position);
@@ -79,13 +79,8 @@ public class ToDoTableAdapter extends BaseAdapter {
         //Setting textview texts with entry values.
         toDoTitle.setText(toDoTableEntry.getType());
         toDoDesc.setText(toDoTableEntry.getDescription());
-        toDoPriority.setText(String.valueOf(toDoTableEntry.getPriority()));
 
-        toDoDate.setText(String.format(Locale.getDefault(), "%d.%d.%d %d:%d", toDoTableEntry.getDeadline().getDayOfMonth()
-                , toDoTableEntry.getDeadline().getMonthOfYear()
-                , toDoTableEntry.getDeadline().getYear()
-                , toDoTableEntry.getDeadline().getHourOfDay()
-                , toDoTableEntry.getDeadline().getMinuteOfHour()));
+        toDoDate.setText(TableManager.lDateTimetoString(toDoTableEntry.getDeadline()));
 
         //High priority is set red, med is orange and low priority wont have colored background.
         if (toDoTableEntry.getPriority() == 1)

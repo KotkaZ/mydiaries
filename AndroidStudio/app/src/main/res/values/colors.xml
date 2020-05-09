@@ -9,11 +9,11 @@
     <color name="colorError">#ff0077</color>
 
 
-    <color name="colorHighPriorityTrans">#8Cba0000</color>
-    <color name="colorMedPriorityTrans">#8Ce38100</color>
+    <color name="colorHighPriorityTrans">#8Cff3b3b</color>
+    <color name="colorMedPriorityTrans">#8Cffb43b</color>
 
-    <color name="colorPositiveMoney">#008f24</color>
-    <color name="colorNegativeMoney">#de0000</color>
+    <color name="colorPositiveMoney">#00d43c</color>
+    <color name="colorNegativeMoney">#ff3b3b</color>
 
     <color name="colorDarkMenuTrans">#8C292922</color>
     <color name="colorDarkMenu">#292922</color>

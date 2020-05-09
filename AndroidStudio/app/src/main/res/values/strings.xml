@@ -56,6 +56,7 @@
     <string name="textNumberTooBig">Väärtus peab olema väiksem kui %1$d!</string>
 
     <string name="toastHoldToDelete">Hoia sõrm sissekandel, et see kustutada!</string>
+    <string name="btnSetDateTime">Määra</string>
 
 
     //Units
