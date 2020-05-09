@@ -29,12 +29,12 @@ public class MoneyTableAdapter extends BaseAdapter {
     /**
      * MoneyTableAdapter default constructor.
      *
-     * @param moneyTable     MoneyTable
+     * @param moneyTableEntries     MoneyTable
      * @param layoutInflater ApplicationContext layoutInflater.
      * @param context        ApplicationContext. For getting resources and colors.
      */
-    public MoneyTableAdapter(MoneyTable moneyTable, LayoutInflater layoutInflater, Context context) {
-        this.moneyTableEntries = moneyTable.getTabel();
+    public MoneyTableAdapter(List<MoneyTableEntry> moneyTableEntries, LayoutInflater layoutInflater, Context context) {
+        this.moneyTableEntries = moneyTableEntries;
         this.layoutInflater = layoutInflater;
         this.context = context;
     }

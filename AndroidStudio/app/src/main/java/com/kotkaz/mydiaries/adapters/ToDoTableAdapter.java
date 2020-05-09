@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat;
 
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.entries.ToDoTableEntry;
-import com.kotkaz.mydiaries.diary.tables.ToDoTable;
 
 import java.util.List;
 import java.util.Locale;
@@ -28,12 +27,12 @@ public class ToDoTableAdapter extends BaseAdapter {
     /**
      * ToDoTableAdapter default constructor.
      *
-     * @param toDoTable      ToDoTable
-     * @param layoutInflater ApplicationContext layoutInflater.
-     * @param context        ApplicationContext. For getting resources and colors.
+     * @param toDoTableEntries ToDoTable
+     * @param layoutInflater   ApplicationContext layoutInflater.
+     * @param context          ApplicationContext. For getting resources and colors.
      */
-    public ToDoTableAdapter(ToDoTable toDoTable, LayoutInflater layoutInflater, Context context) {
-        this.toDoTableEntries = toDoTable.getTabel();
+    public ToDoTableAdapter(List<ToDoTableEntry> toDoTableEntries, LayoutInflater layoutInflater, Context context) {
+        this.toDoTableEntries = toDoTableEntries;
         this.layoutInflater = layoutInflater;
         this.context = context;
     }

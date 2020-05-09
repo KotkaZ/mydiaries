@@ -24,11 +24,11 @@ public class FoodTableAdapter extends BaseAdapter {
     /**
      * FoodTableAdapter Constructor.
      *
-     * @param foodTableDefaultTable FoodTable
+     * @param foodTableEntries FoodTable
      * @param layoutInflater        ApplicationContext layoutInflater.
      */
-    public FoodTableAdapter(FoodTable foodTableDefaultTable, LayoutInflater layoutInflater) {
-        this.foodTableEntries = foodTableDefaultTable.getTabel();
+    public FoodTableAdapter(List<FoodTableEntry> foodTableEntries, LayoutInflater layoutInflater) {
+        this.foodTableEntries = foodTableEntries;
         this.layoutInflater = layoutInflater;
     }
 

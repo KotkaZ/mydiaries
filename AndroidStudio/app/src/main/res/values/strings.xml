@@ -58,6 +58,15 @@
     <string name="toastHoldToDelete">Hoia sõrm sissekandel, et see kustutada!</string>
 
 
+    //Units
+    <string-array name="foodUnits">
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>dl</item>
+        <item>l</item>
+        <item>tk</item>
+    </string-array>
 
     //Sorting values
     <string-array name="sortingOrder">
@@ -65,9 +74,33 @@
         <item>Kahanev</item>
     </string-array>
 
-    <string name ="sortTitle">Pealkiri</string>
-    <string name ="sortDate">Kuupäev</string>
-    <string name ="sortAmount">Kogus</string>
-    <string name ="sortPriority">Prioriteet</string>
+    <string-array name="sortingFood">
+        <item>Nimetus</item>
+        <item>Sisestuskuupäev</item>
+        <item>Aegub</item>
+    </string-array>
 
+    <string-array name="sortingExercise">
+        <item>Tüüp</item>
+        <item>Sisestuskuupäev</item>
+        <item>Treeningukuupäev</item>
+        <item>Kestvus</item>
+        <item>Asukoht</item>
+        <item>Kirjeldus</item>
+    </string-array>
+
+    <string-array name="sortingToDo">
+        <item>Tegevus</item>
+        <item>Sisestuskuupäev</item>
+        <item>Tähtaeg</item>
+        <item>Prioriteet</item>
+    </string-array>
+
+    <string-array name="sortingMoney">
+        <item>Kulu</item>
+        <item>Sisestuskuupäev</item>
+        <item>Summa</item>
+        <item>Kulutuskuupäev</item>
+    </string-array>
+    
 </resources>

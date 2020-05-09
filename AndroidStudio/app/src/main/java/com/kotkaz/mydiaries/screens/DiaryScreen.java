@@ -7,8 +7,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -60,6 +60,8 @@ public class DiaryScreen extends AppCompatActivity {
         setListViewItemListeners();
         setUpExitButtonClickListener();
         addSpinnerValues();
+
+        setSpinnerListener();
 
         //Setting up addButton onClickListener that pops up adding entry screen.
         FloatingActionButton btnAddNewEntry = findViewById(R.id.btnAddEntry);
@@ -153,8 +155,9 @@ public class DiaryScreen extends AppCompatActivity {
         //Long click will delete table entry.
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
             defaultTable.removeData(position);
-            BaseAdapter adapter = (BaseAdapter) listView.getAdapter();
-            adapter.notifyDataSetChanged(); //Updates listView.
+            setListViewAdapter();
+            //BaseAdapter adapter = (BaseAdapter) listView.getAdapter();
+            //adapter.notifyDataSetChanged(); //Updates listView.
             return true;
         });
     }
@@ -186,18 +189,15 @@ public class DiaryScreen extends AppCompatActivity {
         TextView diaryTitle = findViewById(R.id.txtDiaryTitle);
         listView = findViewById(R.id.listEntries);
 
+        setListViewAdapter();
         if (defaultTable instanceof FoodTable) {
             diaryTitle.setText(R.string.FoodList);
-            listView.setAdapter(new FoodTableAdapter((FoodTable) defaultTable, getLayoutInflater()));
         } else if (defaultTable instanceof MoneyTable) {
             diaryTitle.setText(R.string.MoneyList);
-            listView.setAdapter(new MoneyTableAdapter((MoneyTable) defaultTable, getLayoutInflater(), getApplicationContext()));
         } else if (defaultTable instanceof ExerciseTable) {
             diaryTitle.setText(R.string.Exercise);
-            listView.setAdapter(new ExerciseTableAdapter((ExerciseTable) defaultTable, getLayoutInflater()));
         } else if (defaultTable instanceof ToDoTable) {
             diaryTitle.setText(R.string.ToDoList);
-            listView.setAdapter(new ToDoTableAdapter((ToDoTable) defaultTable, getLayoutInflater(), getApplicationContext()));
         }
     }
 
@@ -279,12 +279,13 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout foodTitle = popupView.findViewById(R.id.boxFoodType);
             TextInputLayout foodDate = popupView.findViewById(R.id.boxFoodExpDate);
             TextInputLayout foodAmount = popupView.findViewById(R.id.boxFoodAmount);
+            Spinner spinner = popupView.findViewById(R.id.spn_foodUnit);
             foodTable.addData(foodTitle.getEditText().getText().toString(),
                     LocalDate.parse(foodDate.getEditText().getText().toString()),
-                    Integer.parseInt(foodAmount.getEditText().getText().toString()), "pcs");
-            // TODO: 09/05/2020
-            FoodTableAdapter foodTableAdapter = (FoodTableAdapter) listView.getAdapter();
-            foodTableAdapter.notifyDataSetChanged();
+                    Integer.parseInt(foodAmount.getEditText().getText().toString()),
+                    spinner.getSelectedItem().toString());
+            //FoodTableAdapter foodTableAdapter = (FoodTableAdapter) listView.getAdapter();
+            //foodTableAdapter.notifyDataSetChanged();
         } else if (defaultTable instanceof ExerciseTable) {
             ExerciseTable exerciseTable = (ExerciseTable) defaultTable;
             TextInputLayout boxExerciseType = popupView.findViewById(R.id.boxExerciseType);
@@ -298,8 +299,8 @@ public class DiaryScreen extends AppCompatActivity {
                     Integer.parseInt(boxExerciseLength.getEditText().getText().toString().replaceAll("[ min]", "")),
                     boxExerciseDesc.getEditText().getText().toString(),
                     boxExerciseLocation.getEditText().getText().toString());
-            ExerciseTableAdapter exerciseTableAdapter = (ExerciseTableAdapter) listView.getAdapter();
-            exerciseTableAdapter.notifyDataSetChanged();
+            //ExerciseTableAdapter exerciseTableAdapter = (ExerciseTableAdapter) listView.getAdapter();
+            //exerciseTableAdapter.notifyDataSetChanged();
         } else if (defaultTable instanceof MoneyTable) {
             MoneyTable moneyTable = (MoneyTable) defaultTable;
             TextInputLayout boxMoneyType = popupView.findViewById(R.id.boxMoneyType);
@@ -310,8 +311,8 @@ public class DiaryScreen extends AppCompatActivity {
                     LocalDateTime.parse(boxMoneyUseDate.getEditText().getText().toString()),
                     Double.parseDouble(boxMoneyAmount.getEditText().getText().toString().replaceAll("[$€,.]", "")),
                     boxMoneyDesc.getEditText().getText().toString());
-            MoneyTableAdapter moneyTableAdapter = (MoneyTableAdapter) listView.getAdapter();
-            moneyTableAdapter.notifyDataSetChanged();
+            //MoneyTableAdapter moneyTableAdapter = (MoneyTableAdapter) listView.getAdapter();
+            //moneyTableAdapter.notifyDataSetChanged();
         } else if (defaultTable instanceof ToDoTable) {
             ToDoTable toDoTable = (ToDoTable) defaultTable;
             TextInputLayout boxToDoDate = popupView.findViewById(R.id.boxToDoDate);
@@ -322,9 +323,10 @@ public class DiaryScreen extends AppCompatActivity {
                     LocalDateTime.parse(boxToDoDate.getEditText().getText().toString()),
                     boxToDoDesc.getEditText().getText().toString(),
                     Integer.parseInt(boxToDoPriority.getEditText().getText().toString()));
-            ToDoTableAdapter toDoTableAdapter = (ToDoTableAdapter) listView.getAdapter();
-            toDoTableAdapter.notifyDataSetChanged();
+            //ToDoTableAdapter toDoTableAdapter = (ToDoTableAdapter) listView.getAdapter();
+            //toDoTableAdapter.notifyDataSetChanged();
         }
+        setListViewAdapter();
     }
 
     /**
@@ -335,11 +337,13 @@ public class DiaryScreen extends AppCompatActivity {
 
         String[] arraySpinner = null;
         if (defaultTable instanceof FoodTable) {
-            arraySpinner = new String[]{
-                    getString(R.string.sortTitle),
-                    getString(R.string.sortDate),
-                    getString(R.string.sortAmount),
-            };
+            arraySpinner = getResources().getStringArray(R.array.sortingFood);
+        } else if (defaultTable instanceof MoneyTable) {
+            arraySpinner = getResources().getStringArray(R.array.sortingMoney);
+        } else if (defaultTable instanceof ExerciseTable) {
+            arraySpinner = getResources().getStringArray(R.array.sortingExercise);
+        } else if (defaultTable instanceof ToDoTable) {
+            arraySpinner = getResources().getStringArray(R.array.sortingToDo);
         }
 
 
@@ -350,6 +354,70 @@ public class DiaryScreen extends AppCompatActivity {
 
             sortSpinner.setAdapter(spinnerAdatper);
         }
+    }
+
+    private void setSpinnerListener() {
+        Spinner sortSpinner = findViewById(R.id.spr_sortItem);
+        Spinner sortOrderSpinner = findViewById(R.id.spr_sortOrder);
+
+
+        sortSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setListViewAdapter(position, sortOrderSpinner.getSelectedItemPosition() == 0);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        sortOrderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setListViewAdapter(sortSpinner.getSelectedItemPosition(), position == 0);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+    }
+
+    private void setListViewAdapter(int order, boolean orderType) {
+        if (defaultTable instanceof FoodTable) {
+            listView.setAdapter(new FoodTableAdapter(((FoodTable) defaultTable)
+                    .getOrderedTable(order, orderType)
+                    , getLayoutInflater()));
+        } else if (defaultTable instanceof MoneyTable) {
+            listView.setAdapter(new MoneyTableAdapter(((MoneyTable) defaultTable)
+                    .getOrderedTable(order, orderType)
+                    , getLayoutInflater(), getApplicationContext()));
+
+        } else if (defaultTable instanceof ExerciseTable) {
+            listView.setAdapter(new ExerciseTableAdapter(((ExerciseTable) defaultTable)
+                    .getOrderedTable(order, orderType)
+                    , getLayoutInflater()));
+
+        } else if (defaultTable instanceof ToDoTable) {
+            listView.setAdapter(new ToDoTableAdapter(((ToDoTable) defaultTable)
+                    .getOrderedTable(order, orderType)
+                    , getLayoutInflater(), getApplicationContext()));
+        }
+    }
+
+    private void setListViewAdapter() {
+        Spinner sortSpinner = findViewById(R.id.spr_sortItem);
+        Spinner sortOrderSpinner = findViewById(R.id.spr_sortOrder);
+
+        if(sortSpinner.getSelectedItemPosition() == -1)
+            setListViewAdapter(0, true);
+        else
+            setListViewAdapter(sortSpinner.getSelectedItemPosition(), sortOrderSpinner.getSelectedItemPosition() == 0);
+
+
     }
 
 

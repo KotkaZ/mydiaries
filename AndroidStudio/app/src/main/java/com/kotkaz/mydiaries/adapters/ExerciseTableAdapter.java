@@ -23,11 +23,11 @@ public class ExerciseTableAdapter extends BaseAdapter {
     /**
      * Exercise Table Adapter Constructor.
      *
-     * @param exerciseTable  ExerciseTable
+     * @param exerciseTableEntries  ExerciseTable
      * @param layoutInflater ApplicationContext layoutInflater.
      */
-    public ExerciseTableAdapter(ExerciseTable exerciseTable, LayoutInflater layoutInflater) {
-        this.exerciseTableEntries = exerciseTable.getTabel();
+    public ExerciseTableAdapter(List<ExerciseTableEntry> exerciseTableEntries, LayoutInflater layoutInflater) {
+        this.exerciseTableEntries = exerciseTableEntries;
         this.layoutInflater = layoutInflater;
     }
 

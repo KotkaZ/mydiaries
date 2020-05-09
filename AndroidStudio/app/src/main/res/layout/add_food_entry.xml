@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:errorTextAppearance="@style/ErrorAppearance"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -30,13 +30,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:errorTextAppearance="@style/ErrorAppearance"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxFoodType">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ems="10"
+            android:ems="7"
             android:hint="@string/boxFoodAmount"
             android:imeOptions="actionDone"
             android:inputType="number"
@@ -48,7 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:errorTextAppearance="@style/ErrorAppearance"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxFoodAmount">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -70,4 +70,15 @@
         app:layout_constraintEnd_toEndOf="@+id/boxFoodExpDate"
         app:layout_constraintStart_toStartOf="@+id/boxFoodExpDate"
         app:layout_constraintTop_toBottomOf="@+id/boxFoodExpDate" />
+
+    <Spinner
+        android:id="@+id/spn_foodUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:entries="@array/foodUnits"
+        android:spinnerMode="dialog"
+        app:layout_constraintBottom_toTopOf="@+id/boxFoodExpDate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/boxFoodAmount"
+        app:layout_constraintTop_toBottomOf="@+id/boxFoodType" />
 </androidx.constraintlayout.widget.ConstraintLayout>
