@@ -10,6 +10,8 @@ import com.kotkaz.mydiaries.diary.tables.DefaultTable;
 import org.apache.commons.io.IOUtils;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -65,16 +67,22 @@ public class TableManager {
 
 
     public static String lDateTimetoString(LocalDateTime localDateTime){
-        return String.format(Locale.getDefault(), "%d. %d. %d %d:%d",localDateTime.getDayOfMonth()
-                ,localDateTime.getMonthOfYear()
-                ,localDateTime.getYear()
-                ,localDateTime.getHourOfDay()
-                ,localDateTime.getMinuteOfHour());
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy HH:mm");
+        return localDateTime.toString(dateTimeFormatter);
     }
 
     public static String lDatetoString(LocalDate localDate){
-        return String.format(Locale.getDefault(), "%d. %d. %d",localDate.getDayOfMonth()
-                ,localDate.getMonthOfYear()
-                ,localDate.getYear());
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy");
+        return localDate.toString(dateTimeFormatter);
+    }
+
+    public static LocalDate lDateParse(String string){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy");
+        return LocalDate.parse(string,dateTimeFormatter);
+    }
+
+    public static LocalDateTime lDateTimeParse(String string){
+        DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("dd.MM.yyyy HH:mm");
+        return LocalDateTime.parse(string, dateTimeFormatter);
     }
 }

@@ -1,6 +1,7 @@
 package com.kotkaz.mydiaries.screens;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -41,7 +42,6 @@ import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 import java.util.Calendar;
-import java.util.Locale;
 
 public class DiaryScreen extends AppCompatActivity {
 
@@ -91,30 +91,59 @@ public class DiaryScreen extends AppCompatActivity {
 
         final EditText editText = findDateBox(popupView).getEditText();
 
-        //Gets the current date.
+
         final Calendar calendar = Calendar.getInstance();
         final int cDay = calendar.get(Calendar.DAY_OF_MONTH);
         final int cMonth = calendar.get(Calendar.MONTH);
         final int cYear = calendar.get(Calendar.YEAR);
+        final int cHour = calendar.get(Calendar.HOUR_OF_DAY);
+        final int cMinute = calendar.get(Calendar.MINUTE);
 
 
         //Calendar date picker dialog.
         if (editText != null) {
-            editText.setText(String.format(Locale.getDefault(), "%d-%d-%d", cYear, cMonth + 1, cDay));
+            if (defaultTable instanceof FoodTable)
+                editText.setText(TableManager.lDatetoString(new LocalDate(calendar)));
+            else editText.setText(TableManager.lDateTimetoString(new LocalDateTime(calendar)));
+
 
             editText.setOnClickListener(v2 -> {
 
-
                 final DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        this, (view, year, month, dayOfMonth) ->
-                        editText.setText(String.format(Locale.getDefault(), "%d-%d-%d",
-                                year, month + 1, dayOfMonth)), cYear, cMonth, cDay);
+                        this, (view, year, month, dayOfMonth) -> {
+
+
+                    if (!(defaultTable instanceof FoodTable)) {
+                        final TimePickerDialog timePickerDialog =
+                                new TimePickerDialog(this, (view1, hourOfDay, minute) -> {
+                                    calendar.set(year, month, dayOfMonth, hourOfDay, minute);
+                                    editText.setText(TableManager.lDateTimetoString(new LocalDateTime(calendar)));
+                                },
+                                        cHour, cMinute, true);
+
+
+                        timePickerDialog.show();
+                        timePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE)
+                                .setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
+                        timePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE)
+                                .setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
+
+                    } else {
+                        calendar.set(year, month, dayOfMonth);
+                        editText.setText(TableManager.lDatetoString(new LocalDate(calendar)));
+                    }
+
+
+                }, cYear, cMonth, cDay);
 
                 datePickerDialog.show();
-                datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
-                datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE).setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
+                datePickerDialog.getButton(DatePickerDialog.BUTTON_POSITIVE)
+                        .setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
+                datePickerDialog.getButton(DatePickerDialog.BUTTON_NEGATIVE)
+                        .setTextColor(getApplicationContext().getColor(R.color.colorDarkMenu));
             });
         }
+
 
         //Confirming adding entry.
         final Button btnAdd = popupView.findViewById(R.id.btnConfirmEntry);
@@ -157,8 +186,7 @@ public class DiaryScreen extends AppCompatActivity {
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
             defaultTable.removeData(position);
             setListViewAdapter();
-            //BaseAdapter adapter = (BaseAdapter) listView.getAdapter();
-            //adapter.notifyDataSetChanged(); //Updates listView.
+
             return true;
         });
     }
@@ -282,11 +310,10 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout foodAmount = popupView.findViewById(R.id.boxFoodAmount);
             Spinner spinner = popupView.findViewById(R.id.spn_foodUnit);
             foodTable.addData(foodTitle.getEditText().getText().toString(),
-                    LocalDate.parse(foodDate.getEditText().getText().toString()),
+                    TableManager.lDateParse(foodDate.getEditText().getText().toString()),
                     Integer.parseInt(foodAmount.getEditText().getText().toString()),
                     spinner.getSelectedItem().toString());
-            //FoodTableAdapter foodTableAdapter = (FoodTableAdapter) listView.getAdapter();
-            //foodTableAdapter.notifyDataSetChanged();
+
         } else if (defaultTable instanceof ExerciseTable) {
             ExerciseTable exerciseTable = (ExerciseTable) defaultTable;
             TextInputLayout boxExerciseType = popupView.findViewById(R.id.boxExerciseType);
@@ -295,13 +322,12 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout boxExerciseLength = popupView.findViewById(R.id.boxExerciseLength);
             TextInputLayout boxExerciseLocation = popupView.findViewById(R.id.boxExerciseLocation);
             exerciseTable.addData(
-                    LocalDateTime.parse(boxExerciseDate.getEditText().getText().toString()),
+                    TableManager.lDateTimeParse(boxExerciseDate.getEditText().getText().toString()),
                     boxExerciseType.getEditText().getText().toString(),
                     Integer.parseInt(boxExerciseLength.getEditText().getText().toString().replaceAll("[ min]", "")),
                     boxExerciseDesc.getEditText().getText().toString(),
                     boxExerciseLocation.getEditText().getText().toString());
-            //ExerciseTableAdapter exerciseTableAdapter = (ExerciseTableAdapter) listView.getAdapter();
-            //exerciseTableAdapter.notifyDataSetChanged();
+
         } else if (defaultTable instanceof MoneyTable) {
             MoneyTable moneyTable = (MoneyTable) defaultTable;
             TextInputLayout boxMoneyType = popupView.findViewById(R.id.boxMoneyType);
@@ -309,11 +335,10 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout boxMoneyAmount = popupView.findViewById(R.id.boxMoneyAmount);
             TextInputLayout boxMoneyDesc = popupView.findViewById(R.id.boxMoneyDesc);
             moneyTable.addData(boxMoneyType.getEditText().getText().toString(),
-                    LocalDateTime.parse(boxMoneyUseDate.getEditText().getText().toString()),
+                    TableManager.lDateTimeParse(boxMoneyUseDate.getEditText().getText().toString()),
                     Double.parseDouble(boxMoneyAmount.getEditText().getText().toString().replaceAll("[$€,.]", "")),
                     boxMoneyDesc.getEditText().getText().toString());
-            //MoneyTableAdapter moneyTableAdapter = (MoneyTableAdapter) listView.getAdapter();
-            //moneyTableAdapter.notifyDataSetChanged();
+
         } else if (defaultTable instanceof ToDoTable) {
             ToDoTable toDoTable = (ToDoTable) defaultTable;
             TextInputLayout boxToDoDate = popupView.findViewById(R.id.boxToDoDate);
@@ -321,11 +346,9 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout boxToDoDesc = popupView.findViewById(R.id.boxToDoDesc);
             TextInputLayout boxToDoPriority = popupView.findViewById(R.id.boxToDoPriority);
             toDoTable.addData(boxToDoType.getEditText().getText().toString(),
-                    LocalDateTime.parse(boxToDoDate.getEditText().getText().toString()),
+                    TableManager.lDateTimeParse(boxToDoDate.getEditText().getText().toString()),
                     boxToDoDesc.getEditText().getText().toString(),
                     Integer.parseInt(boxToDoPriority.getEditText().getText().toString()));
-            //ToDoTableAdapter toDoTableAdapter = (ToDoTableAdapter) listView.getAdapter();
-            //toDoTableAdapter.notifyDataSetChanged();
         }
         setListViewAdapter();
     }

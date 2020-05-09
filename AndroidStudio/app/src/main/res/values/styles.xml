@@ -7,17 +7,26 @@
         <item name="colorPrimaryDark">@color/colorDarkMenu</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-
         <item name="buttonStyle">@style/MenuButton</item>
         <item name="editTextStyle">@style/EditBox</item>
 
+
         <item name="android:spinnerItemStyle">@style/spinnerItemStyleDark</item>
 
-        <item name="android:datePickerStyle">@style/DatePickerAppearance</item>
-        <item name="android:textColorHint">@color/colorWhite</item>
     </style>
 
-    <style name="testing">
+    <style name="TextInputLayoutAppearance" parent="Widget.Design.TextInputLayout">
+        <!-- reference our hint & error styles -->
+        <item name="hintTextAppearance">@style/HintAppearance</item>
+        <item name="errorTextAppearance">@style/ErrorAppearance</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="colorControlNormal">@color/colorWhite</item>
+        <item name="colorControlActivated">@color/colorWhite</item>
+        <item name="colorControlHighlight">@color/colorWhite</item>
+    </style>
+
+    <style name="whiteSpinner">
         <item name="android:spinnerItemStyle">@style/spinnerItemStyleWhite</item>
     </style>
 
@@ -32,6 +41,7 @@
 
     <style name="EditBox" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:backgroundTint">@color/colorWhite</item>
     </style>
 
 
@@ -61,13 +71,15 @@
         <item name="android:textSize">36sp</item>
     </style>
 
-    <style name="DatePickerAppearance" parent="@android:style/Widget.Material.Light.DatePicker">
-        <item name="android:headerBackground">@color/colorDarkMenu</item>
+
+    <style name="ErrorAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorError</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
-
-    <style name="ErrorAppearance">
-        <item name="android:textColor">@color/colorError</item>
+    <style name="HintAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
 </resources>
