@@ -77,8 +77,17 @@
         android:id="@+id/spr_sortItem"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintEnd_toStartOf="@+id/spr_sortOrder"
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toTopOf="@+id/guideline_up" />
+
+    <Spinner
+        android:id="@+id/spr_sortOrder"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:entries="@array/sortingOrder"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+        app:layout_constraintStart_toEndOf="@+id/spr_sortItem"
         app:layout_constraintTop_toTopOf="@+id/guideline_up" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

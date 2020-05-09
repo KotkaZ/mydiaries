@@ -43,7 +43,11 @@ public class BaseTextWatcher implements TextWatcher {
         //Setting validators according to textInputLayout id.
         switch (textInputLayout.getId()) {
 
-            case R.id.boxFoodType:
+            case R.id.boxFoodType: {
+                validators.textFieldValidator(textInputLayout, 3, 30);
+                break;
+            }
+
             case R.id.boxExerciseType:
             case R.id.boxExerciseLocation:
             case R.id.boxMoneyType:

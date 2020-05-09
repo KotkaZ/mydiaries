@@ -1,15 +1,8 @@
 package com.kotkaz.mydiaries.diary.tables;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.reflect.TypeToken;
-import com.kotkaz.mydiaries.diary.tools.LocalDateSerializer;
+import com.kotkaz.mydiaries.diary.entries.DefaultEntry;
 
-import org.joda.time.LocalDate;
-
-import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -37,59 +30,26 @@ public class DefaultTable<T> implements Serializable {
      *
      * @param data Entry
      */
-    public void addData(T data) {
+    void addData(T data) {
         tabelData.add(data);
+    }
+
+    /**
+     * Sets tableData field.
+     *
+     * @param data
+     */
+    public void setData(List<T> data) {
+        tabelData = data;
     }
 
     /**
      * Removes entry from table.
      *
-     * @param index
+     * @param indeks
      */
-    public void removeData(int index) {
-        tabelData.remove(index);
-    }
-
-
-    /**
-     * Loads table from JSON file.
-     */
-    public void fromBytes(byte[] bytes) throws IOException {
-
-        final GsonBuilder builder = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
-        final Gson gson = builder.create();
-
-        String data = new String(bytes);
-
-        DefaultTable defaultTable = gson.fromJson(data, this.getClass());
-        if (defaultTable == null) return;
-        this.tabelData = defaultTable.tabelData;
-
-
-    }
-
-
-    /**
-     * Saves table to JSON file.
-     */
-    public byte[] toBytes() {
-        final GsonBuilder builder = new GsonBuilder()
-                .registerTypeAdapter(LocalDate.class, new LocalDateSerializer());
-        final Gson gson = builder.create();
-
-        final Type REVIEW_TYPE = new TypeToken<DefaultTable<T>>() {
-        }.getType();
-
-        return gson.toJson(this, REVIEW_TYPE).getBytes();
-
-
-        /*
-        try (final FileWriter fileWriter = new FileWriter(fileName)) {
-            fileWriter.write(jsonFile);
-        }*/
-
-
+    public void removeData(int indeks) {
+        tabelData.remove(indeks);
     }
 
 
@@ -108,11 +68,37 @@ public class DefaultTable<T> implements Serializable {
      * @param comparator Comparator, that is being used to sort data.
      * @return Ordered ArrayList of Entry T.
      */
-
-    List<T> getOrderedTable(Comparator<T> comparator) {
+    public List<T> getOrderedTable(Comparator<T> comparator) {
         List<T> tempData = new ArrayList<>(tabelData);
         Collections.sort(tempData, comparator);
         return tempData;
+    }
+
+    /**
+     * This method orderes list by Entry-class object variables.
+     *
+     * @param type      Int typenumber
+     *                  0- type
+     *                  1- inputdate
+     *                  2- expDate
+     * @param ascending
+     * @return
+     */
+    public List<T> getOrderedTable(int type, boolean ascending) {
+        return this.getOrderedTable((o1, o2) -> {
+            int value;
+            switch (type) {
+                case 0:
+                    value = ((DefaultEntry) o1).getType().compareTo(((DefaultEntry) o2).getType());
+                    break;
+                case 1:
+                    value = ((DefaultEntry) o1).getInputDate().compareTo(((DefaultEntry) o2).getInputDate());
+                    break;
+                default:
+                    throw new IllegalArgumentException("DefaultTable#getOrderedTabel wrong ordering type");
+            }
+            return value * (ascending ? 1 : -1);
+        });
     }
 
     /**

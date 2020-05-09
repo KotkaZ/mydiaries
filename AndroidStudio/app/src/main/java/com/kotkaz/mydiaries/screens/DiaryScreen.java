@@ -7,12 +7,14 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ import com.kotkaz.mydiaries.validators.MoneyTextWatcher;
 import com.kotkaz.mydiaries.validators.TimeTextWatcher;
 
 import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -56,6 +59,7 @@ public class DiaryScreen extends AppCompatActivity {
         setUpTileAndListView();
         setListViewItemListeners();
         setUpExitButtonClickListener();
+        addSpinnerValues();
 
         //Setting up addButton onClickListener that pops up adding entry screen.
         FloatingActionButton btnAddNewEntry = findViewById(R.id.btnAddEntry);
@@ -277,7 +281,8 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout foodAmount = popupView.findViewById(R.id.boxFoodAmount);
             foodTable.addData(foodTitle.getEditText().getText().toString(),
                     LocalDate.parse(foodDate.getEditText().getText().toString()),
-                    Integer.parseInt(foodAmount.getEditText().getText().toString()));
+                    Integer.parseInt(foodAmount.getEditText().getText().toString()), "pcs");
+            // TODO: 09/05/2020
             FoodTableAdapter foodTableAdapter = (FoodTableAdapter) listView.getAdapter();
             foodTableAdapter.notifyDataSetChanged();
         } else if (defaultTable instanceof ExerciseTable) {
@@ -288,7 +293,7 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout boxExerciseLength = popupView.findViewById(R.id.boxExerciseLength);
             TextInputLayout boxExerciseLocation = popupView.findViewById(R.id.boxExerciseLocation);
             exerciseTable.addData(
-                    LocalDate.parse(boxExerciseDate.getEditText().getText().toString()),
+                    LocalDateTime.parse(boxExerciseDate.getEditText().getText().toString()),
                     boxExerciseType.getEditText().getText().toString(),
                     Integer.parseInt(boxExerciseLength.getEditText().getText().toString().replaceAll("[ min]", "")),
                     boxExerciseDesc.getEditText().getText().toString(),
@@ -302,7 +307,7 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout boxMoneyAmount = popupView.findViewById(R.id.boxMoneyAmount);
             TextInputLayout boxMoneyDesc = popupView.findViewById(R.id.boxMoneyDesc);
             moneyTable.addData(boxMoneyType.getEditText().getText().toString(),
-                    LocalDate.parse(boxMoneyUseDate.getEditText().getText().toString()),
+                    LocalDateTime.parse(boxMoneyUseDate.getEditText().getText().toString()),
                     Double.parseDouble(boxMoneyAmount.getEditText().getText().toString().replaceAll("[$€,.]", "")),
                     boxMoneyDesc.getEditText().getText().toString());
             MoneyTableAdapter moneyTableAdapter = (MoneyTableAdapter) listView.getAdapter();
@@ -314,11 +319,36 @@ public class DiaryScreen extends AppCompatActivity {
             TextInputLayout boxToDoDesc = popupView.findViewById(R.id.boxToDoDesc);
             TextInputLayout boxToDoPriority = popupView.findViewById(R.id.boxToDoPriority);
             toDoTable.addData(boxToDoType.getEditText().getText().toString(),
-                    LocalDate.parse(boxToDoDate.getEditText().getText().toString()),
+                    LocalDateTime.parse(boxToDoDate.getEditText().getText().toString()),
                     boxToDoDesc.getEditText().getText().toString(),
                     Integer.parseInt(boxToDoPriority.getEditText().getText().toString()));
             ToDoTableAdapter toDoTableAdapter = (ToDoTableAdapter) listView.getAdapter();
             toDoTableAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * Add selectable elements to sortSpinner.
+     */
+    private void addSpinnerValues() {
+        Spinner sortSpinner = findViewById(R.id.spr_sortItem);
+
+        String[] arraySpinner = null;
+        if (defaultTable instanceof FoodTable) {
+            arraySpinner = new String[]{
+                    getString(R.string.sortTitle),
+                    getString(R.string.sortDate),
+                    getString(R.string.sortAmount),
+            };
+        }
+
+
+        if (arraySpinner != null) {
+            ArrayAdapter<String> spinnerAdatper = new ArrayAdapter<>(this,
+                    android.R.layout.simple_spinner_item, arraySpinner);
+            spinnerAdatper.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+            sortSpinner.setAdapter(spinnerAdatper);
         }
     }
 

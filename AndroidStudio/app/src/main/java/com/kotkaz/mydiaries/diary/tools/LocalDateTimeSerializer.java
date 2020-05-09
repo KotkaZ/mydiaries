@@ -15,7 +15,7 @@ import org.joda.time.format.ISODateTimeFormat;
 import java.lang.reflect.Type;
 
 public class LocalDateTimeSerializer implements JsonDeserializer<LocalDateTime>, JsonSerializer<LocalDateTime> {
-    private static final DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateTime();
+    private static final DateTimeFormatter DATE_FORMAT = ISODateTimeFormat.dateHourMinuteSecondFraction();
 
     @Override
     public LocalDateTime deserialize(final JsonElement je, final Type type,

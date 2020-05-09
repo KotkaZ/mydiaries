@@ -1,20 +1,20 @@
 package com.kotkaz.mydiaries.diary.entries;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
-public class MoneyTableEntry extends DefaultEntry implements Comparable {
-    private LocalDate useDate;
+public class MoneyTableEntry extends DefaultEntry {
+    private LocalDateTime useDate;
     private double amount;
     private String description;
 
-    public MoneyTableEntry(String type, LocalDate useDate, double amount, String description) {
+    public MoneyTableEntry(String type, LocalDateTime useDate, double amount, String description) {
         super(type);
         this.useDate = useDate;
         this.amount = amount;
         this.description = description;
     }
 
-    public LocalDate getUseDate() {
+    public LocalDateTime getUseDate() {
         return useDate;
     }
 
@@ -26,8 +26,4 @@ public class MoneyTableEntry extends DefaultEntry implements Comparable {
         return description;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return this.getUseDate().compareTo(((MoneyTableEntry) o).getUseDate());
-    }
 }

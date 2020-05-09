@@ -10,11 +10,18 @@
 
         <item name="buttonStyle">@style/MenuButton</item>
         <item name="editTextStyle">@style/EditBox</item>
+
+        <item name="android:spinnerItemStyle">@style/spinnerItemStyle</item>
+
         <item name="android:datePickerStyle">@style/DatePickerAppearance</item>
         <item name="android:textColorHint">@color/colorWhite</item>
-
     </style>
 
+
+    <style name="spinnerItemStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/colorWhite</item>
+    </style>
 
     <style name="EditBox" parent="Widget.AppCompat.EditText">
         <item name="android:textColor">@color/colorWhite</item>

@@ -57,4 +57,17 @@
 
     <string name="toastHoldToDelete">Hoia sõrm sissekandel, et see kustutada!</string>
 
+
+
+    //Sorting values
+    <string-array name="sortingOrder">
+        <item>Kasvav</item>
+        <item>Kahanev</item>
+    </string-array>
+
+    <string name ="sortTitle">Pealkiri</string>
+    <string name ="sortDate">Kuupäev</string>
+    <string name ="sortAmount">Kogus</string>
+    <string name ="sortPriority">Prioriteet</string>
+
 </resources>

@@ -1,49 +1,53 @@
 package com.kotkaz.mydiaries.diary.tables;
 
+
 import com.kotkaz.mydiaries.diary.entries.ToDoTableEntry;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ToDoTable extends DefaultTable<ToDoTableEntry> {
 
 
-    public void addData(String type, LocalDate deadline, String description, int priority) {
+    public void addData(String type, LocalDateTime deadline, String description, int priority) {
         ToDoTableEntry entries = new ToDoTableEntry(type, deadline, description, priority);
         super.addData(entries);
     }
 
     /**
-     * Returns sorted list of tasks, that deadlines is on given date.
+     * This method orderes list by Entry-class object variables.
      *
-     * @param toDoTable
-     * @param date
+     * @param type      Int typenumber
+     *                  0- type
+     *                  1- inputdate
+     *                  2- deadline
+     *                  3- priority
+     * @param ascending
      * @return
      */
-    public static List<ToDoTableEntry> getTasks4Date(ToDoTable toDoTable, LocalDate date) {
-        List<ToDoTableEntry> list = new ArrayList<>();
-        for (ToDoTableEntry entry :
-                toDoTable.getTabel()) {
-            if (entry.getDeadline() == date)
-                list.add(entry);
-        }
-        Collections.sort(list);
-        return list;
+    public List<ToDoTableEntry> getOrderedTable(int type, boolean ascending) {
+        return super.getOrderedTable((o1, o2) -> {
+            int value;
+            switch (type) {
+                case 0:
+                    value = o1.getType().compareTo(o2.getType());
+                    break;
+                case 1:
+                    value = o1.getInputDate().compareTo(o2.getInputDate());
+                    break;
+                case 2:
+                    value = o1.getDeadline().compareTo(o2.getDeadline());
+                    break;
+                case 3:
+                    value = Integer.compare(o1.getPriority(), o2.getPriority());
+                    break;
+                default:
+                    throw new IllegalArgumentException("ToDoTable#getOrderedTabel wrong ordering type");
+            }
+            return value * (ascending ? 1 : -1);
+        });
     }
-
-    /**
-     * Returns sorted list of today's tasks.
-     *
-     * @param toDoTable
-     * @return
-     */
-    public static List<ToDoTableEntry> getTodaysTasks(ToDoTable toDoTable) {
-        return getTasks4Date(toDoTable, LocalDate.now());
-    }
-
 
 }
 

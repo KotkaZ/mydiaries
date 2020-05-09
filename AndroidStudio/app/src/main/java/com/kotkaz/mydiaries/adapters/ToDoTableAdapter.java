@@ -14,6 +14,7 @@ import com.kotkaz.mydiaries.diary.entries.ToDoTableEntry;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * CustomToDoTableAdapter class for listView.
@@ -80,7 +81,12 @@ public class ToDoTableAdapter extends BaseAdapter {
         toDoTitle.setText(toDoTableEntry.getType());
         toDoDesc.setText(toDoTableEntry.getDescription());
         toDoPriority.setText(String.valueOf(toDoTableEntry.getPriority()));
-        toDoDate.setText(toDoTableEntry.getDeadline().toString());
+
+        toDoDate.setText(String.format(Locale.getDefault(), "%d.%d.%d %d:%d", toDoTableEntry.getDeadline().getDayOfMonth()
+                , toDoTableEntry.getDeadline().getMonthOfYear()
+                , toDoTableEntry.getDeadline().getYear()
+                , toDoTableEntry.getDeadline().getHourOfDay()
+                , toDoTableEntry.getDeadline().getMinuteOfHour()));
 
         //High priority is set red, med is orange and low priority wont have colored background.
         if (toDoTableEntry.getPriority() == 1)

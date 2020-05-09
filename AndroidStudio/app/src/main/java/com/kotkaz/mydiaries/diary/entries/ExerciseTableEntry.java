@@ -1,14 +1,14 @@
 package com.kotkaz.mydiaries.diary.entries;
 
-import org.joda.time.LocalDate;
+import org.joda.time.LocalDateTime;
 
-public class ExerciseTableEntry extends DefaultEntry implements Comparable {
-    private LocalDate exerciseDate;
+public class ExerciseTableEntry extends DefaultEntry {
+    private LocalDateTime exerciseDate;
     private int length;
     private String description;
     private String location;
 
-    public ExerciseTableEntry(String type, LocalDate exerciseDate, int length, String description, String location) {
+    public ExerciseTableEntry(String type, LocalDateTime exerciseDate, int length, String description, String location) {
         super(type);
         this.exerciseDate = exerciseDate;
         this.length = length;
@@ -16,7 +16,7 @@ public class ExerciseTableEntry extends DefaultEntry implements Comparable {
         this.location = location;
     }
 
-    public LocalDate getExerciseDate() {
+    public LocalDateTime getExerciseDate() {
         return exerciseDate;
     }
 
@@ -32,8 +32,4 @@ public class ExerciseTableEntry extends DefaultEntry implements Comparable {
         return location;
     }
 
-    @Override
-    public int compareTo(Object o) {
-        return this.exerciseDate.compareTo(((ExerciseTableEntry) o).exerciseDate);
-    }
 }

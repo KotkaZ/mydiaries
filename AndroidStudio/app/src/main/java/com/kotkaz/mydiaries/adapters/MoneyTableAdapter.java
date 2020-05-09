@@ -15,6 +15,7 @@ import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * CustomMoneyTableAdapter class for listView.
@@ -84,7 +85,11 @@ public class MoneyTableAdapter extends BaseAdapter {
         DecimalFormat moneyFormat = new DecimalFormat("€#,##0.00;-€#,##0.00");
 
         moneyAmount.setText(moneyFormat.format(moneyTableEntry.getAmount() / 100));
-        moneyUseDate.setText(moneyTableEntry.getUseDate().toString());
+        moneyUseDate.setText( String.format(Locale.getDefault(), "%d.%d.%d %d:%d",moneyTableEntry.getUseDate().getDayOfMonth()
+                ,moneyTableEntry.getUseDate().getMonthOfYear()
+                ,moneyTableEntry.getUseDate().getYear()
+                ,moneyTableEntry.getUseDate().getHourOfDay()
+                ,moneyTableEntry.getUseDate().getMinuteOfHour()));
 
         //Outgoes are set red, incomes green.
         if (moneyTableEntry.getAmount() < 0)

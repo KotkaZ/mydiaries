@@ -11,6 +11,7 @@ import com.kotkaz.mydiaries.diary.entries.FoodTableEntry;
 import com.kotkaz.mydiaries.diary.tables.FoodTable;
 
 import java.util.List;
+import java.util.Locale;
 
 /**
  * CustomFoodTableAdapter class for listView.
@@ -72,8 +73,11 @@ public class FoodTableAdapter extends BaseAdapter {
 
         //Setting textview texts with entry values.
         foodTitle.setText(foodTableEntry.getType());
-        foodDate.setText(foodTableEntry.getExpDate().toString());
-        foodAmount.setText(String.valueOf(foodTableEntry.getAmount()));
+        foodDate.setText(String.format(Locale.getDefault(), "%d.%d.%d",foodTableEntry.getExpDate().getDayOfMonth()
+                ,foodTableEntry.getExpDate().getMonthOfYear()
+                ,foodTableEntry.getExpDate().getYear()));
+
+        foodAmount.setText(foodTableEntry.getToode().toString());
 
         return convertView;
     }
