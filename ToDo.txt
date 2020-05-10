@@ -26,6 +26,7 @@ Tiit/Robert?
 			KARL: Mul on lihtsam väärtustada tekstiväljad ning võtta valitud välja indeks, mis anda edasi "sorteerimis" meetodisse. Hetkel on olemas väga segased sorteerimised, millest
 				iga üks rakendub erinevalt. Ei näe mõtet implementeerida comparable-i, sest default tabelis on olemas meetod sorteerimiseks, mis võtab vastu comparatori.
 				Seega ilmselt võiks meetod kutsutada välja super.getOrderedTable( new comparator ...)
+			Tiit: Baas juhtumitega olemas
 
 
 * [MED priority] Teksti tõlkimine.

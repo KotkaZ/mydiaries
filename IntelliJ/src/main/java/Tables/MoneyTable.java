@@ -125,23 +125,50 @@ public class MoneyTable extends DefaultTable<Entries.MoneyTableEntry> {
      * getTotalSum Caluclates total sum.
      * @return Total sum is returned as double.
      */
-    public double getTotalSum() {
+    /*public double getTotalSum() {
         return getTabel().stream().mapToDouble(MoneyTableEntry::getAmount).sum();
+    }*/
+    public double getTotalSum() {
+        double total = 0;
+        for (MoneyTableEntry entry :
+                this.getTabel()) {
+            total += entry.getAmount();
+        }
+        return total;
     }
+
 
     /**
      * getTotalSum Caluclates total income.
      * @return Total income is returned as double.
      */
-    public double getTotalIncome() {
+    /*public double getTotalIncome() {
         return getTabel().stream().mapToDouble(v -> Math.max(0,v.getAmount())).sum();
+    }*/
+    public double getTotalIncome() {
+        double income = 0;
+        for (MoneyTableEntry entry :
+                this.getTabel()) {
+            double entryIncome = entry.getAmount();
+            income += (entryIncome > 0 ? entryIncome : 0);
+        }
+        return income;
     }
 
     /**
      * getTotalSum Caluclates total outgo.
      * @return Total outgo is returned as double.
      */
-    public double getTotalOutgo() {
+    /*public double getTotalOutgo() {
         return getTabel().stream().mapToDouble(v -> Math.min(0,v.getAmount())).sum();
+    }*/
+    public double getTotalOutgo() {
+        double outGo = 0;
+        for (MoneyTableEntry entry :
+                this.getTabel()) {
+            double entryOutGo = entry.getAmount();
+            outGo += (entryOutGo < 0 ? entryOutGo : 0);
+        }
+        return outGo;
     }
 }
