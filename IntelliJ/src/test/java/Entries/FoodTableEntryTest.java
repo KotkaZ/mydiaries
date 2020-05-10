@@ -1,6 +1,6 @@
 package Entries;
 
-import Toode.Toode;
+import unitItem.Toode;
 import org.joda.time.LocalDate;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
