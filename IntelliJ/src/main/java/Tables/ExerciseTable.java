@@ -1,7 +1,6 @@
 package Tables;
 
 import Entries.ExerciseTableEntry;
-import Entries.MoneyTableEntry;
 import org.joda.time.LocalDateTime;
 
 import java.util.List;
@@ -15,7 +14,22 @@ public class ExerciseTable extends DefaultTable<Entries.ExerciseTableEntry> {
     }
 
     /**
-     * This method orderes list by Entry-class object variables.
+     * Sums total length of exercises.
+     *
+     * @return
+     */
+    public int totalLenght(){
+        int totalLenght = 0;
+        for (ExerciseTableEntry entry :
+                this.getTabel()) {
+            totalLenght+= entry.getLength();
+        }
+        return totalLenght;
+    }
+
+
+    /**
+     * This method orders list by Entry-class object variables.
      *
      * @param type Int typenumber
      *             0- type

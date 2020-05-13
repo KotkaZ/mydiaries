@@ -101,7 +101,6 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
             for (int elType :
                     arguments) {
                 switch (elType) {
-
                     case 0:
                         value = o1.getType().compareTo(o2.getType());
                         break;
@@ -112,7 +111,7 @@ public class FoodTable extends DefaultTable<Entries.FoodTableEntry> {
                         value = o1.getExpDate().compareTo(o2.getExpDate());
                         break;
                     default:
-                        throw new RuntimeException("FoodTabel#getorderedTabel elType ");
+                        throw new RuntimeException("FoodTable#getorderedTabel elType ");
                 }
                 if (value != 0) break;
             }

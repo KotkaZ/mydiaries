@@ -1,25 +1,25 @@
 package Entries;
 
-import Toode.Toode;
+import Tools.unitItem;
 import org.joda.time.LocalDate;
 
 public class FoodTableEntry extends DefaultEntry {
     private LocalDate expDate;
-    private Toode toode;
+    private unitItem unitItem;
     public static String[] UNITS = new String[]{"g", "kg", "ml", "l", "piece(s)", "package(s)"};
 
     public FoodTableEntry(String type, LocalDate expDate, int amount, String unit) {
         super(type);
         this.expDate = expDate;
-        this.toode = new Toode(amount, unit);
+        this.unitItem = new unitItem(amount, unit);
     }
 
     public LocalDate getExpDate() {
         return expDate;
     }
 
-    public Toode getToode() {
-        return toode;
+    public unitItem getToode() {
+        return unitItem;
     }
 
     /**
