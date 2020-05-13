@@ -184,9 +184,8 @@ public class DiaryScreen extends AppCompatActivity {
 
         //Long click will delete table entry.
         listView.setOnItemLongClickListener((parent, view, position, id) -> {
-            defaultTable.removeData(position);
+            defaultTable.removeData(listView.getAdapter().getItem(position));
             setListViewAdapter();
-
             return true;
         });
     }
