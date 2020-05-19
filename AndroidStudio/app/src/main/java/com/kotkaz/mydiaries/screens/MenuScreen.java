@@ -1,11 +1,14 @@
 package com.kotkaz.mydiaries.screens;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.kotkaz.mydiaries.BuildConfig;
 import com.kotkaz.mydiaries.R;
 import com.kotkaz.mydiaries.diary.tables.DefaultTable;
 import com.kotkaz.mydiaries.diary.tables.ExerciseTable;
@@ -14,7 +17,10 @@ import com.kotkaz.mydiaries.diary.tables.MoneyTable;
 import com.kotkaz.mydiaries.diary.tables.ToDoTable;
 import com.kotkaz.mydiaries.diary.tools.TableManager;
 
+import org.apache.commons.io.FileUtils;
+
 public class MenuScreen extends AppCompatActivity {
+
 
     /**
      * Main method. Shows menu screen.
@@ -26,7 +32,32 @@ public class MenuScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.menu_screen);
+
+        //This part of code will delete old data if new version have changed the saving system.
+        final int workingDataVersion = 3;
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        int knownDataVersion = sharedPref.getInt("dataVersion", 0);
+
+        if (knownDataVersion < workingDataVersion) {
+            FileUtils.deleteQuietly(getFilesDir());
+            saveDataVersion();
+        }
+
         setOnClickListeners();
+
+
+    }
+
+
+    /**
+     * Saves the current Version_Code to lastKnownDataVersion.
+     * Will be used to detect software updates.
+     */
+    private void saveDataVersion() {
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("dataVersion", BuildConfig.VERSION_CODE);
+        editor.apply();
     }
 
 
@@ -36,7 +67,10 @@ public class MenuScreen extends AppCompatActivity {
     private void setOnClickListeners() {
         //Exit button will close activity.
         Button buttonExit = findViewById(R.id.btnExit);
-        buttonExit.setOnClickListener(v -> finish());
+        buttonExit.setOnClickListener(v -> {
+            saveDataVersion();
+            finish();
+        });
 
 
         Button buttonFoodTable = findViewById(R.id.btnFoodList);

@@ -98,7 +98,7 @@
     </string-array>
 
     <string-array name="sortingMoney">
-        <item>Exercise</item>
+        <item>Type</item>
         <item>Entry date</item>
         <item>Amount</item>
         <item>Use date</item>
