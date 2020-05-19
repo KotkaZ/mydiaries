@@ -2,61 +2,61 @@
     <string name="app_name">myDiaries</string>
 
     //Diary Titles
-    <string name="FoodList">Toidunimekiri</string>
-    <string name="MoneyList">Rahapäevik</string>
-    <string name="ToDoList">ToDo nimekiri</string>
-    <string name="Exercise">Treeningpäevik</string>
+    <string name="FoodList">Food list</string>
+    <string name="MoneyList">Money diary</string>
+    <string name="ToDoList">ToDo list</string>
+    <string name="Exercise">Exercise diary</string>
 
 
     //Button texts
-    <string name="btnExit">Välju</string>
-    <string name="btnConfirmEntry">Kinnita</string>
+    <string name="btnExit">Exit</string>
+    <string name="btnConfirmEntry">Confirm</string>
 
 
     //TextView texts
-    <string name="txtTitle">Pealkiri</string>
+    <string name="txtTitle">Title</string>
 
 
     //Entries
     //FoodEntry
-    <string name="boxFoodTitle">Toit</string>
-    <string name="boxFoodAmount">Kogus</string>
-    <string name="boxFoodExpDate">Aegub</string>
+    <string name="boxFoodTitle">Food</string>
+    <string name="boxFoodAmount">Amount</string>
+    <string name="boxFoodExpDate">Expires</string>
 
 
     //MoneyEntry
-    <string name="boxMoneyTitle">Valdkond</string>
-    <string name="boxMoneyDesc">Kirjeldus</string>
-    <string name="boxMoneyAmount">Kogus</string>
-    <string name="boxMoneyUseDate">Kuupäev</string>
+    <string name="boxMoneyTitle">Category</string>
+    <string name="boxMoneyDesc">Description</string>
+    <string name="boxMoneyAmount">Amount</string>
+    <string name="boxMoneyUseDate">Date</string>
 
 
     //Entry
-    <string name="boxToDoTitle">Ülesanne</string>
-    <string name="boxToDoPriority">Tähtsus</string>
-    <string name="boxToDoDate">Kuupäev</string>
-    <string name="boxToDoDesc">Kirjeldus</string>
+    <string name="boxToDoTitle">Task</string>
+    <string name="boxToDoPriority">Priority</string>
+    <string name="boxToDoDate">Date</string>
+    <string name="boxToDoDesc">Description</string>
 
 
     //FoodEntry
-    <string name="boxExerciseTitle">Harjutus</string>
-    <string name="boxExerciseDesc">Kirjeldus</string>
-    <string name="boxExerciseLocation">Asukoht</string>
-    <string name="boxExerciseLength">Kestvus</string>
-    <string name="boxExerciseDate">Kuupäev</string>
+    <string name="boxExerciseTitle">Exercise</string>
+    <string name="boxExerciseDesc">Description</string>
+    <string name="boxExerciseLocation">Location</string>
+    <string name="boxExerciseLength">Length</string>
+    <string name="boxExerciseDate">Date</string>
 
 
     //Validator errors
-    <string name="textEmpty">See väli on nõutud!</string>
-    <string name="textTooShort">Sisend on lühem kui %1$d tähemärki!</string>
-    <string name="textTooLong">Sisend on pikem kui %1$d tähemärki!</string>
+    <string name="textEmpty">This field is required!</string>
+    <string name="textTooShort">Entry is less than %1$d characters!</string>
+    <string name="textTooLong">Entry is more than %1$d characters!</string>
 
-    <string name="textNotNumbers">See väli peab koosnema numbritest!</string>
-    <string name="textNumberTooSmall">Väärtus peab olema suurem kui %1$d!</string>
-    <string name="textNumberTooBig">Väärtus peab olema väiksem kui %1$d!</string>
+    <string name="textNotNumbers">This field must contain only numbers!</string>
+    <string name="textNumberTooSmall">Value must be greater than %1$d!</string>
+    <string name="textNumberTooBig">Value must be less than %1$d!</string>
 
-    <string name="toastHoldToDelete">Hoia sõrm sissekandel, et see kustutada!</string>
-    <string name="btnSetDateTime">Määra</string>
+    <string name="toastHoldToDelete">Long press to delete!</string>
+    <string name="btnSetDateTime">Set</string>
 
 
     //Units
@@ -71,37 +71,37 @@
 
     //Sorting values
     <string-array name="sortingOrder">
-        <item>Kasvav</item>
-        <item>Kahanev</item>
+        <item>Ascending</item>
+        <item>Descending</item>
     </string-array>
 
     <string-array name="sortingFood">
-        <item>Nimetus</item>
-        <item>Sisestuskuupäev</item>
-        <item>Aegub</item>
+        <item>Food</item>
+        <item>Entry date</item>
+        <item>Expiration Date</item>
     </string-array>
 
     <string-array name="sortingExercise">
-        <item>Tüüp</item>
-        <item>Sisestuskuupäev</item>
-        <item>Treeningukuupäev</item>
-        <item>Kestvus</item>
-        <item>Asukoht</item>
-        <item>Kirjeldus</item>
+        <item>Exercise</item>
+        <item>Entry date</item>
+        <item>Date</item>
+        <item>Length</item>
+        <item>Location</item>
+        <item>Description</item>
     </string-array>
 
     <string-array name="sortingToDo">
-        <item>Tegevus</item>
-        <item>Sisestuskuupäev</item>
-        <item>Tähtaeg</item>
-        <item>Prioriteet</item>
+        <item>Task</item>
+        <item>Entry date</item>
+        <item>Deadline</item>
+        <item>Priority</item>
     </string-array>
 
     <string-array name="sortingMoney">
-        <item>Kulu</item>
-        <item>Sisestuskuupäev</item>
-        <item>Summa</item>
-        <item>Kulutuskuupäev</item>
+        <item>Exercise</item>
+        <item>Entry date</item>
+        <item>Amount</item>
+        <item>Use date</item>
     </string-array>
     
 </resources>
