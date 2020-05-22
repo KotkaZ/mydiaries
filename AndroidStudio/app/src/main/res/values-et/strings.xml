@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">myDiaries</string>
+
+    //Diary Titles
+    <string name="FoodList">Toidunimekiri</string>
+    <string name="MoneyList">Rahapäevik</string>
+    <string name="ToDoList">ToDo nimekiri</string>
+    <string name="Exercise">Treeningpäevik</string>
+
+
+    //Button texts
+    <string name="btnExit">Välju</string>
+    <string name="btnConfirmEntry">Kinnita</string>
+
+
+    //TextView texts
+    <string name="txtTitle">Pealkiri</string>
+
+
+    //Entries
+    //FoodEntry
+    <string name="boxFoodTitle">Toit</string>
+    <string name="boxFoodAmount">Kogus</string>
+    <string name="boxFoodExpDate">Aegub</string>
+
+
+    //MoneyEntry
+    <string name="boxMoneyTitle">Valdkond</string>
+    <string name="boxMoneyDesc">Kirjeldus</string>
+    <string name="boxMoneyAmount">Kogus</string>
+    <string name="boxMoneyUseDate">Kuupäev</string>
+
+
+    //Entry
+    <string name="boxToDoTitle">Ülesanne</string>
+    <string name="boxToDoPriority">Tähtsus</string>
+    <string name="boxToDoDate">Kuupäev</string>
+    <string name="boxToDoDesc">Kirjeldus</string>
+
+
+    //FoodEntry
+    <string name="boxExerciseTitle">Harjutus</string>
+    <string name="boxExerciseDesc">Kirjeldus</string>
+    <string name="boxExerciseLocation">Asukoht</string>
+    <string name="boxExerciseLength">Kestvus</string>
+    <string name="boxExerciseDate">Kuupäev</string>
+
+
+    //Validator errors
+    <string name="textEmpty">See väli on nõutud!</string>
+    <string name="textTooShort">Sisend on lühem kui %1$d tähemärki!</string>
+    <string name="textTooLong">Sisend on pikem kui %1$d tähemärki!</string>
+
+    <string name="textNotNumbers">See väli peab koosnema numbritest!</string>
+    <string name="textNumberTooSmall">Väärtus peab olema suurem kui %1$d!</string>
+    <string name="textNumberTooBig">Väärtus peab olema väiksem kui %1$d!</string>
+
+    <string name="toastHoldToDelete">Hoia sõrm sissekandel, et see kustutada!</string>
+    <string name="btnSetDateTime">Määra</string>
+
+
+    //Units
+    <string-array name="foodUnits">
+        <item>g</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>dl</item>
+        <item>l</item>
+        <item>tk</item>
+    </string-array>
+
+    //Sorting values
+    <string-array name="sortingOrder">
+        <item>Kasvav</item>
+        <item>Kahanev</item>
+    </string-array>
+
+    <string-array name="sortingFood">
+        <item>Nimetus</item>
+        <item>Sisestuskuupäev</item>
+        <item>Aegub</item>
+    </string-array>
+
+    <string-array name="sortingExercise">
+        <item>Tüüp</item>
+        <item>Sisestuskuupäev</item>
+        <item>Treeningukuupäev</item>
+        <item>Kestvus</item>
+        <item>Asukoht</item>
+        <item>Kirjeldus</item>
+    </string-array>
+
+    <string-array name="sortingToDo">
+        <item>Tegevus</item>
+        <item>Sisestuskuupäev</item>
+        <item>Tähtaeg</item>
+        <item>Prioriteet</item>
+    </string-array>
+
+    <string-array name="sortingMoney">
+        <item>Kulu</item>
+        <item>Sisestuskuupäev</item>
+        <item>Summa</item>
+        <item>Kulutuskuupäev</item>
+    </string-array>
+    
+</resources>

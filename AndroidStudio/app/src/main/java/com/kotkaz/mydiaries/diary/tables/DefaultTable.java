@@ -46,10 +46,10 @@ public class DefaultTable<T> implements Serializable {
     /**
      * Removes entry from table.
      *
-     * @param indeks
+     * @param entry
      */
-    public void removeData(int indeks) {
-        tabelData.remove(indeks);
+    public void removeData(T entry) {
+        tabelData.remove(entry);
     }
 
 
