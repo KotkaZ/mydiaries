@@ -1,0 +1,8 @@
+
+Tiit: 
+	*Esiekraanile võiks saada, ka tagasinupuga.
+	*Esiekraanil TODO suurte tähtedega
+	
+	*RahaPäevikus võiks olla valik kas sisestad kulu või tulu, hetkel ma ei saanud kulutust sisestada
+	*ToDo tähtsus võiks olla kas slide'iga või radiobuttoniga'iga
+
