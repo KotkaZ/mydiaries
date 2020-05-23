@@ -195,18 +195,23 @@ public class DiaryScreen extends AppCompatActivity {
      */
     private void setUpExitButtonClickListener() {
         Button exitButton = findViewById(R.id.btnDiaryExit);
-        exitButton.setOnClickListener(v -> {
-            if (defaultTable instanceof FoodTable)
-                TableManager.saveTable(getApplicationContext(), defaultTable, "food_table.json");
-            else if (defaultTable instanceof MoneyTable)
-                TableManager.saveTable(getApplicationContext(), defaultTable, "money_table.json");
-            else if (defaultTable instanceof ExerciseTable)
-                TableManager.saveTable(getApplicationContext(), defaultTable, "exercise_table.json");
-            else if (defaultTable instanceof ToDoTable)
-                TableManager.saveTable(getApplicationContext(), defaultTable, "todo _table.json");
+        exitButton.setOnClickListener(v -> exitDiaryScreen());
+    }
 
-            goToMenuScreen(); //Closes activity and shows menu screen.
-        });
+    /**
+     * Saves table and shows menu screen.
+     */
+    private void exitDiaryScreen(){
+        if (defaultTable instanceof FoodTable)
+            TableManager.saveTable(getApplicationContext(), defaultTable, "food_table.json");
+        else if (defaultTable instanceof MoneyTable)
+            TableManager.saveTable(getApplicationContext(), defaultTable, "money_table.json");
+        else if (defaultTable instanceof ExerciseTable)
+            TableManager.saveTable(getApplicationContext(), defaultTable, "exercise_table.json");
+        else if (defaultTable instanceof ToDoTable)
+            TableManager.saveTable(getApplicationContext(), defaultTable, "todo _table.json");
+
+        goToMenuScreen(); //Closes activity and shows menu screen.
     }
 
 
@@ -452,6 +457,11 @@ public class DiaryScreen extends AppCompatActivity {
         Intent menuScreenIntent = new Intent(this, MenuScreen.class);
         finish();
         startActivity(menuScreenIntent);
+    }
+
+    @Override
+    public void onBackPressed() {
+        exitDiaryScreen();
     }
 
 

@@ -4,7 +4,7 @@
     //Diary Titles
     <string name="FoodList">Food list</string>
     <string name="MoneyList">Money diary</string>
-    <string name="ToDoList">ToDo list</string>
+    <string name="ToDoList">TODO list</string>
     <string name="Exercise">Exercise diary</string>
 
 

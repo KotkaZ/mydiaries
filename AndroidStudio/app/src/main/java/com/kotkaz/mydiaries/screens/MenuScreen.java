@@ -122,4 +122,10 @@ public class MenuScreen extends AppCompatActivity {
         startActivity(diaryScreenIntent);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        saveDataVersion();
+        finish();
+    }
 }

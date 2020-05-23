@@ -4,7 +4,7 @@
     //Diary Titles
     <string name="FoodList">Toidunimekiri</string>
     <string name="MoneyList">Rahapäevik</string>
-    <string name="ToDoList">ToDo nimekiri</string>
+    <string name="ToDoList">TODO nimekiri</string>
     <string name="Exercise">Treeningpäevik</string>
 
 
